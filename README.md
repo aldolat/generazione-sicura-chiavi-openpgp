@@ -1,3 +1,26 @@
+Con questa guida vedremo come:
+1. generare in un luogo abbastanza sicuro il nostro mazzo di chiavi personale;
+1. proteggere le chiavi private in modo da usarle ogni giorno in un modo abbastanza sicuro.
+
+La struttura del nostro portachiavi personale sarà il seguente:
+
+1. **Chiave master (o principale)** per sola certificazione su chiavi altrui con dimensione 4096 bit e scadenza dopo 3 anni;
+	1. **Sottochiave per firma** con dimensione 2048 bit e scadenza dopo 1 anno;
+	1. **Sottochiave per cifratura** con dimensione 2048 bit e scadenza dopo 1 anno;
+	1. **Sottochiave per autenticazione** con dimensione 2048 bit e scadenza dopo 1 anno.
+
+La chiave più importante è la chiave master che, nel nostro caso, limiteremo all'uso esclusivo di certificazione di chiavi altrui e per effettuare operazioni sul nostro portachiavi. Per questo motivo la useremo raramente o comunque poco durante l'anno.
+
+Le sottochiavi, invece, saranno utilizzate quotidianamente. Queste sottochiavi possono esistere nel portachiavi di GnuPG anche senza la presenza della chiave principale. Per questo motivo, dopo aver fatto un sicuro backup, elimineremo dal portachiavi la chiave principale, lasciando solo le sottochiavi.
+
+Per maggiore sicurezza sposteremo le sottochiavi su un token USB come la Yubikey. Si tratta di token praticamente indistruttibili, che rendono l'uso della firma digitale, la cifratura e l'autenticazione su sistemi (come SSH) molto comodi (basterà usare un PIN numerico).
+
+Alla fine della guida avremo quindi la seguente situazione:
+1. la chiave principale sarà rimossa dal portachiavi sul disco e trasferita in un luogo sicuro;
+1. le sottochiavi risiederanno sulla YubiKey.
+
+Quando sarà necessario effettuare un'operazione speziale, come ad esempio apporre la nostra firma su chiavi altrui o aggiungere/eliminare una sottochiave o una UserID, importeremo la chiave principale nel nostro portachiavi, effettueremo l'operazione necessaria e infine la rimuoveremo di nuovo.
+
 # Generazione sicura di chiavi OpenPGP
 
 Con questa guida genereremo la nostra chiave privata che avrà questo schema:
@@ -7,7 +30,7 @@ Con questa guida genereremo la nostra chiave privata che avrà questo schema:
 	1. **Sottochiave per cifratura** con dimensione 2048 bit e scadenza dopo 1 anno;
 	1. **Sottochiave per autenticazione** con dimensione 2048 bit e scadenza dopo 1 anno.
 
-L'intento sarà di tenere la chiave master e le sottochiavi insieme, nel nostro PC. Se si vuole separare la chiave master dalle sottochiavi per un utilizzo ancora più sicuro, dare uno sguardo a [Trasferire chiavi GnuPG a YubiKey](#).
+L'intento sarà di tenere la chiave master e le sottochiavi insieme, nel nostro PC. Se si vuole separare la chiave master dalle sottochiavi per un utilizzo ancora più sicuro, dare uno sguardo a [Trasferire chiavi GnuPG a YubiKey](#trasferire-chiavi-gnupg-a-yubikey).
 
 Per la lunghezza delle chiavi avremo la chiave primaria a 4096 bit mentre le sottochiavi a 2048 bit. Per ulteriori informazioni vedi la [FAQ dedicata](https://www.gnupg.org/faq/gnupg-faq.html#default_rsa2048).
 
@@ -474,6 +497,10 @@ keyserver hkps://hkps.pool.sks-keyservers.net
 gpg --send-keys 0x05F0303DA9F107EC
 ~~~
 
-# Trasferire chiavi GnuPG a YubiKey
+# Trasferire le chiavi OpenPGP su YubiKey
+
+In questa parte vedremo come:
+1. separare la chiave principale dal resto del portachiavi;
+1. trasferire le sottochiavi nella Yubikey.
 
 TODO.
