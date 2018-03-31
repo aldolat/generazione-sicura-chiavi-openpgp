@@ -16,7 +16,7 @@ La chiave più importante è la chiave master che, nel nostro caso, limiteremo a
 
 Le sottochiavi, invece, saranno utilizzate quotidianamente. Queste sottochiavi possono esistere nel portachiavi di GnuPG anche senza la presenza della chiave principale. Per questo motivo, dopo aver fatto un sicuro backup, elimineremo dal portachiavi la chiave principale, lasciando solo le sottochiavi.
 
-Per maggiore sicurezza sposteremo le sottochiavi su un token USB come la Yubikey. Si tratta di token praticamente indistruttibili, che rendono l'uso della firma digitale, la cifratura e l'autenticazione su sistemi (come SSH) molto comodi (basterà usare un PIN numerico).
+Per maggiore sicurezza sposteremo le sottochiavi su un token USB come la [Yubikey](https://www.yubico.com/). Si tratta di token praticamente indistruttibili, che rendono l'uso della firma digitale, la cifratura e l'autenticazione su sistemi (come SSH) molto comodi (basterà usare un PIN numerico). Io uso la [Yubikey 4](https://www.yubico.com/product/yubikey-4-series/#yubikey-4).
 
 Alla fine della guida avremo quindi la seguente situazione:
 1. la chiave principale sarà rimossa dal portachiavi sul disco e trasferita in un luogo sicuro;
