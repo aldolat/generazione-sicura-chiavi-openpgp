@@ -22,7 +22,7 @@ Alla fine della guida avremo quindi la seguente situazione:
 1. la chiave principale sarà rimossa dal portachiavi sul disco e trasferita in un luogo sicuro;
 1. le sottochiavi risiederanno sulla YubiKey.
 
-Quando sarà necessario effettuare un'operazione speciale, come ad esempio apporre la nostra firma su chiavi altrui o aggiungere/eliminare una sottochiave o una UserID, importeremo la chiave principale nel nostro portachiavi, effettueremo l'operazione necessaria e infine la rimuoveremo di nuovo.
+Nel nostro disco fisso non avremo quindi nessuna chiave privata. Quando sarà necessario effettuare un'operazione speciale, come ad esempio apporre la nostra firma su chiavi altrui o aggiungere/eliminare una sottochiave o una UserID, importeremo la chiave principale nel nostro portachiavi, effettueremo l'operazione necessaria e infine la rimuoveremo di nuovo.
 
 # Generazione sicura di chiavi OpenPGP
 
