@@ -1,3 +1,5 @@
+** GUIDA IN FASE DI SCRITTURA **
+
 Con questa guida vedremo come:
 1. generare in un luogo abbastanza sicuro il nostro mazzo di chiavi personale;
 1. proteggere le chiavi private in modo da usarle ogni giorno in un modo abbastanza sicuro.
