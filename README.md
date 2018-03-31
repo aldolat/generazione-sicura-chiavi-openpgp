@@ -32,7 +32,7 @@ Con questa guida genereremo la nostra chiave privata che avrà questo schema:
 	1. **Sottochiave per cifratura** con dimensione 2048 bit e scadenza dopo 1 anno;
 	1. **Sottochiave per autenticazione** con dimensione 2048 bit e scadenza dopo 1 anno.
 
-L'intento sarà di tenere la chiave master e le sottochiavi insieme, nel nostro PC. Se si vuole separare la chiave master dalle sottochiavi per un utilizzo ancora più sicuro, dare uno sguardo a [Trasferire chiavi GnuPG a YubiKey](#trasferire-chiavi-gnupg-a-yubikey).
+L'intento sarà di tenere la chiave master e le sottochiavi insieme, nel nostro PC. Se si vuole separare la chiave master dalle sottochiavi per un utilizzo ancora più sicuro, dare uno sguardo a [Trasferire le chiavi OpenPGP su YubiKey](#trasferire-le-chiavi-openpgp-su-yubikey).
 
 Per la lunghezza delle chiavi avremo la chiave primaria a 4096 bit mentre le sottochiavi a 2048 bit. Per ulteriori informazioni vedi la [FAQ dedicata](https://www.gnupg.org/faq/gnupg-faq.html#default_rsa2048).
 
