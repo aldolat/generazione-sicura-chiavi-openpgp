@@ -1,4 +1,5 @@
-** GUIDA IN FASE DI SCRITTURA **
+**GUIDA IN FASE DI SCRITTURA**
+# Introduzione
 
 Con questa guida vedremo come:
 1. generare in un luogo abbastanza sicuro il nostro mazzo di chiavi personale;
@@ -6,7 +7,7 @@ Con questa guida vedremo come:
 
 La struttura del nostro portachiavi personale sarà il seguente:
 
-1. **Chiave master (o principale)** per sola certificazione su chiavi altrui con dimensione 4096 bit e scadenza dopo 3 anni;
+1. **Chiave master (o principale) per sola certificazione di chiavi altrui** con dimensione 4096 bit e scadenza dopo 3 anni;
 	1. **Sottochiave per firma** con dimensione 2048 bit e scadenza dopo 1 anno;
 	1. **Sottochiave per cifratura** con dimensione 2048 bit e scadenza dopo 1 anno;
 	1. **Sottochiave per autenticazione** con dimensione 2048 bit e scadenza dopo 1 anno.
@@ -21,27 +22,25 @@ Alla fine della guida avremo quindi la seguente situazione:
 1. la chiave principale sarà rimossa dal portachiavi sul disco e trasferita in un luogo sicuro;
 1. le sottochiavi risiederanno sulla YubiKey.
 
-Quando sarà necessario effettuare un'operazione speziale, come ad esempio apporre la nostra firma su chiavi altrui o aggiungere/eliminare una sottochiave o una UserID, importeremo la chiave principale nel nostro portachiavi, effettueremo l'operazione necessaria e infine la rimuoveremo di nuovo.
+Quando sarà necessario effettuare un'operazione speciale, come ad esempio apporre la nostra firma su chiavi altrui o aggiungere/eliminare una sottochiave o una UserID, importeremo la chiave principale nel nostro portachiavi, effettueremo l'operazione necessaria e infine la rimuoveremo di nuovo.
 
 # Generazione sicura di chiavi OpenPGP
 
 Con questa guida genereremo la nostra chiave privata che avrà questo schema:
 
-1. **Chiave master (o principale)** per sola certificazione su chiavi altrui con dimensione 4096 bit e scadenza dopo 3 anni;
-	1. **Sottochiave per firma** con dimensione 2048 bit e scadenza dopo 1 anno;
-	1. **Sottochiave per cifratura** con dimensione 2048 bit e scadenza dopo 1 anno;
-	1. **Sottochiave per autenticazione** con dimensione 2048 bit e scadenza dopo 1 anno.
+1. **Chiave master (o principale)** [C - Certificazione]
+	1. **Sottochiave per firma** [S - Sign/Firma]
+	1. **Sottochiave per cifratura** [E - Encrypt/Cifratura]
+	1. **Sottochiave per autenticazione** [A - Authentication/Autenticazione]
 
-L'intento sarà di tenere la chiave master e le sottochiavi insieme, nel nostro PC. Se si vuole separare la chiave master dalle sottochiavi per un utilizzo ancora più sicuro, dare uno sguardo a [Trasferire le chiavi OpenPGP su YubiKey](#trasferire-le-chiavi-openpgp-su-yubikey).
-
-Per la lunghezza delle chiavi avremo la chiave primaria a 4096 bit mentre le sottochiavi a 2048 bit. Per ulteriori informazioni vedi la [FAQ dedicata](https://www.gnupg.org/faq/gnupg-faq.html#default_rsa2048).
+Per la lunghezza delle chiavi avremo la chiave primaria a 4096 bit mentre le sottochiavi a 2048 bit. Per ulteriori informazioni su questo dibattito vedere la [FAQ dedicata](https://www.gnupg.org/faq/gnupg-faq.html#default_rsa2048) sul sito di GnuPG.
 
 ## Prerequisiti
 
-1. È necessario lavorare su un sistema avviato con una distribuzione Linux in modalità live. È preferibile una Tails, ma va bene una qualunque. La distribuzione va avviata isolandola da qualsiasi rete.
+1. È necessario lavorare su un sistema avviato con una distribuzione Linux in modalità live. È preferibile una [Tails](https://tails.boum.org/index.it.html), ma va bene una qualunque. La distribuzione va avviata isolandola da qualsiasi rete.
 1. È necessario usare GnuPG versione 2 o successiva.
 
-Qualora il comando `gpg` faccia partire GnuPG v1, accertarsi che la versione 2 sia installata e aggiungere questa riga a ''~/.bash_aliases'':
+Qualora il comando `gpg` faccia partire GnuPG versione 1, accertarsi che la versione 2 sia installata e aggiungere questa riga a ''~/.bash_aliases'':
 
 ~~~
 alias gpg='gpg2'
