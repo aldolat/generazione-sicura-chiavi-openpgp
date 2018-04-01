@@ -1,4 +1,23 @@
 **GUIDA IN FASE DI SCRITTURA**
+
+<!-- TOC depthFrom:1 depthTo:6 withLinks:1 updateOnSave:0 orderedList:0 -->
+
+- [Introduzione](#introduzione)
+- [Generazione sicura di chiavi OpenPGP](#generazione-sicura-di-chiavi-openpgp)
+	- [Prerequisiti](#prerequisiti)
+	- [Generazione delle chiavi](#generazione-delle-chiavi)
+	- [Il certificato di revoca](#il-certificato-di-revoca)
+	- [Impostare le preferenze della chiave](#impostare-le-preferenze-della-chiave)
+	- [Impostare il file gpg.conf](#impostare-il-file-gpgconf)
+	- [Impostare il keyserver](#impostare-il-keyserver)
+	- [Esportare la chiave pubblica sul keyserver](#esportare-la-chiave-pubblica-sul-keyserver)
+- [Trasferire le chiavi OpenPGP su YubiKey](#trasferire-le-chiavi-openpgp-su-yubikey)
+- [Importare la chiave principale per operazioni speciali](#importare-la-chiave-principale-per-operazioni-speciali)
+- [Estendere la validità delle nostre chiavi](#estendere-la-validit-delle-nostre-chiavi)
+- [Bibliografia](#bibliografia)
+
+<!-- /TOC -->
+
 # Introduzione
 
 Come sappiamo, tutto il sistema della [crittografia a chiave pubblica](https://it.wikipedia.org/wiki/Crittografia_asimmetrica) si basa sull'uso di una chiave che ha una parte pubblica, da divulgare il più possibile, e una parte privata, che va tenuta rigorosamente in un luogo sicuro. Qualora avessimo il dubbio che le chiavi private possano essere in mani altrui, saremmo obbligati a generare un nuovo mazzo di chiavi, con tutto quello che ne comporta (revoca delle chiavi, perdita del lavoro fatto per il Web of Trust, perdita delle firme apposte sulla nostra chiave).
@@ -486,9 +505,6 @@ default-preference-list SHA512 SHA384 SHA256 SHA224 TWOFISH AES256 AES192 3DES Z
 Modificare (o creare) il file `~/.gnupg/dirmngr.conf`:
 
 ~~~
-# Per lo skeleton di questo file vedi:
-# /usr/share/gnupg2/dirmngr-conf.skel
-
 keyserver hkps://hkps.pool.sks-keyservers.net
 ~~~
 
