@@ -1,7 +1,10 @@
 **GUIDA IN FASE DI SCRITTURA**
 
+# Indice
+
 <!-- TOC depthFrom:1 depthTo:6 withLinks:1 updateOnSave:0 orderedList:0 -->
 
+- [Indice](#indice)
 - [Introduzione](#introduzione)
 - [Generazione sicura di chiavi OpenPGP](#generazione-sicura-di-chiavi-openpgp)
 	- [Prerequisiti](#prerequisiti)
