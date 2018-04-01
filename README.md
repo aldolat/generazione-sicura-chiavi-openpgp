@@ -424,7 +424,7 @@ keyid-format 0xlong
 with-fingerprint
 
 # List all keys (or the specified ones) along with their keygrips
-# with-keygrip
+with-keygrip
 
 # Display the calculated validity of user IDs during key listings
 list-options show-uid-validity
@@ -478,7 +478,7 @@ personal-compress-preferences ZLIB BZIP2 ZIP Uncompressed
 
 # This preference list is used for new keys and becomes the default for
 # "setpref" in the edit menu
-default-preference-list SHA512 SHA384 SHA256 SHA224 AES256 AES192 AES CAST5 ZLIB BZIP2 ZIP Uncompressed
+default-preference-list SHA512 SHA384 SHA256 SHA224 TWOFISH AES256 AES192 3DES ZLIB BZIP2 ZIP Uncompressed
 ~~~
 
 ## Impostare il keyserver
