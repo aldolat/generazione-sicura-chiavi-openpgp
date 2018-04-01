@@ -483,7 +483,7 @@ default-preference-list SHA512 SHA384 SHA256 SHA224 TWOFISH AES256 AES192 3DES Z
 
 ## Impostare il keyserver
 
-Modificare (o creare) il file ~/.gnupg/dirmngr.conf
+Modificare (o creare) il file `~/.gnupg/dirmngr.conf`:
 
 ~~~
 # Per lo skeleton di questo file vedi:
@@ -503,5 +503,9 @@ gpg --send-keys 0x05F0303DA9F107EC
 In questa parte vedremo come:
 1. separare la chiave principale dal resto del portachiavi;
 1. trasferire le sottochiavi nella Yubikey.
+
+TODO.
+
+# Importare la chiave principale per operazioni speciali
 
 TODO.
