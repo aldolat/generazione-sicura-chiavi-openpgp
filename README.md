@@ -80,6 +80,8 @@ Qualora il comando `gpg` lanci GnuPG versione 1, accertarsi che la versione 2 si
 alias gpg='gpg2'
 ~~~
 
+Questa scorciatoia permetterà l'avvio di GnuPG versione 2 ogni volta che digitiamo `gpg`.
+
 ## Generazione delle chiavi
 
 Sul sistema di generazione delle chiavi accertarsi di avere GnuPG versione 2.1 o successiva:
@@ -97,17 +99,17 @@ gpg --expert --full-gen-key
 che darà:
 
 ~~~
-Per favore scegli che tipo di chiave vuoi:
+Please select what kind of key you want:
    (1) RSA and RSA (default)
    (2) DSA and Elgamal
-   (3) DSA (firma solo)
-   (4) RSA (firma solo)
+   (3) DSA (sign only)
+   (4) RSA (sign only)
    (7) DSA (set your own capabilities)
    (8) RSA (set your own capabilities)
    (9) ECC and ECC
   (10) ECC (sign only)
   (11) ECC (set your own capabilities)
-  (13) Existing key
+Your selection?
 ~~~
 
 Scegliamo `8`:
@@ -120,9 +122,12 @@ Current allowed actions: Sign Certify Encrypt
    (E) Toggle the encrypt capability
    (A) Toggle the authenticate capability
    (Q) Finished
+
+Your selection?
 ~~~
 
-Rimuoviamo le capacità di firma con `S`:
+Come si vede le attuali capacità della chiave che stiamo creando sono: `Sign Certify Encrypt`.
+Rimuoviamo le capacità di firma premendo `S`:
 
 ~~~
 Possible actions for a RSA key: Sign Certify Encrypt Authenticate
@@ -132,9 +137,11 @@ Current allowed actions: Certify Encrypt
    (E) Toggle the encrypt capability
    (A) Toggle the authenticate capability
    (Q) Finished
+
+Your selection?
 ~~~
 
-Rimuoviamo le capacità di cifratura con `E`:
+Rimuoviamo le capacità di cifratura premendo `E`:
 
 ~~~
 Possible actions for a RSA key: Sign Certify Encrypt Authenticate
@@ -144,9 +151,11 @@ Current allowed actions: Certify
    (E) Toggle the encrypt capability
    (A) Toggle the authenticate capability
    (Q) Finished
+
+Your selection?
 ~~~
 
-Ora la chiave primaria avrà solo la capacità di certificazione su altre chiavi.
+Ora la chiave primaria avrà solo la capacità di certificazione (`Certify`) su altre chiavi.
 
 Premiamo `Q`:
 
@@ -158,49 +167,50 @@ What keysize do you want? (2048)
 Inserire `4096`:
 
 ~~~
-La dimensione richiesta della chiave è 4096 bit
-Per favore specifica per quanto tempo la chiave sarà valida.
-         0 = la chiave non scadrà
-      <n>  = la chiave scadrà dopo n giorni
-      <n>w = la chiave scadrà dopo n settimane
-      <n>m = la chiave scadrà dopo n mesi
-      <n>y = la chiave scadrà dopo n anni
-Chiave valida per? (0)
+Requested keysize is 4096 bits
+Please specify how long the key should be valid.
+         0 = key does not expire
+      <n>  = key expires in n days
+      <n>w = key expires in n weeks
+      <n>m = key expires in n months
+      <n>y = key expires in n years
+Key is valid for? (0)
 ~~~
 
-Inseriamo `3y`:
+Inseriamo `3y` (3 anni):
 
 ~~~
-Key expires at dom 27 dic 2020 11:54:08 CET
+Key expires at mer 31 mar 2021 19:46:05 CEST
 Is this correct? (y/N)
 ~~~
 
-Inseriamo `y`:
+Premiamo `Y`:
 
 ~~~
 GnuPG needs to construct a user ID to identify your key.
-Nome e Cognome:
-Indirizzo di Email:
-Commento:
+
+Real name:
+Email address:
+Comment:
 ~~~
 
-Inseriamo nome e cognome e indirizzo email.
+Inseriamo il nostro nome e cognome e quindi l'indirizzo email.
 Come commento lasciamo il campo vuoto.
 
 ~~~
-Hai selezionato questo User Id:
+You selected this USER-ID:
     "Mario Rossi <mario.rossi@example.com>"
 
-Modifica (N)ome, (C)ommento, (E)mail oppure (O)kay/(Q)uit?
+Change (N)ame, (C)omment, (E)mail or (O)kay/(Q)uit?
 ~~~
 
 Accettare con `O`:
 
 ~~~
-Dobbiamo generare un mucchio di byte casuali. È una buona idea eseguire
-qualche altra azione (scrivere sulla tastiera, muovere il mouse, usare i
-dischi) durante la generazione dei numeri primi; questo da al generatore di
-numeri casuali migliori possibilità di raccogliere abbastanza entropia.
+We need to generate a lot of random bytes. It is a good idea to perform
+some other action (type on the keyboard, move the mouse, utilize the
+disks) during the prime generation; this gives the random number
+generator a better chance to gain enough entropy.
 ~~~
 
 A seguire GnuPG chiederà di impostare la passfrase.
@@ -208,52 +218,59 @@ A seguire GnuPG chiederà di impostare la passfrase.
 Impostiamo la passphrase.
 
 ~~~
-gpg: key 05F0303DA9F107EC marked as ultimately trusted
-gpg: revocation certificate stored as '/home/aldo/.gnupg/openpgp-revocs.d/D4E03D8613D611D10D36B05205F0303DA9F107EC.rev'
-chiavi pubbliche e segrete create e firmate.
+gpg: key 4B6E6777 marked as ultimately trusted
+gpg: directory '/home/mariorossi/.gnupg/openpgp-revocs.d' created
+gpg: revocation certificate stored as '/home/mariorossi/.gnupg/openpgp-revocs.d/491532759708014725CFE3A79F676B5A4B6E6777.rev'
+public and secret key created and signed.
 
-pub   rsa4096 2017-12-27 [C] [expires: 2020-12-27]
-      D4E03D8613D611D10D36B05205F0303DA9F107EC
-uid                      Mario Rossi <mario.rossi@example.com>
+gpg: checking the trustdb
+gpg: marginals needed: 3  completes needed: 1  trust model: PGP
+gpg: depth: 0  valid:   1  signed:   0  trust: 0-, 0q, 0n, 0m, 0f, 1u
+gpg: next trustdb check due at 2021-03-31
+pub   rsa4096/4B6E6777 2018-04-01 [C] [expires: 2021-03-31]
+      Key fingerprint = 4915 3275 9708 0147 25CF  E3A7 9F67 6B5A 4B6E 6777
+uid         [ultimate] Mario Rossi <mario.rossi@example.com>
 ~~~
 
-GnuPG mostra la chiave appena generata e si chiude.
+GnuPG mostra la chiave appena generata ed esce.
 
 Come si vede, esiste solo la chiave principale con la sola capacità di certificazione `[C]`.
 Bisogna ora generare le sottochiavi con:
 
 ~~~
-gpg --expert --edit-key 0x05F0303DA9F107EC
+gpg --expert --edit-key 0x4B6E6777
 ~~~
 
 ~~~
-gpg (GnuPG) 2.2.3; Copyright (C) 2017 Free Software Foundation, Inc.
+gpg (GnuPG) 2.1.11; Copyright (C) 2016 Free Software Foundation, Inc.
 This is free software: you are free to change and redistribute it.
 There is NO WARRANTY, to the extent permitted by law.
 
-È disponibile una chiave segreta.
+Secret key is available.
 
-sec  rsa4096/05F0303DA9F107EC
-     created: 2017-12-27  expires: 2020-12-27  usage: C
+sec  rsa4096/4B6E6777
+     created: 2018-04-01  expires: 2021-03-31  usage: C   
      trust: ultimate      validity: ultimate
 [ultimate] (1). Mario Rossi <mario.rossi@example.com>
+
+gpg>
 ~~~
 
-Dare `addkey`:
+Dare il comando `addkey`:
 
 ~~~
-Per favore scegli che tipo di chiave vuoi:
-   (3) DSA (firma solo)
-   (4) RSA (firma solo)
+Please select what kind of key you want:
+   (3) DSA (sign only)
+   (4) RSA (sign only)
    (5) Elgamal (encrypt only)
-   (6) RSA (cifra solo)
+   (6) RSA (encrypt only)
    (7) DSA (set your own capabilities)
    (8) RSA (set your own capabilities)
   (10) ECC (sign only)
   (11) ECC (set your own capabilities)
   (12) ECC (encrypt only)
   (13) Existing key
-Cosa scegli?
+Your selection?
 ~~~
 
 Scegliere `8`:
@@ -267,10 +284,10 @@ Current allowed actions: Sign Encrypt
    (A) Toggle the authenticate capability
    (Q) Finished
 
-Cosa scegli?
+Your selection?
 ~~~
 
-Togliere la capacità di cifratura con `E`:
+Togliere la capacità di cifratura premendo `E`:
 
 ~~~
 Possible actions for a RSA key: Sign Encrypt Authenticate
@@ -281,7 +298,7 @@ Current allowed actions: Sign
    (A) Toggle the authenticate capability
    (Q) Finished
 
-Cosa scegli?
+Your selection?
 ~~~
 
 Scegliere `Q`:
@@ -294,20 +311,20 @@ What keysize do you want? (2048)
 Premere `Invio` per accettare `2048`:
 
 ~~~
-La dimensione richiesta della chiave è 2048 bit
-Per favore specifica per quanto tempo la chiave sarà valida.
-         0 = la chiave non scadrà
-      <n>  = la chiave scadrà dopo n giorni
-      <n>w = la chiave scadrà dopo n settimane
-      <n>m = la chiave scadrà dopo n mesi
-      <n>y = la chiave scadrà dopo n anni
-Chiave valida per? (0)
+Requested keysize is 2048 bits
+Please specify how long the key should be valid.
+         0 = key does not expire
+      <n>  = key expires in n days
+      <n>w = key expires in n weeks
+      <n>m = key expires in n months
+      <n>y = key expires in n years
+Key is valid for? (0)
 ~~~
 
 Inserire `1y` per farla scadere dopo 1 anno:
 
 ~~~
-Key expires at gio 27 dic 2018 12:13:02 CET
+Key expires at lun 01 apr 2019 19:57:16 CEST
 Is this correct? (y/N)
 ~~~
 
@@ -322,21 +339,27 @@ Accettare inserendo `Y`.
 Inserire quindi la passphrase e la sottochiave sarà aggiunta al portachiavi:
 
 ~~~
-Dobbiamo generare un mucchio di byte casuali. È una buona idea eseguire
-qualche altra azione (scrivere sulla tastiera, muovere il mouse, usare i
-dischi) durante la generazione dei numeri primi; questo da al generatore di
-numeri casuali migliori possibilità di raccogliere abbastanza entropia.
-
-sec  rsa4096/05F0303DA9F107EC
-     created: 2017-12-27  expires: 2020-12-27  usage: C
-     trust: ultimate      validity: ultimate
-ssb  rsa2048/99A0D3F9AFDC63F8
-     created: 2017-12-27  expires: 2018-12-27  usage: S
-[ultimate] (1). Mario Rossi <mario.rossi@example.com>
+We need to generate a lot of random bytes. It is a good idea to perform
+some other action (type on the keyboard, move the mouse, utilize the
+disks) during the prime generation; this gives the random number
+generator a better chance to gain enough entropy.
 ~~~
 
-Aggiungiamo ora con la stessa procedura la chiave di cifratura e poi quella di autenticazione.
-Dopo aver aggiunto la sottochiave di autenticazione dare:
+Attendiamo che finisca, quindi apparirà:
+
+~~~
+sec  rsa4096/4B6E6777
+     created: 2018-04-01  expires: 2021-03-31  usage: C   
+     trust: ultimate      validity: ultimate
+ssb  rsa2048/9114F367
+     created: 2018-04-01  expires: 2019-04-01  usage: S   
+[ultimate] (1). Mario Rossi <mario.rossi@example.com>
+
+gpg>
+~~~
+
+Aggiungiamo ora con la stessa procedura (partendo da `addkey`) la chiave di cifratura e poi quella di autenticazione.
+Alla fine, dopo aver aggiunto la sottochiave di autenticazione, dare il comando:
 
 ~~~
 save
@@ -351,18 +374,19 @@ gpg --list-secret-keys
 ~~~
 
 ~~~
-sec   rsa4096 2017-12-27 [C] [expires: 2020-12-27]
-      D4E03D8613D611D10D36B05205F0303DA9F107EC
-uid           [ultimate] Mario Rossi <mario.rossi@example.com>
-ssb   rsa2048 2017-12-27 [S] [expires: 2018-12-27]
-ssb   rsa2048 2017-12-27 [E] [expires: 2018-12-27]
-ssb   rsa2048 2017-12-27 [A] [expires: 2018-12-27]
+/home/mariorossi/.gnupg/pubring.kbx
+-----------------------------
+sec   rsa4096/4B6E6777 2018-04-01 [C] [expires: 2021-03-31]
+uid         [ultimate] Mario Rossi <mario.rossi@example.com>
+ssb   rsa2048/9114F367 2018-04-01 [S] [expires: 2019-04-01]
+ssb   rsa2048/2F3AC08A 2018-04-01 [E] [expires: 2019-04-01]
+ssb   rsa2048/AFBE0F10 2018-04-01 [A] [expires: 2019-04-01]
 ~~~
 
-Possiamo aggiungere anche altri UserID o una foto con
+Possiamo aggiungere anche altri UserID o una foto con:
 
 ~~~
-gpg --expert --edit-key 0x05F0303DA9F107EC
+gpg --expert --edit-key 0x4B6E6777
 ~~~
 
 e poi con `adduid`.
@@ -372,15 +396,17 @@ e poi con `adduid`.
 Con GnuPG versione 2 la generazione del certificato di revoca è stata fatta automaticamente quando le chiavi sono state generate e si trova nella directory `~/.gnupg/openpgp-revocs.d/`. Il file ha lo stesso nome dell'impronta della chiave, nel nostro caso:
 
 ~~~
-D4E03D8613D611D10D36B05205F0303DA9F107EC.rev
+491532759708014725CFE3A79F676B5A4B6E6777.rev
 ~~~
+
+Questo file andrà tolto da questa directory e conservato in un luogo sicuro.
 
 ## Impostare le preferenze della chiave
 
 Modificare la chiave con:
 
 ~~~
-gpg --expert --edit-key 0x05F0303DA9F107EC
+gpg --expert --edit-key 0x4B6E6777
 ~~~
 
 Dal prompt di Gnupg dare:
@@ -395,9 +421,6 @@ che significa:
 S10	Cifrario Twofish
 S9	Cifrario AES256
 S8	Cifrario AES256
-~~~
-
-~~~
 H10	Hash SHA512
 H9	Hash SHA384
 H8	Hash SHA256
@@ -407,13 +430,26 @@ Z1	Compressione ZIP
 Z0	Non compresso
 ~~~
 
-e quindi:
+Alla domanda di GnuPG seguente:
+
+~~~
+Set preference list to:
+     Cipher: TWOFISH, AES256, AES192, 3DES
+     Digest: SHA512, SHA384, SHA256, SHA1
+     Compression: ZLIB, BZIP2, ZIP, Uncompressed
+     Features: MDC, Keyserver no-modify
+Really update the preferences? (y/N)
+~~~
+
+premere `Y` e quindi:
 
 ~~~
 save
 ~~~
 
 ## Impostare il file gpg.conf
+
+Aprire il file `gpg.conf` dentro la directory `~/.gnupg`, eliminare tutto il contenuto e incollarvi questo testo, ricordandosi di **aggiornare le due ID di chiave** nelle righe `default-key` e `encrypt-to` con l'ID della vostra chiave:
 
 ~~~
 # Per lo skeleton di questo file vedi:
@@ -426,8 +462,8 @@ save
 # The default key to sign with. If this option is not used, the default key is
 # the first key found in the secret keyring
 
-default-key 0x05F0303DA9F107EC
-encrypt-to  0x05F0303DA9F107EC
+default-key 0x9F676B5A4B6E6777
+encrypt-to  0x9F676B5A4B6E6777
 
 #-----------------------------
 # behavior
@@ -514,7 +550,7 @@ keyserver hkps://hkps.pool.sks-keyservers.net
 ## Esportare la chiave pubblica sul keyserver
 
 ~~~
-gpg --send-keys 0x05F0303DA9F107EC
+gpg --send-keys 0x9F676B5A4B6E6777
 ~~~
 
 # Trasferire le chiavi OpenPGP su YubiKey
