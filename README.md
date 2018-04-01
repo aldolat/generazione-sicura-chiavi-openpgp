@@ -150,7 +150,6 @@ Indirizzo di Email:
 Commento:
 ~~~
 
-
 Inseriamo nome e cognome e indirizzo email.
 Come commento lasciamo il campo vuoto.
 
@@ -160,7 +159,6 @@ Hai selezionato questo User Id:
 
 Modifica (N)ome, (C)ommento, (E)mail oppure (O)kay/(Q)uit?
 ~~~
-
 
 Accettare con `O`:
 
@@ -185,7 +183,6 @@ pub   rsa4096 2017-12-27 [C] [expires: 2020-12-27]
 uid                      Mario Rossi <mario.rossi@example.com>
 ~~~
 
-
 GnuPG mostra la chiave appena generata e si chiude.
 
 Come si vede, esiste solo la chiave principale con la sola capacità di certificazione `[C]`.
@@ -208,7 +205,6 @@ sec  rsa4096/05F0303DA9F107EC
 [ultimate] (1). Mario Rossi <mario.rossi@example.com>
 ~~~
 
-
 Dare `addkey`:
 
 ~~~
@@ -226,7 +222,6 @@ Per favore scegli che tipo di chiave vuoi:
 Cosa scegli?
 ~~~
 
-
 Scegliere `8`:
 
 ~~~
@@ -240,7 +235,6 @@ Current allowed actions: Sign Encrypt
 
 Cosa scegli?
 ~~~
-
 
 Togliere la capacità di cifratura con `E`:
 
@@ -256,14 +250,12 @@ Current allowed actions: Sign
 Cosa scegli?
 ~~~
 
-
 Scegliere `Q`:
 
 ~~~
 RSA keys may be between 1024 and 4096 bits long.
 What keysize do you want? (2048)
 ~~~
-
 
 Premere `Invio` per accettare `2048`:
 
@@ -278,14 +270,12 @@ Per favore specifica per quanto tempo la chiave sarà valida.
 Chiave valida per? (0)
 ~~~
 
-
 Inserire `1y` per farla scadere dopo 1 anno:
 
 ~~~
 Key expires at gio 27 dic 2018 12:13:02 CET
 Is this correct? (y/N)
 ~~~
-
 
 Accettare inserendo `Y`:
 
@@ -311,7 +301,6 @@ ssb  rsa2048/99A0D3F9AFDC63F8
 [ultimate] (1). Mario Rossi <mario.rossi@example.com>
 ~~~
 
-
 Aggiungiamo ora con la stessa procedura la chiave di cifratura e poi quella di autenticazione.
 Dopo aver aggiunto la sottochiave di autenticazione dare:
 
@@ -335,7 +324,6 @@ ssb   rsa2048 2017-12-27 [S] [expires: 2018-12-27]
 ssb   rsa2048 2017-12-27 [E] [expires: 2018-12-27]
 ssb   rsa2048 2017-12-27 [A] [expires: 2018-12-27]
 ~~~
-
 
 Possiamo aggiungere anche altri UserID o una foto con
 
