@@ -16,14 +16,14 @@
 	- [Esportare la chiave pubblica sul keyserver](#esportare-la-chiave-pubblica-sul-keyserver)
 - [Trasferire le chiavi OpenPGP su YubiKey](#trasferire-le-chiavi-openpgp-su-yubikey)
 - [Importare la chiave principale per operazioni speciali](#importare-la-chiave-principale-per-operazioni-speciali)
-- [Estendere la validità delle nostre chiavi](#estendere-la-validit-delle-nostre-chiavi)
+- [Estendere la validità delle nostre chiavi](#estendere-la-validità-delle-nostre-chiavi)
 - [Bibliografia](#bibliografia)
 
 <!-- /TOC -->
 
 # Introduzione
 
-Come sappiamo, tutto il sistema della [crittografia a chiave pubblica](https://it.wikipedia.org/wiki/Crittografia_asimmetrica) si basa sull'uso di una chiave che ha una parte pubblica, da divulgare il più possibile, e una parte privata, che va tenuta rigorosamente in un luogo sicuro. Qualora avessimo il dubbio che le chiavi private possano essere in mani altrui, saremmo obbligati a generare un nuovo mazzo di chiavi, con tutto quello che ne comporta (revoca delle chiavi, perdita del lavoro fatto per il Web of Trust, perdita delle firme apposte sulla nostra chiave).
+Come sappiamo, tutto il sistema della [crittografia a chiave pubblica](https://it.wikipedia.org/wiki/Crittografia_asimmetrica) si basa sull'uso di una chiave che ha una parte pubblica, da divulgare il più possibile, e una parte privata, che va tenuta rigorosamente in un luogo sicuro. Qualora avessimo il dubbio che le chiavi private possano essere in mani altrui, saremmo obbligati a generare un nuovo mazzo di chiavi, con tutto quello che ne comporta (revoca delle chiavi, perdita del lavoro fatto per il [Web of Trust](https://it.wikipedia.org/wiki/Web_of_trust), perdita delle firme apposte sulla nostra chiave).
 
 Con questa guida vedremo come:
 1. **generare** in un luogo abbastanza sicuro il nostro mazzo di chiavi personale;
@@ -530,6 +530,8 @@ TODO.
 TODO.
 
 # Estendere la validità delle nostre chiavi
+
+TODO.
 
 # Bibliografia
 
