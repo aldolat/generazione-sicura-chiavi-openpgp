@@ -38,19 +38,21 @@ Un ultimo punto prima di passare alla pratica. Il motivo di avere una scadenza s
 
 Con questa guida genereremo la nostra chiave privata che avrà questo schema:
 
-1. **Chiave master (o principale)** [C - Certificazione]
-	1. **Sottochiave per firma** [S - Sign/Firma]
-	1. **Sottochiave per cifratura** [E - Encrypt/Cifratura]
+1. **Chiave master (o principale)** [C - Certification/Certificazione]
+	1. **Sottochiave per firma** [S - Signing/Firma]
+	1. **Sottochiave per cifratura** [E - Encryption/Cifratura]
 	1. **Sottochiave per autenticazione** [A - Authentication/Autenticazione]
 
-Per la lunghezza delle chiavi avremo la chiave primaria a 4096 bit mentre le sottochiavi a 2048 bit. Per ulteriori informazioni su questo dibattito della lunghezza delle chiavi si può vedere la [FAQ dedicata](https://www.gnupg.org/faq/gnupg-faq.html#default_rsa2048) sul sito di GnuPG.
+Per la lunghezza delle chiavi avremo la chiave primaria a 4096 bit mentre le sottochiavi a 2048 bit. Per ulteriori informazioni su questo dibattito della lunghezza delle chiavi si può vedere:
+* [Why does GnuPG default to 2048 bit RSA-2048?](https://www.gnupg.org/faq/gnupg-faq.html#default_rsa2048) sul sito di GnuPG;
+* [The Big Debate, 2048 vs. 4096, Yubico’s Position](https://www.yubico.com/2015/02/big-debate-2048-4096-yubicos-stand/) sul blog di Yubico.
 
 ## Prerequisiti
 
-1. È necessario lavorare su un sistema avviato con una distribuzione Linux in modalità live. È preferibile una [Tails](https://tails.boum.org/index.it.html), ma va bene una qualunque. La distribuzione va avviata isolandola da qualsiasi rete.
-1. È necessario usare GnuPG versione 2 o successiva.
+1. È necessario lavorare su un sistema avviato con una distribuzione Linux in modalità *live*. È preferibile una [Tails](https://tails.boum.org/index.it.html), ma va bene una qualunque. La distribuzione va avviata isolandola da qualsiasi rete.
+1. È necessario usare GnuPG versione 2.1 o successiva.
 
-Qualora il comando `gpg` faccia partire GnuPG versione 1, accertarsi che la versione 2 sia installata e aggiungere questa riga a `~/.bash_aliases`:
+Qualora il comando `gpg` lanci GnuPG versione 1, accertarsi che la versione 2 sia installata e aggiungere questa riga a `~/.bash_aliases`:
 
 ~~~
 alias gpg='gpg2'
@@ -58,7 +60,7 @@ alias gpg='gpg2'
 
 ## Generazione delle chiavi
 
-Sul sistema di generazione delle chiavi accertarsi di avere GnuPG v2 o successiva:
+Sul sistema di generazione delle chiavi accertarsi di avere GnuPG versione 2.1 o successiva:
 
 ~~~
 gpg --version
@@ -509,3 +511,12 @@ TODO.
 TODO.
 
 # Estendere la validità delle nostre chiavi
+
+# Bibliografia
+
+* [Creazione di chiavi sicure (ossìa, come generare con GnuPG una coppia di chiavi per poterla conservare in modo "abbastanza" sicuro)](http://tjl73.altervista.org/secure_keygen/).
+* [PGP and SSH keys on a Yubikey NEO](https://www.esev.com/blog/post/2015-01-pgp-ssh-key-on-yubikey-neo/).
+* [Creating the perfect GPG keypair](https://alexcabal.com/creating-the-perfect-gpg-keypair/).
+* [Using GPG and SSH keys (GnuPG 2.1) with a Smartcard (Yubikey 4)](https://suva.sh/posts/gpg-ssh-smartcard-yubikey-keybase/).
+* [Guide to using YubiKey as a SmartCard for GPG and SSH](https://github.com/drduh/YubiKey-Guide).
+* [OpenPGP Best Practices](https://riseup.net/en/security/message-security/openpgp/best-practices).
