@@ -13,6 +13,7 @@
 	- [Impostare il keyserver](#impostare-il-keyserver)
 	- [Copiare la directory .gnupg nel proprio computer di lavoro](#copiare-la-directory-gnupg-nel-proprio-computer-di-lavoro)
 	- [Esportare la chiave pubblica sul keyserver](#esportare-la-chiave-pubblica-sul-keyserver)
+	- [Segnarsi la data di scadenza delle proprie chiavi nel calendario](#segnarsi-la-data-di-scadenza-delle-proprie-chiavi-nel-calendario)
 - [Fare il backup](#fare-il-backup)
 	- [Backup della directory di GnuPG](#backup-della-directory-di-gnupg)
 	- [Backup delle chiavi](#backup-delle-chiavi)
@@ -570,6 +571,10 @@ Dopo il trasferimento non dimenticate di distruggere la directory `.gnupg` sulla
 ~~~
 gpg --send-keys 0x9F676B5A4B6E6777
 ~~~
+
+## Segnarsi la data di scadenza delle proprie chiavi nel calendario
+
+Segnatevi nel vostro calendario quando scadranno le chiavi e fatevi mandare un avviso almeno un mese prima. Una volta rinnovate le chiavi, inviatele al keyserver. Ricordate che le chiavi scadute possono essere ancora rinnovate, ma non è buona norma farle scadere.
 
 # Fare il backup
 
