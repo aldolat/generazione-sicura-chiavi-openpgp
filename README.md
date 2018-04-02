@@ -13,8 +13,14 @@
 	- [Impostare le preferenze della chiave](#impostare-le-preferenze-della-chiave)
 	- [Impostare il file gpg.conf](#impostare-il-file-gpgconf)
 	- [Impostare il keyserver](#impostare-il-keyserver)
+	- [Copiare la directory .gnupg nel proprio computer di lavoro](#copiare-la-directory-gnupg-nel-proprio-computer-di-lavoro)
 	- [Esportare la chiave pubblica sul keyserver](#esportare-la-chiave-pubblica-sul-keyserver)
+- [Fare il backup](#fare-il-backup)
+	- [Backup della directory di GnuPG](#backup-della-directory-di-gnupg)
+	- [Backup delle chiavi](#backup-delle-chiavi)
+	- [Backup del certificato di revoca](#backup-del-certificato-di-revoca)
 - [Trasferire le chiavi OpenPGP su YubiKey](#trasferire-le-chiavi-openpgp-su-yubikey)
+- [Spostamento della chiave principale](#spostamento-della-chiave-principale)
 - [Importare la chiave principale per operazioni speciali](#importare-la-chiave-principale-per-operazioni-speciali)
 - [Estendere la validità delle nostre chiavi](#estendere-la-validità-delle-nostre-chiavi)
 - [Bibliografia](#bibliografia)
@@ -56,6 +62,12 @@ Nel nostro disco fisso non avremo quindi nessuna chiave privata. Potremmo anche 
 
 Un ultimo punto prima di passare alla pratica. Il motivo di avere una scadenza sulle chiavi è un ulteriore sicurezza per noi. Immaginiamo il caso in cui dovessimo perdere il controllo del nostro mazzo di chiavi, compresa la chiave principale, e non avessimo più a disposizione nemmeno il certificato di revoca. In questo caso la scadenza sarà una garanzia per noi che a un certo punto le chiavi scadranno in modo naturale. Per i tempi di scadenza ognuno può scegliere quello che più ritenga opportuno, ma 3 anni per la principale e 1 anno per le sottochiavi dovrebbe essere un buon compromesso tra la seccatura di dover manutenzionare il portachiavi e il tempo di scadenza naturale dopo eventuale compromissione.
 
+Questa guida può essere seguita in modo modulare:
+* si può scegliere di mantenere tutte le chiavi sul proprio disco fisso, seguendo solo la parte sulla generazione sicura delle chiavi;
+* si può scegliere di spostare in un luogo sicuro la chiave principale dal resto del proprio mazzo di chiavi, mantenendo nel disco fisso solo le sottochiavi;
+* si può scegliere di spostare le sottochiavi in un token USB come la YubiKey, mantenendo la chiave principale nel disco fisso;
+* si può scegliere di spostare le sottochiavi in un token USB come la YubiKey e di spostare la chiave principale in un luogo sicuro, non lasciando nessuna chiave privata nel disco fisso.
+
 # Generazione sicura di chiavi OpenPGP
 
 Con questa guida genereremo la nostra chiave privata che avrà questo schema:
@@ -73,6 +85,7 @@ Per la lunghezza delle chiavi avremo la chiave primaria a 4096 bit mentre le sot
 
 1. È necessario lavorare su un sistema avviato con una distribuzione Linux in modalità *live*. È preferibile una [Tails](https://tails.boum.org/index.it.html), ma va bene una qualunque. La distribuzione va avviata isolandola da qualsiasi rete.
 1. È necessario usare GnuPG versione 2.1 o successiva.
+1. È necessario un token USB come, ad esempio, una Yubikey, nel caso si decida di spostare le sottochiavi su questo supporto.
 
 Qualora il comando `gpg` lanci GnuPG versione 1, accertarsi che la versione 2 sia installata e aggiungere questa riga a `~/.bash_aliases`:
 
@@ -399,7 +412,7 @@ Con GnuPG versione 2 la generazione del certificato di revoca è stata fatta aut
 491532759708014725CFE3A79F676B5A4B6E6777.rev
 ~~~
 
-Questo file andrà tolto da questa directory e conservato in un luogo sicuro.
+Questo file andrà tolto da questa directory e conservato in un luogo sicuro. Lo vedremo nel paragrafo dedicato al backup.
 
 ## Impostare le preferenze della chiave
 
@@ -496,18 +509,6 @@ use-agent
 # keyserver
 #-----------------------------
 
-# This is the server that --recv-keys, --send-keys, and --search-keys will
-# communicate with to receive keys from, send keys to, and search for keys on
-# QUESTA OPZIONE È GESTITA IN DIRMNGR.CONF
-# keyserver hkps://hkps.pool.sks-keyservers.net
-
-# Set the proxy to use for HTTP and HKP keyservers - default to the standard
-# local Tor socks proxy
-# It is encouraged to use Tor for improved anonymity. Preferrably use either a
-# dedicated SOCKSPort for GnuPG and/or enable IsolateDestPort and
-# IsolateDestAddr
-#keyserver-options http-proxy=socks5-hostname://127.0.0.1:9050
-
 # When using --refresh-keys, if the key in question has a preferred keyserver
 # URL, then disable use of that preferred keyserver to refresh the key from
 keyserver-options no-honor-keyserver-url
@@ -520,18 +521,18 @@ keyserver-options include-revoked
 # algorithm and ciphers
 #-----------------------------
 
-# list of personal digest preferences. When multiple digests are supported by
+# List of personal digest preferences. When multiple digests are supported by
 # all recipients, choose the strongest one
 personal-cipher-preferences TWOFISH AES256 AES192 3DES
 
-# list of personal digest preferences. When multiple ciphers are supported by
+# List of personal digest preferences. When multiple ciphers are supported by
 # all recipients, choose the strongest one
 personal-digest-preferences SHA512 SHA384 SHA256 SHA224
 
-# message digest algorithm used when signing a key
+# Message digest algorithm used when signing a key
 cert-digest-algo SHA512
 
-# list of personal compression preferences.
+# List of personal compression preferences.
 personal-compress-preferences ZLIB BZIP2 ZIP Uncompressed
 
 # This preference list is used for new keys and becomes the default for
@@ -544,8 +545,19 @@ default-preference-list SHA512 SHA384 SHA256 SHA224 TWOFISH AES256 AES192 3DES Z
 Modificare (o creare) il file `~/.gnupg/dirmngr.conf`:
 
 ~~~
+# Per lo skeleton di questo file vedi:
+# /usr/share/gnupg2/dirmngr-conf.skel
+
+# This is the server that --recv-keys, --send-keys, and --search-keys will
+# communicate with to receive keys from, send keys to, and search for keys on
 keyserver hkps://hkps.pool.sks-keyservers.net
 ~~~
+
+## Copiare la directory .gnupg nel proprio computer di lavoro
+
+A questo punto, se avete usato una distribuzione *live* per la generazione delle chiavi, copiate tutta la directory `.gnupg` su una chiavetta USB e quindi trasferitela sul disco fisso del computer di lavoro.
+
+Dopo il trasferimento non dimenticate di distruggere la directory `.gnupg` sulla chiavetta. Si possono usare diversi strumenti come ad esempio `shred`.
 
 ## Esportare la chiave pubblica sul keyserver
 
@@ -553,11 +565,96 @@ keyserver hkps://hkps.pool.sks-keyservers.net
 gpg --send-keys 0x9F676B5A4B6E6777
 ~~~
 
+# Fare il backup
+
+Dopo aver generato il nostro mazzo di chiavi **è fondamentale farne il backup**. Davvero, non si prenda alla leggera questo passaggio e **non proseguite oltre se non fate il backup**.
+
+Faremo il backup di questi tre elementi:
+* directory di GnuPG;
+* chiavi;
+* certificato di revoca.
+
+Creiamo una directory `backup` e relative sottodirectory sulla scrivania del PC dove metteremo tutti i file del backup:
+
+~~~
+mkdir -p ~/Scrivania/backup/directory_gnupg
+mkdir ~/Scrivania/backup/chiavi
+mkdir ~/Scrivania/backup/certificato_di_revoca
+~~~
+
+Cambiate `Scrivania` con `Desktop` se è il vostro caso.
+
+## Backup della directory di GnuPG
+
+Anzitutto facciamo il backup di tutta la directory di GnuPG così come si trova in questo momento. Qualora qualcosa dovesse andare storto, potremmo sempre ripristinarla e cominciare daccapo.
+
+~~~
+cp -r ~/.gnupg/ ~/Scrivania/backup/directory_gnupg/
+~~~
+
+## Backup delle chiavi
+
+Vediamo anzitutto la situazione delle nostre chiavi private:
+
+~~~
+gpg --list-secret-keys
+~~~
+
+che restituirà qualcosa del tipo:
+
+~~~
+sec   rsa4096/0x9F676B5A4B6E6777 2018-04-01 [C] [expires: 2021-03-31]
+      Key fingerprint = 4915 3275 9708 0147 25CF  E3A7 9F67 6B5A 4B6E 6777
+      Keygrip = C6D1CD1D12CBBC8FA14D30004EAF381803A72597
+uid                   [ultimate] Mario Rossi <mario.rossi@example.com>
+ssb   rsa2048/0xE7E0CAF69114F367 2018-04-01 [S] [expires: 2019-04-01]
+      Keygrip = 135159EDEFB9FCB6062F9DE0E21FD90CB07DA041
+ssb   rsa2048/0x3C91B3682F3AC08A 2018-04-01 [E] [expires: 2019-04-01]
+      Keygrip = C74D47329D5D224B0716879DCF3A4EC2D8951C53
+ssb   rsa2048/0x465ED456AFBE0F10 2018-04-01 [A] [expires: 2019-04-01]
+      Keygrip = 30DEE8A060F3562CD6F1384E0F883D65477E596A
+~~~
+
+Procediamo ad effettuare un backup di tutta la chiave (principale e sottochiavi) e anche delle singole chiavi. Questo è quello che otterremo:
+1. backup chiave completa;
+1. backup chiave principale;
+1. backup di tutte le sottochiavi;
+1. backup sottochiave di firma;
+1. backup sottochiave di cifratura;
+1. backup sottochiave di autenticazione;
+1. backup chiave pubblica;
+1. backup chiave SSH.
+
+Qui di sotto gli otto comandi di cui sopra, eseguiti uno dopo l'altro. Notate come in alcuni casi l'opzione è `--export-secret-keys` oppure `export-secret-key` con un punto esclamativo `!` dopo l'ID della chiave.
+
+~~~
+gpg --armor --export-secret-keys 0x9F676B5A4B6E6777 > ~/Scrivania/backup/chiavi/1_principale_con_sottochiavi_0x9F676B5A4B6E6777.asc
+gpg --armor --export-secret-key 0x9F676B5A4B6E6777! > ~/Scrivania/backup/chiavi/2_principale_soltanto_0x9F676B5A4B6E6777.asc
+gpg --armor --export-secret-subkeys 0x9F676B5A4B6E6777 > ~/Scrivania/backup/chiavi/3_sottochiavi_0x9F676B5A4B6E6777.asc
+gpg --armor --export-secret-subkey 0xE7E0CAF69114F367! > ~/Scrivania/backup/chiavi/4_sottochiave_firma_0xE7E0CAF69114F367.asc
+gpg --armor --export-secret-subkey 0x3C91B3682F3AC08A! > ~/Scrivania/backup/chiavi/5_sottochiave_cifratura_0x3C91B3682F3AC08A.asc
+gpg --armor --export-secret-subkey 0x465ED456AFBE0F10! > ~/Scrivania/backup/chiavi/6_sottochiave_autenticazione_0x465ED456AFBE0F10.asc
+gpg --armor --export 0x9F676B5A4B6E6777 > ~/Scrivania/backup/chiavi/7_chiave_pubblica_0x9F676B5A4B6E6777.asc
+gpg --armor --export-ssh-key 0x9F676B5A4B6E6777 > ~/Scrivania/backup/chiavi/8_chiave_pubblica_ssh_0x9F676B5A4B6E6777.asc
+~~~
+
+## Backup del certificato di revoca
+
+Come abbiamo detto al paragrafo "Il certificato di revoca", questo è stato già creato da GnuPG versione 2 nella directory `~/.gnupg/openpgp-revocs.d/` ed il file ha lo stesso nome dell'impronta della chiave, nel nostro caso `491532759708014725CFE3A79F676B5A4B6E6777.rev`.
+
+Spostiamolo dalla directory `~/.gnupg` alla directory di backup:
+
+~~~
+mv ~/.gnupg/openpgp-revocs.d/491532759708014725CFE3A79F676B5A4B6E6777.rev ~/Scrivania/backup/certificato_di_revoca/
+~~~
+
+Eventualmente è anche possibile stampare su carta il certificato e conservarlo in cassaforte.
+
 # Trasferire le chiavi OpenPGP su YubiKey
 
-In questa parte vedremo come:
-1. separare la chiave principale dal resto del portachiavi;
-1. trasferire le sottochiavi nella Yubikey.
+TODO.
+
+# Spostamento della chiave principale
 
 TODO.
 
