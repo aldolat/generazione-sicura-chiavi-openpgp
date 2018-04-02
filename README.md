@@ -19,8 +19,9 @@
 	- [Backup della directory di GnuPG](#backup-della-directory-di-gnupg)
 	- [Backup delle chiavi](#backup-delle-chiavi)
 	- [Backup del certificato di revoca](#backup-del-certificato-di-revoca)
+	- [Spostamento della directory di backup in un luogo sicuro](#spostamento-della-directory-di-backup-in-un-luogo-sicuro)
 - [Trasferire le chiavi OpenPGP su YubiKey](#trasferire-le-chiavi-openpgp-su-yubikey)
-- [Spostamento della chiave principale](#spostamento-della-chiave-principale)
+- [Eliminazione della chiave principale](#eliminazione-della-chiave-principale)
 - [Importare la chiave principale per operazioni speciali](#importare-la-chiave-principale-per-operazioni-speciali)
 - [Estendere la validità delle nostre chiavi](#estendere-la-validità-delle-nostre-chiavi)
 - [Bibliografia](#bibliografia)
@@ -396,6 +397,12 @@ ssb   rsa2048/2F3AC08A 2018-04-01 [E] [expires: 2019-04-01]
 ssb   rsa2048/AFBE0F10 2018-04-01 [A] [expires: 2019-04-01]
 ~~~
 
+La situazione è, quindi, la seguente:
+* **chiave principale**, adibita alla sola **certificazione e gestione del portachiavi**: `sec   rsa4096/4B6E6777 2018-04-01 [C]`;
+* **sottochiave di firma**: `ssb   rsa2048/9114F367 2018-04-01 [S]`;
+* **sottochiave di cifratura**: `ssb   rsa2048/2F3AC08A 2018-04-01 [E] [expires: 2019-04-01]`;
+* **sottochiave di autenticazione**: `ssb   rsa2048/AFBE0F10 2018-04-01 [A] [expires: 2019-04-01]`.
+
 Possiamo aggiungere anche altri UserID o una foto con:
 
 ~~~
@@ -650,13 +657,310 @@ mv ~/.gnupg/openpgp-revocs.d/491532759708014725CFE3A79F676B5A4B6E6777.rev ~/Scri
 
 Eventualmente è anche possibile stampare su carta il certificato e conservarlo in cassaforte.
 
+## Spostamento della directory di backup in un luogo sicuro
+
+Finito il backup, spostare la directory `~/Scrivania/backup` in un supporto da conservare in un luogo sicuro.
+
+A seconda di quanta importanza hanno queste chiavi per voi, posso consigliare una situazione del genere:
+* copia della cartella su una chiavetta USB da usare **solo** per questo scopo, conservata in un luogo sicuro e nascosto;
+* copia di sicurezza su una seconda chiavetta USB da usare **solo** per questo scopo, conservata in un altro luogo sicuro e nascosto.
+
+Chiaramente non complicatevi la vita, ma prendete le dovute precauzioni per proteggere le chiavi.
+
 # Trasferire le chiavi OpenPGP su YubiKey
 
-TODO.
+Se avete un token USB come la YubiKey, potete trasferire le sottochiavi in essa. L'operazione è molto semplice.
 
-# Spostamento della chiave principale
+Ricordo che trasferire le sottochiavi nel token USB è una operazione a senso unico e non è possibile tornare indietro, vale a dire trasferire le sottochiavi dal token al nostro disco fisso. Solo se abbiamo un backup delle chiavi possiamo ripristinare la situazione allo stato prima del trasferimento. Per cui **non procedete se non avete fatto il backup**.
 
-TODO.
+Diamo uno sguardo alla situazione attuale:
+
+~~~
+gpg --list-secret-keys
+~~~
+
+~~~
+sec   rsa4096/0x9F676B5A4B6E6777 2018-04-01 [C] [expires: 2021-03-31]
+      Key fingerprint = 4915 3275 9708 0147 25CF  E3A7 9F67 6B5A 4B6E 6777
+      Keygrip = C6D1CD1D12CBBC8FA14D30004EAF381803A72597
+uid                   [ultimate] Mario Rossi <mario.rossi@example.com>
+ssb   rsa2048/0xE7E0CAF69114F367 2018-04-01 [S] [expires: 2019-04-01]
+      Keygrip = 135159EDEFB9FCB6062F9DE0E21FD90CB07DA041
+ssb   rsa2048/0x3C91B3682F3AC08A 2018-04-01 [E] [expires: 2019-04-01]
+      Keygrip = C74D47329D5D224B0716879DCF3A4EC2D8951C53
+ssb   rsa2048/0x465ED456AFBE0F10 2018-04-01 [A] [expires: 2019-04-01]
+      Keygrip = 30DEE8A060F3562CD6F1384E0F883D65477E596A
+~~~
+
+Inseriamo il token nella porta USB e controlliamo che venga vista da GnuPG:
+
+~~~
+gpg --card-status
+~~~
+
+Se restituisce:
+
+~~~
+gpg: error getting version from 'scdaemon': No SmartCard daemon
+gpg: OpenPGP card not available: No SmartCard daemon
+~~~
+
+installiamo `scdaemon`:
+
+~~~
+sudo apt-get install pcscd pcsc-tools scdaemon
+~~~
+
+e quindi di nuovo:
+
+~~~
+gpg --card-status
+~~~
+
+che restituirà qualcosa del tipo:
+
+~~~
+Reader ...........: Yubico Yubikey 4 OTP U2F CCID 00 00
+Application ID ...: XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+Version ..........: 2.1
+Manufacturer .....: Yubico
+Serial number ....: XXXXXXXX
+Name of cardholder: [not set]
+Language prefs ...: [not set]
+Sex ..............: unspecified
+URL of public key : [not set]
+Login data .......: [not set]
+Signature PIN ....: not forced
+Key attributes ...: rsa2048 rsa2048 rsa2048
+Max. PIN lengths .: 127 127 127
+PIN retry counter : 3 0 3
+Signature counter : 0
+Signature key ....: [none]
+Encryption key....: [none]
+Authentication key: [none]
+General key info..: [none]
+~~~
+
+Notate come ci siano i tre campi dedicati alla conservazione delle tre sottochiavi che abbiamo creato:
+
+~~~
+Signature key ....: [none]
+Encryption key....: [none]
+Authentication key: [none]
+~~~
+
+Qui sposteremo le nostre tre sottochiavi. Iniziamo la procedura.
+
+Entriamo in modalità modifica:
+
+~~~
+gpg --card-edit
+~~~
+
+Cambiamo anzitutto i PIN. I PIN predefiniti di fabbrica sono:
+* Admin PIN (8 cifre): `12345678`
+* PIN (6 cifre): `123456`
+
+Entriamo in modalità amministratore dando:
+
+~~~
+admin
+~~~
+
+e quindi:
+
+~~~
+passwd
+~~~
+
+Dal menu scegliere l'opzione da seguire, vale a dire `Change PIN` e, una volta finito, `Change Admin PIN`. Quindi alla fine salvare con `save` e uscire con `quit`.
+
+Una volta aggiornati i due PIN, passare al trasferimento delle chiavi. Dal prompt del terminale dare:
+
+~~~
+gpg --edit-key 0x9F676B5A4B6E6777
+~~~
+
+che restituirà:
+
+~~~
+gpg (GnuPG) 2.1.11; Copyright (C) 2016 Free Software Foundation, Inc.
+This is free software: you are free to change and redistribute it.
+There is NO WARRANTY, to the extent permitted by law.
+
+Secret key is available.
+
+sec  rsa4096/0x9F676B5A4B6E6777
+     created: 2018-04-01  expires: 2021-03-31  usage: C   
+     trust: ultimate      validity: ultimate
+ssb  rsa2048/0xE7E0CAF69114F367
+     created: 2018-04-01  expires: 2019-04-01  usage: S   
+ssb  rsa2048/0x3C91B3682F3AC08A
+     created: 2018-04-01  expires: 2019-04-01  usage: E   
+ssb  rsa2048/0x465ED456AFBE0F10
+     created: 2018-04-01  expires: 2019-04-01  usage: A   
+[ultimate] (1). Mario Rossi <mario.rossi@example.com>
+~~~
+
+Selezioniamo la prima sottochiave con:
+
+~~~
+key 1
+~~~
+
+che mostrerà la chiave selezionata con un asterisco `*`:
+
+~~~
+sec  rsa4096/0x9F676B5A4B6E6777
+     created: 2018-04-01  expires: 2021-03-31  usage: C   
+     trust: ultimate      validity: ultimate
+ssb* rsa2048/0xE7E0CAF69114F367
+     created: 2018-04-01  expires: 2019-04-01  usage: S   
+ssb  rsa2048/0x3C91B3682F3AC08A
+     created: 2018-04-01  expires: 2019-04-01  usage: E   
+ssb  rsa2048/0x465ED456AFBE0F10
+     created: 2018-04-01  expires: 2019-04-01  usage: A   
+[ultimate] (1). Mario Rossi <mario.rossi@example.com>
+~~~
+
+Trasferiamo la chiave con:
+
+~~~
+keytocard
+~~~
+
+Deselezioniamo quindi la chiave 1:
+
+~~~
+key 1
+~~~
+
+L'asterisco verrà tolto. Quindi procedere con lo stesso metodo per le restanti due chiavi. Qui indico di seguito i comandi in sequenza:
+
+~~~
+key 2
+keytocard
+key 2
+key 3
+keytocard
+key 3
+~~~
+
+Alla fine salviamo e usciamo:
+
+~~~
+save
+~~~
+
+Una volta usciti al prompt dei comandi, diamo uno sguardo alla situazione:
+
+~~~
+gpg --edit-key 0x9F676B5A4B6E6777
+~~~
+
+che restituirà:
+
+~~~
+gpg (GnuPG) 2.1.11; Copyright (C) 2016 Free Software Foundation, Inc.
+This is free software: you are free to change and redistribute it.
+There is NO WARRANTY, to the extent permitted by law.
+
+Secret key is available.
+
+sec  rsa4096/0x9F676B5A4B6E6777
+     created: 2018-04-01  expires: 2021-03-31  usage: C   
+     trust: ultimate      validity: ultimate
+ssb> rsa2048/0xE7E0CAF69114F367
+     created: 2018-04-01  expires: 2019-04-01  usage: S   
+ssb> rsa2048/0x3C91B3682F3AC08A
+     created: 2018-04-01  expires: 2019-04-01  usage: E   
+ssb> rsa2048/0x465ED456AFBE0F10
+     created: 2018-04-01  expires: 2019-04-01  usage: A   
+[ultimate] (1). Mario Rossi <mario.rossi@example.com>
+~~~
+
+Come si vede abbiamo il segno `>` dopo ogni `ssb`, segno che le sottochiavi sono nel token. La chiave principale invece è ancora nel nostro disco.
+
+Potremmo finire qua se abbiamo scelto di non cancellare la chiave principale dal disco.
+
+# Eliminazione della chiave principale
+
+Se abbiamo scelto di eliminare la chiave principale dal disco, eliminarla con:
+
+~~~
+gpg --delete-secret-key 0x9F676B5A4B6E6777
+~~~
+
+che ci dirà:
+
+~~~
+gpg (GnuPG) 2.1.11; Copyright (C) 2016 Free Software Foundation, Inc.
+This is free software: you are free to change and redistribute it.
+There is NO WARRANTY, to the extent permitted by law.
+
+
+sec  rsa4096/0x9F676B5A4B6E6777 2018-04-01 Mario Rossi <mario.rossi@example.com>
+
+Delete this key from the keyring? (y/N)
+~~~
+
+Premere `Y`:
+
+~~~
+This is a secret key! - really delete? (y/N)
+~~~
+
+Confermare la scelta con `Y`. Ora apparirà un messaggio a video chiedendo una ulteriore conferma. Leggete bene cosa appare:
+
+~~~
+Do you really want to permanently delete the OpenPGP secret key:
+"Mario Rossi <mario.rossi@example.com>"
+4096-bit RSA key, ID 0x9F676B5A4B6E6777,
+created 2018-04-01.
+?
+~~~
+
+Premete sul pulsante `Delete key`.
+
+Ora:
+1. se avete trasferito le sottochiavi nel token USB, il sistema non chiede più nulla perché le sottochiavi non ci sono nel disco ed eliminerà la chiave principale;
+2. se invece avete deciso di tenere le sottochiavi nel disco, il sistema continuerà a chiedere conferma per ogni sottochiave se eliminarle: in questo caso premete il pulsante `No`. Una volta premuto `No` le richieste si fermeranno e verrà eliminata solo la chiave principale.
+
+Vediamo quindi la situazione:
+
+~~~
+gpg --list-secret-keys
+~~~
+
+Ora, se avete spostato le sottochiavi nella YubiKey, la risposta sarà:
+
+~~~
+sec#  rsa4096/0x9F676B5A4B6E6777 2018-04-01 [C] [expires: 2021-03-31]
+      Key fingerprint = 4915 3275 9708 0147 25CF  E3A7 9F67 6B5A 4B6E 6777
+      Keygrip = C6D1CD1D12CBBC8FA14D30004EAF381803A72597
+uid                   [ultimate] Mario Rossi <mario.rossi@example.com>
+ssb>  rsa2048/0xE7E0CAF69114F367 2018-04-01 [S] [expires: 2019-04-01]
+      Keygrip = 135159EDEFB9FCB6062F9DE0E21FD90CB07DA041
+ssb>  rsa2048/0x3C91B3682F3AC08A 2018-04-01 [E] [expires: 2019-04-01]
+      Keygrip = C74D47329D5D224B0716879DCF3A4EC2D8951C53
+ssb>  rsa2048/0x465ED456AFBE0F10 2018-04-01 [A] [expires: 2019-04-01]
+      Keygrip = 30DEE8A060F3562CD6F1384E0F883D65477E596A
+~~~
+
+mentre, se avete deciso di tenere le sottochiavi nel disco, la risposta sarà:
+
+~~~
+sec#  rsa4096/0x9F676B5A4B6E6777 2018-04-01 [C] [expires: 2021-03-31]
+      Key fingerprint = 4915 3275 9708 0147 25CF  E3A7 9F67 6B5A 4B6E 6777
+      Keygrip = C6D1CD1D12CBBC8FA14D30004EAF381803A72597
+uid                   [ultimate] Mario Rossi <mario.rossi@example.com>
+ssb   rsa2048/0xE7E0CAF69114F367 2018-04-01 [S] [expires: 2019-04-01]
+      Keygrip = 135159EDEFB9FCB6062F9DE0E21FD90CB07DA041
+ssb   rsa2048/0x3C91B3682F3AC08A 2018-04-01 [E] [expires: 2019-04-01]
+      Keygrip = C74D47329D5D224B0716879DCF3A4EC2D8951C53
+ssb   rsa2048/0x465ED456AFBE0F10 2018-04-01 [A] [expires: 2019-04-01]
+      Keygrip = 30DEE8A060F3562CD6F1384E0F883D65477E596A
+~~~
 
 # Importare la chiave principale per operazioni speciali
 
