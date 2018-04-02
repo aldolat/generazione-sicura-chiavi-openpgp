@@ -658,19 +658,19 @@ Eventualmente è anche possibile stampare su carta il certificato e conservarlo 
 
 ## Spostamento della directory di backup in un luogo sicuro
 
-Finito il backup, spostare la directory `~/Scrivania/backup` in un supporto da conservare in un luogo sicuro.
+Finito il backup, spostare la directory `~/Scrivania/backup` in almeno due supporti da conservare in due luoghi distinti e sicuri.
 
 A seconda di quanta importanza hanno queste chiavi per voi, posso consigliare una situazione del genere:
-* copia della cartella su una chiavetta USB da usare **solo** per questo scopo, conservata in un luogo sicuro e nascosto;
-* copia di sicurezza su una seconda chiavetta USB da usare **solo** per questo scopo, conservata in un altro luogo sicuro e nascosto.
+* copia della cartella su una chiavetta USB da usare **solo** per questo scopo, conservata in un luogo sicuro e nascosto, ad esempio la vostra cassaforte in casa;
+* copia di sicurezza su una seconda chiavetta USB da usare **solo** per questo scopo, conservata in un altro luogo sicuro e nascosto, ad esempio la vostra cassetta di sicurezza in banca.
 
-Chiaramente non complicatevi la vita, ma prendete le dovute precauzioni per proteggere le chiavi.
+Chiaramente non complicatevi la vita, ma prendete le dovute precauzioni per proteggere le chiavi. Sappiate però che, se perdete la YubiKey (se la usate per le vostre sottochiavi) e se perdete i vostri backup, non potrete più accedere ai vostri file cifrati.
 
 # Trasferire le chiavi OpenPGP su YubiKey
 
 Se avete un token USB come la YubiKey, potete trasferire le sottochiavi in essa. L'operazione è molto semplice.
 
-Ricordo che trasferire le sottochiavi nel token USB è una operazione a senso unico e non è possibile tornare indietro, vale a dire trasferire le sottochiavi dal token al nostro disco fisso. Solo se abbiamo un backup delle chiavi possiamo ripristinare la situazione allo stato prima del trasferimento. Per cui **non procedete se non avete fatto il backup**.
+Ricordo che trasferire le sottochiavi nel token USB è una **operazione a senso unico e non è possibile tornare indietro**, cioè non si possono trasferire le sottochiavi dal token al nostro disco fisso. Solo se abbiamo un backup delle chiavi possiamo ripristinare la situazione allo stato prima del trasferimento. Per cui **non procedete se non avete fatto il backup**. Io ve l'ho detto.
 
 Diamo uno sguardo alla situazione attuale:
 
