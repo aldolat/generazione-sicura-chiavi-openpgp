@@ -1113,9 +1113,9 @@ save
 
 # Bibliografia
 
-* [Creazione di chiavi sicure (ossìa, come generare con GnuPG una coppia di chiavi per poterla conservare in modo "abbastanza" sicuro)](http://tjl73.altervista.org/secure_keygen/).
-* [PGP and SSH keys on a Yubikey NEO](https://www.esev.com/blog/post/2015-01-pgp-ssh-key-on-yubikey-neo/).
-* [Creating the perfect GPG keypair](https://alexcabal.com/creating-the-perfect-gpg-keypair/).
-* [Using GPG and SSH keys (GnuPG 2.1) with a Smartcard (Yubikey 4)](https://suva.sh/posts/gpg-ssh-smartcard-yubikey-keybase/).
-* [Guide to using YubiKey as a SmartCard for GPG and SSH](https://github.com/drduh/YubiKey-Guide).
-* [OpenPGP Best Practices](https://riseup.net/en/security/message-security/openpgp/best-practices).
+* Riseup, [OpenPGP Best Practices](https://riseup.net/en/security/message-security/openpgp/best-practices).
+* Tjl73, [Creazione di chiavi sicure (ossìa, come generare con GnuPG una coppia di chiavi per poterla conservare in modo "abbastanza" sicuro)](http://tjl73.altervista.org/secure_keygen/).
+* Eric Severance, [PGP and SSH keys on a Yubikey NEO](https://www.esev.com/blog/post/2015-01-pgp-ssh-key-on-yubikey-neo/).
+* Alex Cabal, [Creating the perfect GPG keypair](https://alexcabal.com/creating-the-perfect-gpg-keypair/).
+* Suva.sh, [Using GPG and SSH keys (GnuPG 2.1) with a Smartcard (Yubikey 4)](https://suva.sh/posts/gpg-ssh-smartcard-yubikey-keybase/).
+* Drduh, [Guide to using YubiKey as a SmartCard for GPG and SSH](https://github.com/drduh/YubiKey-Guide).
