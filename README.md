@@ -227,7 +227,7 @@ disks) during the prime generation; this gives the random number
 generator a better chance to gain enough entropy.
 ~~~
 
-A seguire GnuPG chiederà di impostare la passfrase.
+A seguire GnuPG chiederà di impostare la passphrase.
 
 Impostiamo la passphrase.
 
