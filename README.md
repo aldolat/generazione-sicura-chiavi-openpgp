@@ -878,7 +878,11 @@ ssb> rsa2048/0x465ED456AFBE0F10
 [ultimate] (1). Mario Rossi <mario.rossi@example.com>
 ~~~
 
-Come si vede abbiamo il segno `>` dopo ogni `ssb`, segno che le sottochiavi sono nel token. La chiave principale invece è ancora nel nostro disco.
+Come si vede abbiamo il segno `>` dopo ogni `ssb`, segno che le sottochiavi sono nel token. La chiave principale invece è ancora nel nostro disco. Date anche uno sguardo a com'è cambiata la YubiKey dando:
+
+~~~
+gpg --card-status
+~~~
 
 Potremmo finire qua se abbiamo scelto di non cancellare la chiave principale dal disco.
 
