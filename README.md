@@ -631,7 +631,7 @@ Procediamo ad effettuare un backup di tutta la chiave (principale e sottochiavi)
 1. backup chiave pubblica;
 1. backup chiave SSH.
 
-Qui di sotto gli otto comandi di cui sopra, eseguiti uno dopo l'altro. Notate come in alcuni casi l'opzione è `--export-secret-keys` oppure `export-secret-key` con un punto esclamativo `!` dopo l'ID della chiave.
+Qui di sotto gli otto comandi di cui sopra, eseguiti uno dopo l'altro. Notate come in alcuni casi l'opzione è `--export-secret-keys` oppure `export-secret-key` senza `s` e con un punto esclamativo `!` dopo l'ID della chiave.
 
 ~~~
 gpg --armor --export-secret-keys 0x9F676B5A4B6E6777 > ~/Scrivania/backup/chiavi/1_principale_con_sottochiavi_0x9F676B5A4B6E6777.asc
