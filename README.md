@@ -1,5 +1,3 @@
-**GUIDA IN FASE DI SCRITTURA**
-
 # Indice
 
 <!-- TOC depthFrom:1 depthTo:6 withLinks:1 updateOnSave:0 orderedList:0 -->
@@ -22,6 +20,7 @@
 	- [Spostamento della directory di backup in un luogo sicuro](#spostamento-della-directory-di-backup-in-un-luogo-sicuro)
 - [Trasferire le chiavi OpenPGP su YubiKey](#trasferire-le-chiavi-openpgp-su-yubikey)
 - [Eliminazione della chiave principale](#eliminazione-della-chiave-principale)
+- [Gli agenti](#gli-agenti)
 - [Importare la chiave principale per operazioni speciali](#importare-la-chiave-principale-per-operazioni-speciali)
 - [Estendere la validità delle nostre chiavi](#estendere-la-validità-delle-nostre-chiavi)
 - [Bibliografia](#bibliografia)
@@ -923,8 +922,16 @@ created 2018-04-01.
 Premete sul pulsante `Delete key`.
 
 Ora:
-1. se avete trasferito le sottochiavi nel token USB, il sistema non chiede più nulla perché le sottochiavi non ci sono nel disco ed eliminerà la chiave principale;
-2. se invece avete deciso di tenere le sottochiavi nel disco, il sistema continuerà a chiedere conferma per ogni sottochiave se eliminarle: in questo caso premete il pulsante `No`. Una volta premuto `No` le richieste si fermeranno e verrà eliminata solo la chiave principale.
+1. **se avete trasferito le sottochiavi nel token USB**, il sistema non chiede più nulla perché le sottochiavi non ci sono nel disco ed eliminerà la chiave principale;
+2. **se invece avete deciso di tenere le sottochiavi nel disco**, il sistema continuerà a chiedere conferma per ogni sottochiave se eliminarle:
+~~~
+Do you really want to permanently delete the OpenPGP secret subkey key:
+"Mario Rossi <mario.rossi@example.com>"
+2048-bit RSA key, ID 0xE7E0CAF69114F367,
+created 2018-04-01 (main key ID 0x9F676B5A4B6E6777).
+?
+~~~
+In questo caso premete il pulsante `No`. Una volta premuto `No` le richieste si fermeranno e verrà eliminata solo la chiave principale.
 
 Vediamo quindi la situazione:
 
@@ -932,7 +939,7 @@ Vediamo quindi la situazione:
 gpg --list-secret-keys
 ~~~
 
-Ora, se avete spostato le sottochiavi nella YubiKey, la risposta sarà:
+Ora, **se avete spostato le sottochiavi nella YubiKey**, la risposta sarà:
 
 ~~~
 sec#  rsa4096/0x9F676B5A4B6E6777 2018-04-01 [C] [expires: 2021-03-31]
@@ -947,7 +954,7 @@ ssb>  rsa2048/0x465ED456AFBE0F10 2018-04-01 [A] [expires: 2019-04-01]
       Keygrip = 30DEE8A060F3562CD6F1384E0F883D65477E596A
 ~~~
 
-mentre, se avete deciso di tenere le sottochiavi nel disco, la risposta sarà:
+mentre, **se avete deciso di tenere le sottochiavi nel disco**, la risposta sarà:
 
 ~~~
 sec#  rsa4096/0x9F676B5A4B6E6777 2018-04-01 [C] [expires: 2021-03-31]
@@ -962,13 +969,138 @@ ssb   rsa2048/0x465ED456AFBE0F10 2018-04-01 [A] [expires: 2019-04-01]
       Keygrip = 30DEE8A060F3562CD6F1384E0F883D65477E596A
 ~~~
 
+# Gli agenti
+
+Fermiamo `ssh-agent`:
+
+~~~
+killall ssh-agent
+~~~
+
+Disabilitiamo `ssh-agent` permanentemente:
+
+~~~
+sudo nano /etc/X11/Xsession.options
+~~~
+
+e commentiamo la riga aggiungendo un cancelletto `#` all'inizio:
+
+~~~
+# use-ssh-agent
+~~~
+
+Abilitiamo il supporto SSH in GnuPG:
+
+~~~
+echo "enable-ssh-support" >> ~/.gnupg/gpg-agent.conf
+~~~
+
+Riavviamo l'agente di GnuPG:
+
+~~~
+gpg-connect-agent killagent /bye
+gpg-connect-agent /bye
+~~~
+
+Inseriamo la riga seguente in `~/.bashrc`
+
+~~~
+echo "export SSH_AUTH_SOCK=~/.gnupg/S.gpg-agent.ssh" >> ~/.bashrc
+~~~
+
+Facciamo rileggere questo file:
+
+~~~
+source .bashrc
+~~~
+
+Infine, se non l'abbiamo già fatto, assicuriamoci di usare `gpg2` invece della versione 1:
+
+~~~
+echo "alias gpg=gpg2" >> ~/.bash_aliases
+~~~
+
 # Importare la chiave principale per operazioni speciali
 
-TODO.
+Quando periodicamente dovrete fare operazioni occasionali sul vostro portachiavi o se dovete firmare (certificare) una chiave altrui, vi servirà la chiave principale. Per fare queste operazioni dovrete importare la chiave principale nel vostro portachiavi, fare l'operazione e quindi cancellarla nuovamente.
+
+C'è un altro metodo per fare uso della chiave principale, come ad esempio dire momentaneamente a GnuPG che la sua *home* non è `~/.gnupg` ma un'altra directory. Io non ho mai usato questo sistema, per cui scrivo solo quello che uso io.
+
+Accertatevi di avere accesso dal terminale alla directory dove c'è il vostro backup e quindi dare:
+
+~~~
+gpg --import ~/Scrivania/backup/chiavi/2_principale_soltanto_0x9F676B5A4B6E6777.asc
+~~~
+
+Il sistema risponderà:
+
+~~~
+gpg: key 0x9F676B5A4B6E6777: "Mario Rossi <mario.rossi@example.com>" not changed
+gpg: key 0x9F676B5A4B6E6777: secret key imported
+gpg: Total number processed: 2
+gpg:              unchanged: 1
+gpg:       secret keys read: 2
+gpg:   secret keys imported: 1
+~~~
+
+Effettuare quindi le operazioni che dovevamo compiere e, alla fine, eliminarla nuovamente:
+
+~~~
+gpg --delete-secret-key 0x9F676B5A4B6E6777
+~~~
+
+Anche qui seguite attentamente quanto dicevo al paragrafo "Eliminazione della chiave principale".
 
 # Estendere la validità delle nostre chiavi
 
-TODO.
+Se abbiamo scelto una validità a tempo per le nostre chiavi, periodicamente potremo estenderne la validità se ancora sono valide per noi. Teniamo presente che possiamo rinnovare la validità di una chiave già scaduta.
+
+Se abbiamo scelto di togliere la chiave principale dal nostro disco, dovremo importarla nuovamente, come descritto al paragrafo "Importare la chiave principale per operazioni speciali".
+
+Se abbiamo scelto, poi, di tenere le sottochiavi nel token USB, dovremo inserirlo in una porta USB.
+
+Iniziamo quindi la procedura di rinnovo:
+
+~~~
+gpg --edit-key 0x9F676B5A4B6E6777
+~~~
+
+~~~
+sec  rsa4096/0x9F676B5A4B6E6777
+     created: 2018-04-01  expires: 2021-03-31  usage: C   
+     trust: ultimate      validity: ultimate
+ssb  rsa2048/0xE7E0CAF69114F367
+     created: 2018-04-01  expires: 2019-04-01  usage: S   
+ssb  rsa2048/0x3C91B3682F3AC08A
+     created: 2018-04-01  expires: 2019-04-01  usage: E   
+ssb  rsa2048/0x465ED456AFBE0F10
+     created: 2018-04-01  expires: 2019-04-01  usage: A   
+[ultimate] (1). Mario Rossi <mario.rossi@example.com>
+~~~
+
+I passi di rinnovo per ogni chiave sono i seguenti:
+1. selezione della sottochiave da rinnovare;
+1. invio del comando `expire`;
+1. scelta della durata della validità;
+1. deselezione della sottochiave.
+
+Nel nostro caso, essendo tre le chiavi, questi i passaggi tutti di seguito:
+
+~~~
+key 1 (per la prima sottochiave; key 2 per seconda; key 3 per terza)
+	expire (e seguire le istruzioni)
+		1y (per un anno di validità)
+key 1 (deseleziona)
+key 2 (seleziona la seconda sottochiave)
+	expire
+		1y
+key 2 (deseleziona)
+key 3 (seleziona la terza sottochiave)
+	expire
+		1y
+check (verifichiamo che tutto sia stato eseguito)
+save
+~~~
 
 # Bibliografia
 
