@@ -45,8 +45,8 @@ Con questa guida vedremo come:
 
 Generalmente un mazzo di chiavi personale è composto in modo predefinito da:
 
-1. una chiave master o principale per la firma e la certificazione;
-1. una sottochiave per la cifratura.
+1. una **chiave master (o principale)** per la firma e la certificazione;
+1. una **sottochiave** per la cifratura.
 
 Noi, invece, per elevare la sicurezza del nostro portachiavi spingeremo al massimo il concetto delle sottochiavi. La struttura del nostro portachiavi personale, infatti, sarà il seguente:
 
