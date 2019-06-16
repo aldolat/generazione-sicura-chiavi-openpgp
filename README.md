@@ -407,10 +407,10 @@ ssb   rsa2048/AFBE0F10 2018-04-01 [A] [expires: 2019-04-01]
 
 La situazione è, quindi, la seguente:
 
-* ***chiave principale**, adibita alla sola **certificazione e gestione del portachiavi**: `sec   rsa4096/4B6E6777 2018-04-01 [C]`;
-* ***sottochiave di firma**: `ssb   rsa2048/9114F367 2018-04-01 [S]`;
-* ***sottochiave di cifratura**: `ssb   rsa2048/2F3AC08A 2018-04-01 [E] [expires: 2019-04-01]`;
-* ***sottochiave di autenticazione**: `ssb   rsa2048/AFBE0F10 2018-04-01 [A] [expires: 2019-04-01]`.
+* **chiave principale**, adibita alla sola **certificazione e gestione del portachiavi**: `sec   rsa4096/4B6E6777 2018-04-01 [C]`;
+* **sottochiave di firma**: `ssb   rsa2048/9114F367 2018-04-01 [S]`;
+* **sottochiave di cifratura**: `ssb   rsa2048/2F3AC08A 2018-04-01 [E] [expires: 2019-04-01]`;
+* **sottochiave di autenticazione**: `ssb   rsa2048/AFBE0F10 2018-04-01 [A] [expires: 2019-04-01]`.
 
 Possiamo aggiungere anche altri UserID o una foto con:
 
