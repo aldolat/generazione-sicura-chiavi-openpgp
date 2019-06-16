@@ -1,7 +1,7 @@
 # Generazione sicura di chiavi OpenPGP
 
-Autore: Aldo Latino
-Data di pubblicazione: 2018-04-01
+Autore: Aldo Latino  
+Data di pubblicazione: 2018-04-01  
 Licenza: [Creative Commons Attribuzione - Condividi allo stesso modo 4.0 Internazionale (CC BY-SA 4.0)](https://creativecommons.org/licenses/by-sa/4.0/deed.it)
 
 ## Indice
@@ -32,7 +32,6 @@ Licenza: [Creative Commons Attribuzione - Condividi allo stesso modo 4.0 Interna
   * [Importare la chiave principale per operazioni speciali](#importare-la-chiave-principale-per-operazioni-speciali)
   * [Estendere la validità delle nostre chiavi](#estendere-la-validità-delle-nostre-chiavi)
   * [Bibliografia](#bibliografia)
-  * [Licenza](#licenza)
 <!-- /code_chunk_output -->
 
 ## Introduzione
@@ -1140,31 +1139,3 @@ save
 * Alex Cabal, [Creating the perfect GPG keypair](https://alexcabal.com/creating-the-perfect-gpg-keypair/).
 * Suva.sh, [Using GPG and SSH keys (GnuPG 2.1) with a Smartcard (Yubikey 4)](https://suva.sh/posts/gpg-ssh-smartcard-yubikey-keybase/).
 * Drduh, [Guide to using YubiKey as a SmartCard for GPG and SSH](https://github.com/drduh/YubiKey-Guide).
-
-## Licenza
-
-![Licenza Creative Commons](https://i.creativecommons.org/l/by-sa/4.0/88x31.png)
-
-Quest'opera è distribuita con Licenza Creative Commons Attribuzione - Condividi allo stesso modo 4.0 Internazionale (CC BY-SA 4.0).
-
-Questo è un riassunto in linguaggio accessibile a tutti (e non un sostituto) della licenza.
-
-La licenza completa in italiano è disponibile qui: <https://creativecommons.org/licenses/by-sa/4.0/legalcode.it>.
-
-Tu sei libero di:
-
-* **Condividere** - riprodurre, distribuire, comunicare al pubblico, esporre in pubblico, rappresentare, eseguire e recitare questo materiale con qualsiasi mezzo e formato
-* **Modificare** - remixare, trasformare il materiale e basarti su di esso per le tue opere per qualsiasi fine, anche commerciale.
-
-Il licenziante non può revocare questi diritti fintanto che tu rispetti i termini della licenza.
-
-Alle seguenti condizioni:
-
-* **Attribuzione** - Devi riconoscere una menzione di paternità adeguata, fornire un link alla licenza e indicare se sono state effettuate delle modifiche. Puoi fare ciò in qualsiasi maniera ragionevole possibile, ma non con modalità tali da suggerire che il licenziante avalli te o il tuo utilizzo del materiale.
-* **StessaLicenza** - Se remixi, trasformi il materiale o ti basi su di esso, devi distribuire i tuoi contributi con la stessa licenza del materiale originario.
-* **Divieto di restrizioni aggiuntive** - Non puoi applicare termini legali o misure tecnologiche che impongano ad altri soggetti dei vincoli giuridici su quanto la licenza consente loro di fare.
-
-Note:
-
-* Non sei tenuto a rispettare i termini della licenza per quelle componenti del materiale che siano in pubblico dominio o nei casi in cui il tuo utilizzo sia consentito da una eccezione o limitazione prevista dalla legge.
-* Non sono fornite garanzie. La licenza può non conferirti tutte le autorizzazioni necessarie per l'utilizzo che ti prefiggi. Ad esempio, diritti di terzi come i diritti all'immagine, alla riservatezza e i diritti morali potrebbero restringere gli usi che ti prefiggi sul materiale.
