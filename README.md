@@ -2,33 +2,34 @@
 
 ## Indice
 
-<!-- TOC depthFrom:1 depthTo:6 withLinks:1 updateOnSave:0 orderedList:0 -->
-
-- [Indice](#indice)
-- [Introduzione](#introduzione)
-- [Generazione sicura di chiavi OpenPGP](#generazione-sicura-di-chiavi-openpgp)
-  - [Prerequisiti](#prerequisiti)
-  - [Generazione delle chiavi](#generazione-delle-chiavi)
-  - [Il certificato di revoca](#il-certificato-di-revoca)
-  - [Impostare le preferenze della chiave](#impostare-le-preferenze-della-chiave)
-  - [Impostare il file gpg.conf](#impostare-il-file-gpgconf)
-  - [Impostare il keyserver](#impostare-il-keyserver)
-  - [Copiare la directory .gnupg nel proprio computer di lavoro](#copiare-la-directory-gnupg-nel-proprio-computer-di-lavoro)
-  - [Esportare la chiave pubblica sul keyserver](#esportare-la-chiave-pubblica-sul-keyserver)
-  - [Segnarsi la data di scadenza delle proprie chiavi nel calendario](#segnarsi-la-data-di-scadenza-delle-proprie-chiavi-nel-calendario)
-- [Fare il backup](#fare-il-backup)
-  - [Backup della directory di GnuPG](#backup-della-directory-di-gnupg)
-  - [Backup delle chiavi](#backup-delle-chiavi)
-  - [Backup del certificato di revoca](#backup-del-certificato-di-revoca)
-  - [Spostamento della directory di backup in un luogo sicuro](#spostamento-della-directory-di-backup-in-un-luogo-sicuro)
-- [Trasferire le chiavi OpenPGP su YubiKey](#trasferire-le-chiavi-openpgp-su-yubikey)
-- [Eliminazione della chiave principale](#eliminazione-della-chiave-principale)
-- [Gli agenti](#gli-agenti)
-- [Importare la chiave principale per operazioni speciali](#importare-la-chiave-principale-per-operazioni-speciali)
-- [Estendere la validità delle nostre chiavi](#estendere-la-validità-delle-nostre-chiavi)
-- [Bibliografia](#bibliografia)
-
-<!-- /TOC -->
+<!-- @import "[TOC]" {cmd="toc" depthFrom=1 depthTo=6 orderedList=false} -->
+<!-- code_chunk_output -->
+* [Generazione sicura di chiavi OpenPGP](#generazione-sicura-di-chiavi-openpgp)
+	* [Indice](#indice)
+	* [Introduzione](#introduzione)
+	* [Generazione delle chiavi](#generazione-delle-chiavi)
+		* [Prerequisiti](#prerequisiti)
+		* [Generare le chiavi](#generare-le-chiavi)
+		* [Il certificato di revoca](#il-certificato-di-revoca)
+		* [Impostare le preferenze della chiave](#impostare-le-preferenze-della-chiave)
+		* [Impostare il file gpg.conf](#impostare-il-file-gpgconf)
+		* [Impostare il keyserver](#impostare-il-keyserver)
+		* [Copiare la directory .gnupg nel proprio computer di lavoro](#copiare-la-directory-gnupg-nel-proprio-computer-di-lavoro)
+		* [Esportare la chiave pubblica sul keyserver](#esportare-la-chiave-pubblica-sul-keyserver)
+		* [Segnarsi la data di scadenza delle proprie chiavi nel calendario](#segnarsi-la-data-di-scadenza-delle-proprie-chiavi-nel-calendario)
+	* [Fare il backup](#fare-il-backup)
+		* [Backup della directory di GnuPG](#backup-della-directory-di-gnupg)
+		* [Backup delle chiavi](#backup-delle-chiavi)
+		* [Backup del certificato di revoca](#backup-del-certificato-di-revoca)
+		* [Spostare la directory di backup in un luogo sicuro](#spostare-la-directory-di-backup-in-un-luogo-sicuro)
+	* [Trasferire le chiavi OpenPGP su YubiKey](#trasferire-le-chiavi-openpgp-su-yubikey)
+	* [Eliminare la chiave principale](#eliminare-la-chiave-principale)
+	* [Gli agenti](#gli-agenti)
+	* [Importare la chiave principale per operazioni speciali](#importare-la-chiave-principale-per-operazioni-speciali)
+	* [Estendere la validità delle nostre chiavi](#estendere-la-validità-delle-nostre-chiavi)
+	* [Bibliografia](#bibliografia)
+* [Bibliografia](#bibliografia)
+<!-- /code_chunk_output -->
 
 ## Introduzione
 
@@ -70,12 +71,12 @@ Un ultimo punto prima di passare alla pratica. Il motivo di avere una scadenza s
 
 Questa guida può essere seguita in modo modulare:
 
-- si può scegliere di mantenere tutte le chiavi sul proprio disco fisso, seguendo solo la parte sulla generazione sicura delle chiavi;
-- si può scegliere di spostare in un luogo sicuro la chiave principale dal resto del proprio mazzo di chiavi, mantenendo nel disco fisso solo le sottochiavi;
-- si può scegliere di spostare le sottochiavi in un token USB come la YubiKey, mantenendo la chiave principale nel disco fisso;
-- si può scegliere di spostare le sottochiavi in un token USB come la YubiKey e di spostare la chiave principale in un luogo sicuro, non lasciando nessuna chiave privata nel disco fisso.
+* si può scegliere di mantenere tutte le chiavi sul proprio disco fisso, seguendo solo la parte sulla generazione sicura delle chiavi;
+* si può scegliere di spostare in un luogo sicuro la chiave principale dal resto del proprio mazzo di chiavi, mantenendo nel disco fisso solo le sottochiavi;
+* si può scegliere di spostare le sottochiavi in un token USB come la YubiKey, mantenendo la chiave principale nel disco fisso;
+* si può scegliere di spostare le sottochiavi in un token USB come la YubiKey e di spostare la chiave principale in un luogo sicuro, non lasciando nessuna chiave privata nel disco fisso.
 
-## Generare chiavi OpenPGP in modo sicuro
+## Generazione delle chiavi
 
 Con questa guida genereremo la nostra chiave privata che avrà questo schema:
 
@@ -86,8 +87,8 @@ Con questa guida genereremo la nostra chiave privata che avrà questo schema:
 
 Per la lunghezza delle chiavi avremo la chiave primaria a 4096 bit mentre le sottochiavi a 2048 bit. Per ulteriori informazioni su questo dibattito della lunghezza delle chiavi si può vedere:
 
-- [Why does GnuPG default to 2048 bit RSA-2048?](https://www.gnupg.org/faq/gnupg-faq.html#default_rsa2048) sul sito di GnuPG;
-- [The Big Debate, 2048 vs. 4096, Yubico’s Position](https://www.yubico.com/2015/02/big-debate-2048-4096-yubicos-stand/) sul blog di Yubico.
+* [Why does GnuPG default to 2048 bit RSA-2048?](https://www.gnupg.org/faq/gnupg-faq.html#default_rsa2048) sul sito di GnuPG;
+* [The Big Debate, 2048 vs. 4096, Yubico’s Position](https://www.yubico.com/2015/02/big-debate-2048-4096-yubicos-stand/) sul blog di Yubico.
 
 ### Prerequisiti
 
@@ -103,7 +104,7 @@ alias gpg='gpg2'
 
 Questa scorciatoia permetterà l'avvio di GnuPG versione 2 ogni volta che digitiamo `gpg`.
 
-### Generazione delle chiavi
+### Generare le chiavi
 
 Sul sistema di generazione delle chiavi accertarsi di avere GnuPG versione 2.1 o successiva:
 
@@ -406,10 +407,10 @@ ssb   rsa2048/AFBE0F10 2018-04-01 [A] [expires: 2019-04-01]
 
 La situazione è, quindi, la seguente:
 
-- **chiave principale**, adibita alla sola **certificazione e gestione del portachiavi**: `sec   rsa4096/4B6E6777 2018-04-01 [C]`;
-- **sottochiave di firma**: `ssb   rsa2048/9114F367 2018-04-01 [S]`;
-- **sottochiave di cifratura**: `ssb   rsa2048/2F3AC08A 2018-04-01 [E] [expires: 2019-04-01]`;
-- **sottochiave di autenticazione**: `ssb   rsa2048/AFBE0F10 2018-04-01 [A] [expires: 2019-04-01]`.
+* ***chiave principale**, adibita alla sola **certificazione e gestione del portachiavi**: `sec   rsa4096/4B6E6777 2018-04-01 [C]`;
+* ***sottochiave di firma**: `ssb   rsa2048/9114F367 2018-04-01 [S]`;
+* ***sottochiave di cifratura**: `ssb   rsa2048/2F3AC08A 2018-04-01 [E] [expires: 2019-04-01]`;
+* ***sottochiave di autenticazione**: `ssb   rsa2048/AFBE0F10 2018-04-01 [A] [expires: 2019-04-01]`.
 
 Possiamo aggiungere anche altri UserID o una foto con:
 
@@ -590,9 +591,9 @@ Dopo aver generato il nostro mazzo di chiavi **è fondamentale farne il backup**
 
 Faremo il backup di questi tre elementi:
 
-- directory di GnuPG;
-- chiavi;
-- certificato di revoca.
+* directory di GnuPG;
+* chiavi;
+* certificato di revoca.
 
 Creiamo una directory `backup` e relative sottodirectory sulla scrivania del PC dove metteremo tutti i file del backup:
 
@@ -671,14 +672,14 @@ mv ~/.gnupg/openpgp-revocs.d/491532759708014725CFE3A79F676B5A4B6E6777.rev ~/Scri
 
 Eventualmente è anche possibile stampare su carta il certificato e conservarlo in cassaforte.
 
-### Spostamento della directory di backup in un luogo sicuro
+### Spostare la directory di backup in un luogo sicuro
 
 Finito il backup, spostare la directory `~/Scrivania/backup` in almeno due supporti da conservare in due luoghi distinti e sicuri.
 
 A seconda di quanta importanza hanno queste chiavi per voi, posso consigliare una situazione del genere:
 
-- copia della cartella su una chiavetta USB da usare **solo** per questo scopo, conservata in un luogo sicuro e nascosto, ad esempio la vostra cassaforte in casa;
-- copia di sicurezza su una seconda chiavetta USB da usare **solo** per questo scopo, conservata in un altro luogo sicuro e nascosto, ad esempio la vostra cassetta di sicurezza in banca.
+* copia della cartella su una chiavetta USB da usare **solo** per questo scopo, conservata in un luogo sicuro e nascosto, ad esempio la vostra cassaforte in casa;
+* copia di sicurezza su una seconda chiavetta USB da usare **solo** per questo scopo, conservata in un altro luogo sicuro e nascosto, ad esempio la vostra cassetta di sicurezza in banca.
 
 Chiaramente non complicatevi la vita, ma prendete le dovute precauzioni per proteggere le chiavi. Sappiate però che, se perdete la YubiKey (se la usate per le vostre sottochiavi) e se perdete i vostri backup, non potrete più accedere ai vostri file cifrati.
 
@@ -774,8 +775,8 @@ gpg --card-edit
 
 Cambiamo anzitutto i PIN. I PIN predefiniti di fabbrica sono:
 
-- Admin PIN (8 cifre): `12345678`
-- PIN (6 cifre): `123456`
+* Admin PIN (8 cifre): `12345678`
+* PIN (6 cifre): `123456`
 
 Entriamo in modalità amministratore dando:
 
@@ -903,7 +904,7 @@ gpg --card-status
 
 Potremmo finire qua se abbiamo scelto di non cancellare la chiave principale dal disco.
 
-## Eliminazione della chiave principale
+## Eliminare la chiave principale
 
 Se abbiamo scelto di eliminare la chiave principale dal disco, eliminarla con:
 
@@ -1129,9 +1130,9 @@ save
 
 ## Bibliografia
 
-- Riseup, [OpenPGP Best Practices](https://riseup.net/en/security/message-security/openpgp/best-practices).
-- Tjl73, [Creazione di chiavi sicure (ossìa, come generare con GnuPG una coppia di chiavi per poterla conservare in modo "abbastanza" sicuro)](http://tjl73.altervista.org/secure_keygen/).
-- Eric Severance, [PGP and SSH keys on a Yubikey NEO](https://www.esev.com/blog/post/2015-01-pgp-ssh-key-on-yubikey-neo/).
-- Alex Cabal, [Creating the perfect GPG keypair](https://alexcabal.com/creating-the-perfect-gpg-keypair/).
-- Suva.sh, [Using GPG and SSH keys (GnuPG 2.1) with a Smartcard (Yubikey 4)](https://suva.sh/posts/gpg-ssh-smartcard-yubikey-keybase/).
-- Drduh, [Guide to using YubiKey as a SmartCard for GPG and SSH](https://github.com/drduh/YubiKey-Guide).
+* Riseup, [OpenPGP Best Practices](https://riseup.net/en/security/message-security/openpgp/best-practices).
+* Tjl73, [Creazione di chiavi sicure (ossìa, come generare con GnuPG una coppia di chiavi per poterla conservare in modo "abbastanza" sicuro)](http://tjl73.altervista.org/secure_keygen/).
+* Eric Severance, [PGP and SSH keys on a Yubikey NEO](https://www.esev.com/blog/post/2015-01-pgp-ssh-key-on-yubikey-neo/).
+* Alex Cabal, [Creating the perfect GPG keypair](https://alexcabal.com/creating-the-perfect-gpg-keypair/).
+* Suva.sh, [Using GPG and SSH keys (GnuPG 2.1) with a Smartcard (Yubikey 4)](https://suva.sh/posts/gpg-ssh-smartcard-yubikey-keybase/).
+* Drduh, [Guide to using YubiKey as a SmartCard for GPG and SSH](https://github.com/drduh/YubiKey-Guide).
