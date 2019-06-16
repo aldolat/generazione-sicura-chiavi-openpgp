@@ -28,7 +28,6 @@
   * [Importare la chiave principale per operazioni speciali](#importare-la-chiave-principale-per-operazioni-speciali)
   * [Estendere la validità delle nostre chiavi](#estendere-la-validità-delle-nostre-chiavi)
   * [Bibliografia](#bibliografia)
-* [Bibliografia](#bibliografia)
 <!-- /code_chunk_output -->
 
 ## Introduzione
