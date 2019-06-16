@@ -263,7 +263,7 @@ There is NO WARRANTY, to the extent permitted by law.
 Secret key is available.
 
 sec  rsa4096/4B6E6777
-     created: 2018-04-01  expires: 2021-03-31  usage: C   
+     created: 2018-04-01  expires: 2021-03-31  usage: C
      trust: ultimate      validity: ultimate
 [ultimate] (1). Mario Rossi <mario.rossi@example.com>
 
@@ -363,10 +363,10 @@ Attendiamo che finisca, quindi apparirà:
 
 ~~~
 sec  rsa4096/4B6E6777
-     created: 2018-04-01  expires: 2021-03-31  usage: C   
+     created: 2018-04-01  expires: 2021-03-31  usage: C
      trust: ultimate      validity: ultimate
 ssb  rsa2048/9114F367
-     created: 2018-04-01  expires: 2019-04-01  usage: S   
+     created: 2018-04-01  expires: 2019-04-01  usage: S
 [ultimate] (1). Mario Rossi <mario.rossi@example.com>
 
 gpg>
@@ -440,7 +440,7 @@ che significa:
 ~~~
 S10	Cifrario Twofish
 S9	Cifrario AES256
-S8	Cifrario AES256
+S8	Cifrario AES192
 H10	Hash SHA512
 H9	Hash SHA384
 H8	Hash SHA256
@@ -795,14 +795,14 @@ There is NO WARRANTY, to the extent permitted by law.
 Secret key is available.
 
 sec  rsa4096/0x9F676B5A4B6E6777
-     created: 2018-04-01  expires: 2021-03-31  usage: C   
+     created: 2018-04-01  expires: 2021-03-31  usage: C
      trust: ultimate      validity: ultimate
 ssb  rsa2048/0xE7E0CAF69114F367
-     created: 2018-04-01  expires: 2019-04-01  usage: S   
+     created: 2018-04-01  expires: 2019-04-01  usage: S
 ssb  rsa2048/0x3C91B3682F3AC08A
-     created: 2018-04-01  expires: 2019-04-01  usage: E   
+     created: 2018-04-01  expires: 2019-04-01  usage: E
 ssb  rsa2048/0x465ED456AFBE0F10
-     created: 2018-04-01  expires: 2019-04-01  usage: A   
+     created: 2018-04-01  expires: 2019-04-01  usage: A
 [ultimate] (1). Mario Rossi <mario.rossi@example.com>
 ~~~
 
@@ -816,14 +816,14 @@ che mostrerà la chiave selezionata con un asterisco `*`:
 
 ~~~
 sec  rsa4096/0x9F676B5A4B6E6777
-     created: 2018-04-01  expires: 2021-03-31  usage: C   
+     created: 2018-04-01  expires: 2021-03-31  usage: C
      trust: ultimate      validity: ultimate
 ssb* rsa2048/0xE7E0CAF69114F367
-     created: 2018-04-01  expires: 2019-04-01  usage: S   
+     created: 2018-04-01  expires: 2019-04-01  usage: S
 ssb  rsa2048/0x3C91B3682F3AC08A
-     created: 2018-04-01  expires: 2019-04-01  usage: E   
+     created: 2018-04-01  expires: 2019-04-01  usage: E
 ssb  rsa2048/0x465ED456AFBE0F10
-     created: 2018-04-01  expires: 2019-04-01  usage: A   
+     created: 2018-04-01  expires: 2019-04-01  usage: A
 [ultimate] (1). Mario Rossi <mario.rossi@example.com>
 ~~~
 
@@ -872,14 +872,14 @@ There is NO WARRANTY, to the extent permitted by law.
 Secret key is available.
 
 sec  rsa4096/0x9F676B5A4B6E6777
-     created: 2018-04-01  expires: 2021-03-31  usage: C   
+     created: 2018-04-01  expires: 2021-03-31  usage: C
      trust: ultimate      validity: ultimate
 ssb> rsa2048/0xE7E0CAF69114F367
-     created: 2018-04-01  expires: 2019-04-01  usage: S   
+     created: 2018-04-01  expires: 2019-04-01  usage: S
 ssb> rsa2048/0x3C91B3682F3AC08A
-     created: 2018-04-01  expires: 2019-04-01  usage: E   
+     created: 2018-04-01  expires: 2019-04-01  usage: E
 ssb> rsa2048/0x465ED456AFBE0F10
-     created: 2018-04-01  expires: 2019-04-01  usage: A   
+     created: 2018-04-01  expires: 2019-04-01  usage: A
 [ultimate] (1). Mario Rossi <mario.rossi@example.com>
 ~~~
 
@@ -1076,14 +1076,14 @@ gpg --edit-key 0x9F676B5A4B6E6777
 
 ~~~
 sec  rsa4096/0x9F676B5A4B6E6777
-     created: 2018-04-01  expires: 2021-03-31  usage: C   
+     created: 2018-04-01  expires: 2021-03-31  usage: C
      trust: ultimate      validity: ultimate
 ssb  rsa2048/0xE7E0CAF69114F367
-     created: 2018-04-01  expires: 2019-04-01  usage: S   
+     created: 2018-04-01  expires: 2019-04-01  usage: S
 ssb  rsa2048/0x3C91B3682F3AC08A
-     created: 2018-04-01  expires: 2019-04-01  usage: E   
+     created: 2018-04-01  expires: 2019-04-01  usage: E
 ssb  rsa2048/0x465ED456AFBE0F10
-     created: 2018-04-01  expires: 2019-04-01  usage: A   
+     created: 2018-04-01  expires: 2019-04-01  usage: A
 [ultimate] (1). Mario Rossi <mario.rossi@example.com>
 ~~~
 
