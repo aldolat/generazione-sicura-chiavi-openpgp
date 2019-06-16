@@ -690,7 +690,9 @@ Chiaramente non complicatevi la vita, ma prendete le dovute precauzioni per prot
 
 Se avete un token USB come la YubiKey, potete trasferire le sottochiavi in essa. L'operazione è molto semplice.
 
-Ricordo che trasferire le sottochiavi nel token USB è una **operazione a senso unico e non è possibile tornare indietro**, cioè non si possono trasferire le sottochiavi dal token al nostro disco fisso. Solo se abbiamo un backup delle chiavi possiamo ripristinare la situazione allo stato prima del trasferimento. Per cui **non procedete se non avete fatto il backup**. Io ve l'ho detto.
+Prima di andare avanti, quando dico "trasferire" intendo proprio spostare una cosa da un post a un altro. Nel nostro caso, intendo spostare le sottochiavi dal disco fisso alla YubiKey.
+
+Ricordo che trasferire le sottochiavi nel token USB è una **operazione a senso unico e non è possibile tornare indietro**, cioè non si possono trasferire le sottochiavi dal token al nostro disco fisso. Solo se abbiamo un backup delle chiavi possiamo ripristinare la situazione allo stato prima del trasferimento. Per cui **non procedete se non avete fatto il backup**.
 
 Diamo uno sguardo alla situazione attuale:
 
