@@ -85,10 +85,10 @@ Questa guida può essere seguita in modo modulare:
 Una nota prima di cominciare. Lungo la guida i vari comandi da terminale useranno ID di chiave, keygrip, percorsi nel disco fisso e quant'altro che fanno riferimento a quanto eseguito per scrivere la guida. Ciò significa che dovrete sostituire gli ID di chiave, i keygrip, i percorsi e quant'altro con quelli vostri. Ad esempio, in un comando come questo:
 
 ```bash
-cp rm ~/.gnupg/private-keys-v1.d/C6D1CD1D12CBBC8FA14D30004EAF381803A72597.key
+gpg --with-keygrip --list-key 0x9F676B5A4B6E6777
 ```
 
-dovrete sostituire `C6D1CD1D12CBBC8FA14D30004EAF381803A72597.key` con il nome corretto del vostro file.
+dovrete sostituire `0x9F676B5A4B6E6777` con l'ID corretto della vostra chiave.
 
 ## Generazione delle chiavi
 
@@ -948,7 +948,7 @@ Per identificare quale di questi file è la chiave master, dare nel terminale qu
 gpg --with-keygrip --list-key 0x9F676B5A4B6E6777
 ```
 
-Siccome è stato fatto il backup della directory di GnuPG, potete eliminare il file `.key` corrispondente alla chiave master. Per ogni evenienza, prima di cancellare il file, verificate che nel backup ci sia il file che state per cancellare. Il comando per eliminare il file è:
+Siccome è stato fatto il [backup della directory di GnuPG](#backup-della-directory-di-gnupg), potete eliminare il file `.key` corrispondente alla chiave master. Per ogni evenienza, prima di cancellare il file, verificate che nel backup ci sia il file che state per cancellare. Il comando per eliminare il file è:
 
 ```bash
 cp rm ~/.gnupg/private-keys-v1.d/C6D1CD1D12CBBC8FA14D30004EAF381803A72597.key
