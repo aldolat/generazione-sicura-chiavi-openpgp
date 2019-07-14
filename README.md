@@ -678,7 +678,7 @@ gpg --armor --export-ssh-key 0x9F676B5A4B6E6777 > ~/Scrivania/backup/chiavi/8_ch
 
 ### Backup del certificato di revoca
 
-Come abbiamo detto al paragrafo [*Il certificato di revoca*](#il-certificato-di-revoca), questo è stato già creato da GnuPG versione 2 nella directory `~/.gnupg/openpgp-revocs.d/` ed il file ha lo stesso nome dell'impronta della chiave, nel nostro caso `491532759708014725CFE3A79F676B5A4B6E6777.rev`.
+Come abbiamo detto al paragrafo [Il certificato di revoca](#il-certificato-di-revoca), questo è stato già creato da GnuPG versione 2 nella directory `~/.gnupg/openpgp-revocs.d/` ed il file ha lo stesso nome dell'impronta della chiave, nel nostro caso `491532759708014725CFE3A79F676B5A4B6E6777.rev`.
 
 Spostiamolo dalla directory `~/.gnupg` alla directory di backup:
 
