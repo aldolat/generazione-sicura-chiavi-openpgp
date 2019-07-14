@@ -28,6 +28,8 @@ Licenza: [Creative Commons Attribuzione - Condividi allo stesso modo 4.0 Interna
     * [Spostare la directory di backup in un luogo sicuro](#spostare-la-directory-di-backup-in-un-luogo-sicuro)
   * [Trasferire le chiavi OpenPGP su YubiKey](#trasferire-le-chiavi-openpgp-su-yubikey)
   * [Eliminare la chiave principale](#eliminare-la-chiave-principale)
+    * [GnuPG versione 2.1 o superiore](#gnupg-versione-21-o-superiore)
+    * [GnuPG inferiore alla versione 2.1](#gnupg-inferiore-alla-versione-21)
   * [Gli agenti](#gli-agenti)
   * [Importare la chiave principale per operazioni speciali](#importare-la-chiave-principale-per-operazioni-speciali)
   * [Estendere la validità delle nostre chiavi](#estendere-la-validità-delle-nostre-chiavi)
@@ -78,6 +80,14 @@ Questa guida può essere seguita in modo modulare:
 * si può scegliere di spostare in un luogo sicuro la chiave principale dal resto del proprio mazzo di chiavi, mantenendo nel disco fisso solo le sottochiavi;
 * si può scegliere di spostare le sottochiavi in un token USB come la YubiKey, mantenendo la chiave principale nel disco fisso;
 * si può scegliere di spostare le sottochiavi in un token USB come la YubiKey e di spostare la chiave principale in un luogo sicuro, non lasciando nessuna chiave privata nel disco fisso.
+
+Una nota prima di cominciare. Lungo la guida i vari comandi da terminale useranno ID di chiave, keygrip, percorsi nel disco fisso e quant'altro che fanno riferimento a quanto eseguito per scrivere la guida. Ciò significa che dovrete sostituire gli ID di chiave, i keygrip, i percorsi e quant'altro con quelli vostri. Ad esempio, in un comando come questo:
+
+```bash
+cp rm ~/.gnupg/private-keys-v1.d/C6D1CD1D12CBBC8FA14D30004EAF381803A72597.key
+```
+
+dovrete sostituire `C6D1CD1D12CBBC8FA14D30004EAF381803A72597.key` con il nome corretto del vostro file.
 
 ## Generazione delle chiavi
 
@@ -616,6 +626,8 @@ Anzitutto facciamo il backup di tutta la directory di GnuPG così come si trova 
 cp -r ~/.gnupg/ ~/Scrivania/backup/directory_gnupg/
 ```
 
+Verificate che nella directory di backup ci sia la sotto-directory `private-keys-v1.d` con all'interno i file privati delle chiavi. Ce ne devono essere uno per ogni chiave privata, vale a dire uno per la chiave master e uno per ogni sottochiave.
+
 ### Backup delle chiavi
 
 Vediamo anzitutto la situazione delle nostre chiavi private:
@@ -911,57 +923,63 @@ Potremmo finire qua se abbiamo scelto di non cancellare la chiave principale dal
 
 ## Eliminare la chiave principale
 
-Se abbiamo scelto di eliminare la chiave principale dal disco, eliminarla con:
+Se abbiamo scelto di eliminare la chiave principale dal disco, dobbiamo anzitutto verificare che versione di GnuPG stiamo usando, perché a seconda della versione bisognerà procedere in due modi diversi:
+
+* **se abbiamo GnuPG versione 2.1 o superiore:** è sufficiente cancellare il file corrispondente alla chiave master dalla directory ~/.gnupg/private-keys-v1.d;
+* **se abbiamo GnuPG inferiore alla versione 2.1:** dopo aver fatto il backup delle sottochiavi, bisogna dapprima cancellare tutta la chiave (master e sottochiavi) e poi reimportare solo le sottochiavi.
+
+Vediamo i due procedimenti nel dettaglio.
+
+### GnuPG versione 2.1 o superiore
+
+GnuPG, dalla versione 2.1 in su, deposita le chiavi private nella directory `~/.gnupg/private-keys-v1.d/` e non più nel file `~/.gnupg/secring.gpg`. Perciò, se avete una chiave master e 3 sottochiavi, dovreste avere 4 file con estensione `.key` in quella directory:
+
+```text
+C6D1CD1D12CBBC8FA14D30004EAF381803A72597.key
+135159EDEFB9FCB6062F9DE0E21FD90CB07DA041.key
+C74D47329D5D224B0716879DCF3A4EC2D8951C53.key
+30DEE8A060F3562CD6F1384E0F883D65477E596A.key
+```
+
+Per identificare quale di questi file è la chiave master, dare nel terminale questo comando:
 
 ```bash
-gpg --delete-secret-key 0x9F676B5A4B6E6777
+gpg --with-keygrip --list-key 0x9F676B5A4B6E6777
 ```
 
-che ci dirà:
+Siccome è stato fatto il backup della directory di GnuPG, potete eliminare il file `.key` corrispondente alla chiave master. Per ogni evenienza, prima di cancellare il file, verificate che nel backup ci sia il file che state per cancellare. Il comando per eliminare il file è:
 
-```text
-gpg (GnuPG) 2.1.11; Copyright (C) 2016 Free Software Foundation, Inc.
-This is free software: you are free to change and redistribute it.
-There is NO WARRANTY, to the extent permitted by law.
-
-
-sec  rsa4096/0x9F676B5A4B6E6777 2018-04-01 Mario Rossi <mario.rossi@example.com>
-
-Delete this key from the keyring? (y/N)
+```bash
+cp rm ~/.gnupg/private-keys-v1.d/C6D1CD1D12CBBC8FA14D30004EAF381803A72597.key
 ```
 
-Premere `Y`:
+oppure usate un programma come `shred` per eliminarlo in modo sicuro.
 
-```text
-This is a secret key! - really delete? (y/N)
+Se avete fatto da poco la migrazione a GnuPG versione 2.1 o superiore, il vecchio file `secring.gpg` che conteneva le chiavi private potrebbe ancora averla al suo interno. Per cui, se la dimensione del file è zero, il file non contiene più nulla; altrimenti, se la dimensione del file è maggiore di zero, cancellatelo del tutto.
+
+Quando in futuro vi servirà usare la chiave master (ad esempio, per firmare una chiave altrui), potrete semplicemente prendere dal backup il file `.key` della chiave master e copiarlo nella directory `private-keys-v1.d` di lavoro. Una volta terminata l'esigenza, potrete eliminare nuovamente il file.
+
+### GnuPG inferiore alla versione 2.1
+
+Se avete questa versione di GnuPG, bisognerà procedere con questi passi:
+
+1. Essere sicuri di avere il [backup funzionante delle chiavi](#backup-delle-chiavi);
+1. Rimuovere la chiave privata completa (cioè master e sottochiavi);
+1. Reimportare dal backup solo le sottochiavi.
+
+La chiave completa si elimina con:
+
+```bash
+gpg --delete-secret-keys 0x9F676B5A4B6E6777
 ```
 
-Confermare la scelta con `Y`. Ora apparirà un messaggio a video chiedendo una ulteriore conferma. Leggete bene cosa appare:
+Le sottochiavi si importano con:
 
-```text
-Do you really want to permanently delete the OpenPGP secret key:
-"Mario Rossi <mario.rossi@example.com>"
-4096-bit RSA key, ID 0x9F676B5A4B6E6777,
-created 2018-04-01.
-?
+```bash
+gpg --import 0xE7E0CAF69114F367
+gpg --import 0x3C91B3682F3AC08A
+gpg --import 0x465ED456AFBE0F10
 ```
-
-Premete sul pulsante `Delete key`.
-
-Ora:
-
-1. **se avete trasferito le sottochiavi nel token USB**, il sistema non chiede più nulla perché le sottochiavi non ci sono nel disco ed eliminerà la chiave principale;
-1. **se invece avete deciso di tenere le sottochiavi nel disco**, il sistema continuerà a chiedere conferma per ogni sottochiave se eliminarle:
-
-```text
-Do you really want to permanently delete the OpenPGP secret subkey key:
-"Mario Rossi <mario.rossi@example.com>"
-2048-bit RSA key, ID 0xE7E0CAF69114F367,
-created 2018-04-01 (main key ID 0x9F676B5A4B6E6777).
-?
-```
-
-In questo caso premete il pulsante `No`. Una volta premuto `No` le richieste si fermeranno e verrà eliminata solo la chiave principale.
 
 Vediamo quindi la situazione:
 
@@ -1019,10 +1037,25 @@ e commentiamo la riga aggiungendo un cancelletto `#` all'inizio:
 # use-ssh-agent
 ```
 
-Abilitiamo il supporto SSH in GnuPG:
+Abilitiamo il supporto SSH in GnuPG aggiungendo la seguente riga in `~/.gnupg/gpg-agent.conf`:
 
-```bash
-echo "enable-ssh-support" >> ~/.gnupg/gpg-agent.conf
+```text
+enable-ssh-support
+```
+
+Già che ci siamo aggiungiamo pure la scelta di quale `pinentry` usare:
+
+```text
+pinentry-program /usr/bin/pinentry-gtk-2
+```
+
+Alternative sono, ad esempio:
+
+```text
+pinentry-program /usr/bin/pinentry-curses
+pinentry-program /usr/bin/pinentry-tty
+pinentry-program /usr/bin/pinentry-qt
+pinentry-program /usr/bin/pinentry-gnome3
 ```
 
 Riavviamo l'agente di GnuPG:
@@ -1056,36 +1089,61 @@ Quando periodicamente dovrete fare operazioni occasionali sul vostro portachiavi
 
 C'è un altro metodo per fare uso della chiave principale, come ad esempio dire momentaneamente a GnuPG che la sua *home* non è `~/.gnupg` ma un'altra directory. Io non ho mai usato questo sistema, per cui scrivo solo quello che uso io.
 
-Accertatevi di avere accesso dal terminale alla directory dove c'è il vostro backup e quindi dare:
+Accertatevi di avere accesso dal terminale alla directory dove c'è il vostro backup. Lo scopo è quello di copiare il file `.key` della chiave master dal backup alla directory attuale di lavoro di GnuPG.
 
 ```bash
-gpg --import ~/Scrivania/backup/chiavi/2_principale_soltanto_0x9F676B5A4B6E6777.asc
-```
-
-Il sistema risponderà:
-
-```text
-gpg: key 0x9F676B5A4B6E6777: "Mario Rossi <mario.rossi@example.com>" not changed
-gpg: key 0x9F676B5A4B6E6777: secret key imported
-gpg: Total number processed: 2
-gpg:              unchanged: 1
-gpg:       secret keys read: 2
-gpg:   secret keys imported: 1
+cp directory-backup-gnupg/private-keys-v1.d/C6D1CD1D12CBBC8FA14D30004EAF381803A72597.key ~/.gnupg/private-keys-v1.d/C6D1CD1D12CBBC8FA14D30004EAF381803A72597.key
 ```
 
 Effettuare quindi le operazioni che dovevamo compiere e, alla fine, eliminarla nuovamente:
 
 ```bash
-gpg --delete-secret-key 0x9F676B5A4B6E6777
+cp rm ~/.gnupg/private-keys-v1.d/C6D1CD1D12CBBC8FA14D30004EAF381803A72597.key
 ```
 
-Anche qui seguite attentamente quanto dicevo al paragrafo "Eliminazione della chiave principale".
+Accertatevi ora che la chiave master non ci sia più con:
+
+```bash
+gpg --list-secret-keys
+```
+
+che dovrebbe restituire qualcosa di simile a questo:
+
+```text
+sec#  rsa4096/0x9F676B5A4B6E6777 2018-04-01 [C] [expires: 2021-03-31]
+      Key fingerprint = 4915 3275 9708 0147 25CF  E3A7 9F67 6B5A 4B6E 6777
+      Keygrip = C6D1CD1D12CBBC8FA14D30004EAF381803A72597
+uid                   [ultimate] Mario Rossi <mario.rossi@example.com>
+ssb>  rsa2048/0xE7E0CAF69114F367 2018-04-01 [S] [expires: 2019-04-01]
+      Keygrip = 135159EDEFB9FCB6062F9DE0E21FD90CB07DA041
+ssb>  rsa2048/0x3C91B3682F3AC08A 2018-04-01 [E] [expires: 2019-04-01]
+      Keygrip = C74D47329D5D224B0716879DCF3A4EC2D8951C53
+ssb>  rsa2048/0x465ED456AFBE0F10 2018-04-01 [A] [expires: 2019-04-01]
+      Keygrip = 30DEE8A060F3562CD6F1384E0F883D65477E596A
+```
+
+o a questo, se avete deciso di tenere le sottochiavi nel disco:
+
+```text
+sec#  rsa4096/0x9F676B5A4B6E6777 2018-04-01 [C] [expires: 2021-03-31]
+      Key fingerprint = 4915 3275 9708 0147 25CF  E3A7 9F67 6B5A 4B6E 6777
+      Keygrip = C6D1CD1D12CBBC8FA14D30004EAF381803A72597
+uid                   [ultimate] Mario Rossi <mario.rossi@example.com>
+ssb   rsa2048/0xE7E0CAF69114F367 2018-04-01 [S] [expires: 2019-04-01]
+      Keygrip = 135159EDEFB9FCB6062F9DE0E21FD90CB07DA041
+ssb   rsa2048/0x3C91B3682F3AC08A 2018-04-01 [E] [expires: 2019-04-01]
+      Keygrip = C74D47329D5D224B0716879DCF3A4EC2D8951C53
+ssb   rsa2048/0x465ED456AFBE0F10 2018-04-01 [A] [expires: 2019-04-01]
+      Keygrip = 30DEE8A060F3562CD6F1384E0F883D65477E596A
+```
+
+C'è il simbolo `#` dopo la parola `sec`, per cui la chiave master non c'è più.
 
 ## Estendere la validità delle nostre chiavi
 
 Se abbiamo scelto una validità a tempo per le nostre chiavi, periodicamente potremo estenderne la validità se ancora sono valide per noi. Teniamo presente che possiamo rinnovare la validità di una chiave già scaduta.
 
-Se abbiamo scelto di togliere la chiave principale dal nostro disco, dovremo importarla nuovamente, come descritto al paragrafo "Importare la chiave principale per operazioni speciali".
+Se abbiamo scelto di togliere la chiave principale dal nostro disco, dovremo importarla nuovamente, come descritto al paragrafo [Importare la chiave principale per operazioni speciali](#importare-la-chiave-principale-per-operazioni.speciali).
 
 Se abbiamo scelto, poi, di tenere le sottochiavi nel token USB, dovremo inserirlo in una porta USB.
 
@@ -1135,6 +1193,7 @@ save
 
 ## Bibliografia
 
+* Debian Wiki, [Subkeys](https://wiki.debian.org/Subkeys).
 * Riseup, [OpenPGP Best Practices](https://riseup.net/en/security/message-security/openpgp/best-practices).
 * Tjl73, [Creazione di chiavi sicure (ossìa, come generare con GnuPG una coppia di chiavi per poterla conservare in modo "abbastanza" sicuro)](http://tjl73.altervista.org/secure_keygen/).
 * Eric Severance, [PGP and SSH keys on a Yubikey NEO](https://www.esev.com/blog/post/2015-01-pgp-ssh-key-on-yubikey-neo/).
