@@ -2,6 +2,7 @@
 
 Autore: Aldo Latino  
 Data di pubblicazione: 2018-04-01  
+Ultimo aggiornamento: 2019-07-14  
 Licenza: [Creative Commons Attribuzione - Condividi allo stesso modo 4.0 Internazionale (CC BY-SA 4.0)](https://creativecommons.org/licenses/by-sa/4.0/deed.it)
 
 ## Indice
