@@ -1068,8 +1068,24 @@ gpg-connect-agent /bye
 
 Inseriamo la riga seguente in `~/.bashrc`
 
-```bash
-echo "export SSH_AUTH_SOCK=~/.gnupg/S.gpg-agent.ssh" >> ~/.bashrc
+```text
+# You should always add the following lines to your .bashrc or whatever initialization file is used for all shell invocations.
+# @link https://gnupg.org/documentation/manuals/gnupg/Invoking-GPG_002dAGENT.html#Invoking-GPG_002dAGENT
+GPG_TTY=$(tty)
+export GPG_TTY
+
+# Launch gpg-agent
+gpg-connect-agent /bye
+
+# When using SSH support, use the current TTY for passphrase prompts
+gpg-connect-agent updatestartuptty /bye > /dev/null
+
+# Point the SSH_AUTH_SOCK to the one handled by gpg-agent
+if [ -S $(gpgconf --list-dirs agent-ssh-socket) ]; then
+  export SSH_AUTH_SOCK=$(gpgconf --list-dirs agent-ssh-socket)
+else
+  echo "$(gpgconf --list-dirs agent-ssh-socket) doesn't exist. Is gpg-agent running ?"
+fi
 ```
 
 Facciamo rileggere questo file:
