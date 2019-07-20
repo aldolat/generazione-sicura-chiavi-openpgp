@@ -926,12 +926,12 @@ Potremmo finire qua se abbiamo scelto di non cancellare la chiave principale dal
 
 Se abbiamo scelto di eliminare la chiave principale dal disco, dobbiamo anzitutto verificare che versione di GnuPG stiamo usando, perché a seconda della versione bisognerà procedere in due modi diversi:
 
-* **se abbiamo GnuPG versione 2.1 o superiore:** è sufficiente cancellare il file corrispondente alla chiave master dalla directory ~/.gnupg/private-keys-v1.d;
-* **se abbiamo GnuPG inferiore alla versione 2.1:** dopo aver fatto il backup delle sottochiavi, bisogna dapprima cancellare tutta la chiave (master e sottochiavi) e poi reimportare solo le sottochiavi.
+* **se abbiamo GnuPG versione 2.1 o successiva:** è sufficiente cancellare il file corrispondente alla chiave master dalla directory `~/.gnupg/private-keys-v1.d`;
+* **se abbiamo GnuPG precedente alla versione 2.1:** dopo aver fatto il backup delle sottochiavi, bisogna dapprima cancellare tutta la chiave (master e sottochiavi) e poi reimportare solo le sottochiavi.
 
-Vediamo i due procedimenti nel dettaglio.
+Nonostante all'inizio della guida ho specificato di usare solo la versione di GnuPG 2.1 o successiva, vediamo comunque i due procedimenti nel dettaglio.
 
-### GnuPG versione 2.1 o superiore
+### GnuPG versione 2.1 o successiva
 
 GnuPG, dalla versione 2.1 in su, deposita le chiavi private nella directory `~/.gnupg/private-keys-v1.d/` e non più nel file `~/.gnupg/secring.gpg`. Perciò, se avete una chiave master e 3 sottochiavi, dovreste avere 4 file con estensione `.key` in quella directory:
 
@@ -960,7 +960,7 @@ Se avete fatto da poco la migrazione a GnuPG versione 2.1 o superiore, il vecchi
 
 Quando in futuro vi servirà usare la chiave master (ad esempio, per firmare una chiave altrui), potrete semplicemente prendere dal backup il file `.key` della chiave master e copiarlo nella directory `private-keys-v1.d` di lavoro. Una volta terminata l'esigenza, potrete eliminare nuovamente il file.
 
-### GnuPG inferiore alla versione 2.1
+### GnuPG precedente alla versione 2.1
 
 Se avete questa versione di GnuPG, bisognerà procedere con questi passi:
 
