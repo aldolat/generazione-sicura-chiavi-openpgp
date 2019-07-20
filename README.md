@@ -954,7 +954,18 @@ Siccome è stato fatto il [backup della directory di GnuPG](#backup-della-direct
 cp rm ~/.gnupg/private-keys-v1.d/C6D1CD1D12CBBC8FA14D30004EAF381803A72597.key
 ```
 
-oppure usate un programma come `shred` per eliminarlo in modo sicuro.
+oppure usate un programma come `shred` per eliminarlo in modo sicuro:
+
+```bash
+shred -vuzn25 ~/.gnupg/private-keys-v1.d/C6D1CD1D12CBBC8FA14D30004EAF381803A72597.key
+```
+
+Le opzioni `-vuzn25` di `shred` significano:
+
+`v` = show progress  
+`u` = truncate and remove file after overwriting  
+`z` = add a final overwrite with zeros to hide shredding  
+`n` = overwrite N times instead of the default (3)
 
 Se avete fatto da poco la migrazione a GnuPG versione 2.1 o superiore, il vecchio file `secring.gpg` che conteneva le chiavi private potrebbe ancora averla al suo interno. Per cui, se la dimensione del file è zero, il file non contiene più nulla; altrimenti, se la dimensione del file è maggiore di zero, cancellatelo del tutto.
 
