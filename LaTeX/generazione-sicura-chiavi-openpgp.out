@@ -1,0 +1,24 @@
+\BOOKMARK [1][-]{section.1}{Introduzione}{}% 1
+\BOOKMARK [1][-]{section.2}{Generazione delle chiavi}{}% 2
+\BOOKMARK [2][-]{subsection.2.1}{Prerequisiti}{section.2}% 3
+\BOOKMARK [2][-]{subsection.2.2}{Generare le chiavi}{section.2}% 4
+\BOOKMARK [2][-]{subsection.2.3}{Il certificato di revoca}{section.2}% 5
+\BOOKMARK [2][-]{subsection.2.4}{Impostare le preferenze della chiave}{section.2}% 6
+\BOOKMARK [2][-]{subsection.2.5}{Impostare il file gpg.conf}{section.2}% 7
+\BOOKMARK [2][-]{subsection.2.6}{Impostare il keyserver}{section.2}% 8
+\BOOKMARK [2][-]{subsection.2.7}{Copiare la directory .gnupg nel proprio computer di lavoro}{section.2}% 9
+\BOOKMARK [2][-]{subsection.2.8}{Esportare la chiave pubblica sul keyserver}{section.2}% 10
+\BOOKMARK [2][-]{subsection.2.9}{Segnarsi la data di scadenza delle proprie chiavi nel calendario}{section.2}% 11
+\BOOKMARK [1][-]{section.3}{Fare il backup}{}% 12
+\BOOKMARK [2][-]{subsection.3.1}{Backup della directory di GnuPG}{section.3}% 13
+\BOOKMARK [2][-]{subsection.3.2}{Backup delle chiavi}{section.3}% 14
+\BOOKMARK [2][-]{subsection.3.3}{Backup del certificato di revoca}{section.3}% 15
+\BOOKMARK [2][-]{subsection.3.4}{Spostare la directory di backup in un luogo sicuro}{section.3}% 16
+\BOOKMARK [1][-]{section.4}{Trasferire le chiavi OpenPGP su YubiKey}{}% 17
+\BOOKMARK [1][-]{section.5}{Eliminare la chiave principale}{}% 18
+\BOOKMARK [2][-]{subsection.5.1}{GnuPG versione 2.1 o successiva}{section.5}% 19
+\BOOKMARK [2][-]{subsection.5.2}{GnuPG precedente alla versione 2.1}{section.5}% 20
+\BOOKMARK [1][-]{section.6}{Gli agenti}{}% 21
+\BOOKMARK [1][-]{section.7}{Importare la chiave principale per operazioni speciali}{}% 22
+\BOOKMARK [1][-]{section.8}{Estendere la validit\340 delle nostre chiavi}{}% 23
+\BOOKMARK [1][-]{section.9}{Bibliografia}{}% 24
