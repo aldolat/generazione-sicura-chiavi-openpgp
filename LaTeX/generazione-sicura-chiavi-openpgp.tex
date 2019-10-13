@@ -23,14 +23,11 @@ breaklines=true
 }
 
 \usepackage{mathptmx}
-% \usepackage{ebgaramond}
-% \usepackage{mathpazo}
 
-%opening
 \title{Generazione sicura di chiavi OpenPGP}
 \author{Aldo Latino}
 
-\date{1 aprile 2017 -- 13 ottobre 2019}
+\date{1 aprile 2018 -- 14 luglio 2019}
 
 
 \begin{document}
@@ -40,7 +37,7 @@ breaklines=true
 %\newpage
 
 \begin{abstract}
-Una guida dettagliata, per quanto possibile, sulla generazione, conservazione e protezione delle chiavi OpenPGP.
+Una guida dettagliata, per quanto possibile, sulla generazione, conservazione e protezione delle chiavi OpenPGP. La guida è stata pubblicata la prima volta su \href{https://github.com/aldolat/generazione-sicura-chiavi-openpgp}{GitHub}.
 \end{abstract}
 
 \tableofcontents
@@ -106,9 +103,9 @@ Questa guida può essere seguita in modo modulare:
 
 Una nota prima di cominciare. Lungo la guida i vari comandi da terminale useranno \textsc{id} di chiave, keygrip, percorsi nel disco fisso e quant'altro che fanno riferimento a quanto eseguito per scrivere la guida. Ciò significa che dovrete sostituire gli \textsc{id} di chiave, i keygrip, i percorsi e quant'altro con quelli vostri. Ad esempio, in un comando come questo:
 
-\begin{verbatim}
+\begin{lstlisting}
 gpg --with-keygrip --list-key 0x9F676B5A4B6E6777
-\end{verbatim}
+\end{lstlisting}
 
 dovrete sostituire \texttt{0x9F676B5A4B6E6777} con l'\textsc{id} corretto della vostra chiave.
 
@@ -142,9 +139,9 @@ Per la lunghezza delle chiavi avremo la chiave primaria a 4096 bit mentre le sot
 
 Qualora il comando \texttt{gpg} lanci GnuPG versione 1, accertarsi che la versione 2 sia installata e aggiungere questa riga a \texttt{~/.bash\_aliases}:
 
-\begin{verbatim}
+\begin{lstlisting}
 alias gpg='gpg2'
-\end{verbatim}
+\end{lstlisting}
 
 Questa scorciatoia permetterà l'avvio di GnuPG versione 2 ogni volta che digitiamo \texttt{gpg}.
 
@@ -152,19 +149,19 @@ Questa scorciatoia permetterà l'avvio di GnuPG versione 2 ogni volta che digiti
 
 Sul sistema di generazione delle chiavi accertarsi di avere GnuPG versione 2.1 o successiva:
 
-\begin{verbatim}
+\begin{lstlisting}
 gpg --version
-\end{verbatim}
+\end{lstlisting}
 
 Iniziare quindi la procedura con:
 
-\begin{verbatim}
+\begin{lstlisting}
 gpg --expert --full-gen-key
-\end{verbatim}
+\end{lstlisting}
 
 che darà:
 
-\begin{verbatim}
+\begin{lstlisting}
 Please select what kind of key you want:
    (1) RSA and RSA (default)
    (2) DSA and Elgamal
@@ -176,11 +173,11 @@ Please select what kind of key you want:
   (10) ECC (sign only)
   (11) ECC (set your own capabilities)
 Your selection?
-\end{verbatim}
+\end{lstlisting}
 
 Scegliamo \texttt{8}:
 
-\begin{verbatim}
+\begin{lstlisting}
 Possible actions for a RSA key: Sign Certify Encrypt Authenticate
 Current allowed actions: Sign Certify Encrypt
 
@@ -190,12 +187,11 @@ Current allowed actions: Sign Certify Encrypt
    (Q) Finished
 
 Your selection?
-\end{verbatim}
+\end{lstlisting}
 
-Come si vede le attuali capacità della chiave che stiamo creando sono: \texttt{Sign Certify Encrypt}.
-Rimuoviamo le capacità di firma premendo \texttt{S}:
+Come si vede le attuali capacità della chiave che stiamo creando sono:\newline \texttt{Sign Certify Encrypt}. Rimuoviamo le capacità di firma premendo \texttt{S}:
 
-\begin{verbatim}
+\begin{lstlisting}
 Possible actions for a RSA key: Sign Certify Encrypt Authenticate
 Current allowed actions: Certify Encrypt
 
@@ -205,11 +201,11 @@ Current allowed actions: Certify Encrypt
    (Q) Finished
 
 Your selection?
-\end{verbatim}
+\end{lstlisting}
 
 Rimuoviamo le capacità di cifratura premendo \texttt{E}`:
 
-\begin{verbatim}
+\begin{lstlisting}
 Possible actions for a RSA key: Sign Certify Encrypt Authenticate
 Current allowed actions: Certify
 
@@ -219,21 +215,21 @@ Current allowed actions: Certify
    (Q) Finished
 
 Your selection?
-\end{verbatim}
+\end{lstlisting}
 
 Ora la chiave primaria avrà solo la capacità di certificazione (\texttt{Certify}) su altre chiavi.
 
 Premiamo \texttt{Q}:
 
-\begin{verbatim}
+\begin{lstlisting}
 RSA keys may be between 1024 and 4096 bits long.
 What keysize do you want? (2048)
-\end{verbatim}
+\end{lstlisting}
 
 
 Inserire \texttt{4096}:
 
-\begin{verbatim}
+\begin{lstlisting}
 Requested keysize is 4096 bits
 Please specify how long the key should be valid.
          0 = key does not expire
@@ -242,51 +238,51 @@ Please specify how long the key should be valid.
       <n>m = key expires in n months
       <n>y = key expires in n years
 Key is valid for? (0)
-\end{verbatim}
+\end{lstlisting}
 
 
 Inseriamo \texttt{3y} (3 anni):
 
-\begin{verbatim}
+\begin{lstlisting}
 Key expires at mer 31 mar 2021 19:46:05 CEST
 Is this correct? (y/N)
-\end{verbatim}
+\end{lstlisting}
 
 Premiamo \texttt{Y}:
 
-\begin{verbatim}
+\begin{lstlisting}
 GnuPG needs to construct a user ID to identify your key.
 
 Real name:
 Email address:
 Comment:
-\end{verbatim}
+\end{lstlisting}
 
 
 Inseriamo il nostro nome e cognome e quindi l'indirizzo email.
 Come commento lasciamo il campo vuoto.
 
-\begin{verbatim}
+\begin{lstlisting}
 You selected this USER-ID:
     "Mario Rossi <mario.rossi@example.com>"
 
 Change (N)ame, (C)omment, (E)mail or (O)kay/(Q)uit?
-\end{verbatim}
+\end{lstlisting}
 
 Accettare con \texttt{O}:
 
-\begin{verbatim}
+\begin{lstlisting}
 We need to generate a lot of random bytes. It is a good idea to perform
 some other action (type on the keyboard, move the mouse, utilize the
 disks) during the prime generation; this gives the random number
 generator a better chance to gain enough entropy.
-\end{verbatim}
+\end{lstlisting}
 
 A seguire GnuPG chiederà di impostare la passphrase.
 
 Impostiamo la passphrase.
 
-\begin{verbatim}
+\begin{lstlisting}
 gpg: key 4B6E6777 marked as ultimately trusted
 gpg: directory '/home/mariorossi/.gnupg/openpgp-revocs.d' created
 gpg: revocation certificate stored as '/home/mariorossi/.gnupg/openpgp-revocs.d/491532759708014725CFE3A79F676B5A4B6E6777.rev'
@@ -299,19 +295,19 @@ gpg: next trustdb check due at 2021-03-31
 pub   rsa4096/4B6E6777 2018-04-01 [C] [expires: 2021-03-31]
       Key fingerprint = 4915 3275 9708 0147 25CF  E3A7 9F67 6B5A 4B6E 6777
 uid         [ultimate] Mario Rossi <mario.rossi@example.com>
-\end{verbatim}
+\end{lstlisting}
 
 GnuPG mostra la chiave appena generata ed esce.
 
 Come si vede, esiste solo la chiave principale con la sola capacità di certificazione \texttt{[C]}.
 Bisogna ora generare le sottochiavi con:
 
-\begin{verbatim}
+\begin{lstlisting}
 gpg --expert --edit-key 0x4B6E6777
-\end{verbatim}
+\end{lstlisting}
 
 
-\begin{verbatim}
+\begin{lstlisting}
 gpg (GnuPG) 2.1.11; Copyright (C) 2016 Free Software Foundation, Inc.
 This is free software: you are free to change and redistribute it.
 There is NO WARRANTY, to the extent permitted by law.
@@ -324,11 +320,11 @@ sec  rsa4096/4B6E6777
 [ultimate] (1). Mario Rossi <mario.rossi@example.com>
 
 gpg>
-\end{verbatim}
+\end{lstlisting}
 
 Dare il comando \texttt{addkey}:
 
-\begin{verbatim}
+\begin{lstlisting}
 Please select what kind of key you want:
    (3) DSA (sign only)
    (4) RSA (sign only)
@@ -341,11 +337,11 @@ Please select what kind of key you want:
   (12) ECC (encrypt only)
   (13) Existing key
 Your selection?
-\end{verbatim}
+\end{lstlisting}
 
 Scegliere \texttt{8}:
 
-\begin{verbatim}
+\begin{lstlisting}
 Possible actions for a RSA key: Sign Encrypt Authenticate
 Current allowed actions: Sign Encrypt
 
@@ -355,11 +351,11 @@ Current allowed actions: Sign Encrypt
    (Q) Finished
 
 Your selection?
-\end{verbatim}
+\end{lstlisting}
 
 Togliere la capacità di cifratura premendo \texttt{E}:
 
-\begin{verbatim}
+\begin{lstlisting}
 Possible actions for a RSA key: Sign Encrypt Authenticate
 Current allowed actions: Sign
 
@@ -369,18 +365,18 @@ Current allowed actions: Sign
    (Q) Finished
 
 Your selection?
-\end{verbatim}
+\end{lstlisting}
 
 Scegliere \texttt{Q}:
 
-\begin{verbatim}
+\begin{lstlisting}
 RSA keys may be between 1024 and 4096 bits long.
 What keysize do you want? (2048)
-\end{verbatim}
+\end{lstlisting}
 
 Premere \texttt{Invio} per accettare \texttt{2048}:
 
-\begin{verbatim}
+\begin{lstlisting}
 Requested keysize is 2048 bits
 Please specify how long the key should be valid.
          0 = key does not expire
@@ -389,36 +385,36 @@ Please specify how long the key should be valid.
       <n>m = key expires in n months
       <n>y = key expires in n years
 Key is valid for? (0)
-\end{verbatim}
+\end{lstlisting}
 
 Inserire \texttt{1y} per farla scadere dopo 1 anno:
 
-\begin{verbatim}
+\begin{lstlisting}
 Key expires at lun 01 apr 2019 19:57:16 CEST
 Is this correct? (y/N)
-\end{verbatim}
+\end{lstlisting}
 
 Accettare inserendo \texttt{Y}:
 
-\begin{verbatim}
+\begin{lstlisting}
 Really create? (y/N)
-\end{verbatim}
+\end{lstlisting}
 
 Accettare inserendo \texttt{Y}.
 
 Inserire quindi la passphrase e la sottochiave sarà aggiunta al portachiavi:
 
-\begin{verbatim}
+\begin{lstlisting}
 We need to generate a lot of random bytes. It is a good idea to perform
 some other action (type on the keyboard, move the mouse, utilize the
 disks) during the prime generation; this gives the random number
 generator a better chance to gain enough entropy.
-\end{verbatim}
+\end{lstlisting}
 
 
 Attendiamo che finisca, quindi apparirà:
 
-\begin{verbatim}
+\begin{lstlisting}
 sec  rsa4096/4B6E6777
      created: 2018-04-01  expires: 2021-03-31  usage: C
      trust: ultimate      validity: ultimate
@@ -427,26 +423,26 @@ ssb  rsa2048/9114F367
 [ultimate] (1). Mario Rossi <mario.rossi@example.com>
 
 gpg>
-\end{verbatim}
+\end{lstlisting}
 
 
 Aggiungiamo ora con la stessa procedura (partendo da \texttt{addkey}) la chiave di cifratura e poi quella di autenticazione.
 Alla fine, dopo aver aggiunto la sottochiave di autenticazione, dare il comando:
 
-\begin{verbatim}
+\begin{lstlisting}
 save
-\end{verbatim}
+\end{lstlisting}
 
 per salvare e uscire.
 
 Alla fine avremo questo portachiavi:
 
-\begin{verbatim}
+\begin{lstlisting}
 gpg --list-secret-keys
-\end{verbatim}
+\end{lstlisting}
 
 
-\begin{verbatim}
+\begin{lstlisting}
 /home/mariorossi/.gnupg/pubring.kbx
 -----------------------------
 sec   rsa4096/4B6E6777 2018-04-01 [C] [expires: 2021-03-31]
@@ -454,7 +450,7 @@ uid         [ultimate] Mario Rossi <mario.rossi@example.com>
 ssb   rsa2048/9114F367 2018-04-01 [S] [expires: 2019-04-01]
 ssb   rsa2048/2F3AC08A 2018-04-01 [E] [expires: 2019-04-01]
 ssb   rsa2048/AFBE0F10 2018-04-01 [A] [expires: 2019-04-01]
-\end{verbatim}
+\end{lstlisting}
 
 La situazione è, quindi, la seguente:
 
@@ -467,20 +463,20 @@ La situazione è, quindi, la seguente:
 
 Possiamo aggiungere anche altri UserID o una foto con:
 
-\begin{verbatim}
+\begin{lstlisting}
 gpg --expert --edit-key 0x4B6E6777
-\end{verbatim}
+\end{lstlisting}
 
 e poi con \texttt{adduid}.
 
 \subsection{Il certificato di revoca}
 \label{sec:certificato-revoca}
 
-Con GnuPG versione 2 la generazione del certificato di revoca è stata fatta automaticamente quando le chiavi sono state generate e si trova nella directory \texttt{~/.gnupg/openpgp-revocs.d/}. Il file ha lo stesso nome dell'impronta della chiave, nel nostro caso:
+Con GnuPG versione 2 la generazione del certificato di revoca è stata fatta automaticamente quando le chiavi sono state generate e si trova nella directory\newline \texttt{~/.gnupg/openpgp-revocs.d/}. Il file ha lo stesso nome dell'impronta della chiave, nel nostro caso:
 
-\begin{verbatim}
+\begin{lstlisting}
 491532759708014725CFE3A79F676B5A4B6E6777.rev
-\end{verbatim}
+\end{lstlisting}
 
 Questo file andrà tolto da questa directory e conservato in un luogo sicuro. Lo vedremo nel \hyperref[sec:backup-certificato-revoca]{paragrafo dedicato al backup}.
 
@@ -488,19 +484,19 @@ Questo file andrà tolto da questa directory e conservato in un luogo sicuro. Lo
 
 Modificare la chiave con:
 
-\begin{verbatim}
+\begin{lstlisting}
 gpg --expert --edit-key 0x4B6E6777
-\end{verbatim}
+\end{lstlisting}
 
 Dal prompt di Gnupg dare:
 
-\begin{verbatim}
+\begin{lstlisting}
 setpref S10 S9 S8 H10 H9 H8 Z2 Z3 Z1 Z0
-\end{verbatim}
+\end{lstlisting}
 
-che significa:
+Per il significato dei codici, vedi la Tabella \ref{table:codici}.
 
-\begin{table}[h!]
+\begin{table}[ht!]
 	\begin{tabular}{cl}
  		\hline
 		\textsc{Codice} & \textsc{Descrizione} \\
@@ -517,30 +513,32 @@ che significa:
 		\texttt{Z0} & \texttt{Non compresso} \\
 		\hline
 	\end{tabular}
+	\caption{I codici GnuPG per cifrari, hash e compressione.}
+	\label{table:codici}
 \end{table}
 
 Alla domanda di GnuPG seguente:
 
-\begin{verbatim}
+\begin{lstlisting}
 Set preference list to:
      Cipher: TWOFISH, AES256, AES192, 3DES
      Digest: SHA512, SHA384, SHA256, SHA1
      Compression: ZLIB, BZIP2, ZIP, Uncompressed
      Features: MDC, Keyserver no-modify
 Really update the preferences? (y/N)
-\end{verbatim}
+\end{lstlisting}
 
 premere \texttt{Y} e quindi:
 
-\begin{verbatim}
+\begin{lstlisting}
 save
-\end{verbatim}
+\end{lstlisting}
 
 \subsection{Impostare il file gpg.conf}
 
 Aprire il file \texttt{gpg.conf} dentro la directory \texttt{~/.gnupg}, eliminare tutto il contenuto e incollarvi questo testo, ricordandosi di \textbf{aggiornare le due \textsc{id} di chiave} nelle righe \texttt{default-key} e \texttt{encrypt-to} con l'\textsc{id} della vostra chiave:
 
-\begin{verbatim}
+\begin{lstlisting}
 # Per lo skeleton di questo file vedi:
 # /usr/share/gnupg2/gpg-conf.skel
 
@@ -614,20 +612,20 @@ personal-compress-preferences ZLIB BZIP2 ZIP Uncompressed
 # This preference list is used for new keys and becomes the default for
 # "setpref" in the edit menu
 default-preference-list SHA512 SHA384 SHA256 SHA224 TWOFISH AES256 AES192 3DES ZLIB BZIP2 ZIP Uncompressed
-\end{verbatim}
+\end{lstlisting}
 
 \subsection{Impostare il keyserver}
 
 Modificare (o creare) il file \texttt{~/.gnupg/dirmngr.conf}:
 
-\begin{verbatim}
+\begin{lstlisting}
 # Per lo skeleton di questo file vedi:
 # /usr/share/gnupg2/dirmngr-conf.skel
 
 # This is the server that --recv-keys, --send-keys, and --search-keys will
 # communicate with to receive keys from, send keys to, and search for keys on
 keyserver hkps://hkps.pool.sks-keyservers.net
-\end{verbatim}
+\end{lstlisting}
 
 \subsection{Copiare la directory \texttt{.gnupg} nel proprio computer di lavoro}
 
@@ -637,9 +635,9 @@ Dopo il trasferimento non dimenticate di distruggere la directory \texttt{.gnupg
 
 \subsection{Esportare la chiave pubblica sul keyserver}
 
-\begin{verbatim}
+\begin{lstlisting}
 gpg --send-keys 0x9F676B5A4B6E6777
-\end{verbatim}
+\end{lstlisting}
 
 \subsection{Segnarsi la data di scadenza delle proprie chiavi nel calendario}
 
@@ -659,36 +657,38 @@ Faremo il backup di questi tre elementi:
 
 Creiamo una directory \texttt{backup} e relative sottodirectory sulla scrivania del \textsc{pc} dove metteremo tutti i file del backup:
 
-\begin{verbatim}
+\begin{lstlisting}
 mkdir -p ~/Scrivania/backup/directory_gnupg
 mkdir ~/Scrivania/backup/chiavi
 mkdir ~/Scrivania/backup/certificato_di_revoca
-\end{verbatim}
+\end{lstlisting}
 
 
 Cambiate \texttt{Scrivania} con \texttt{Desktop} se è il vostro caso.
 
 \subsection{Backup della directory di GnuPG}
+\label{sec:backup-directory-gnupg}
 
 Anzitutto facciamo il backup di tutta la directory di GnuPG così come si trova in questo momento. Qualora qualcosa dovesse andare storto, potremmo sempre ripristinarla e cominciare daccapo.
 
-\begin{verbatim}
+\begin{lstlisting}
 cp -r ~/.gnupg/ ~/Scrivania/backup/directory_gnupg/
-\end{verbatim}
+\end{lstlisting}
 
-Verificate che nella directory di backup ci sia la sotto-directory \texttt{private-keys-v1.d} con all'interno i file privati delle chiavi. Ce ne devono essere uno per ogni chiave privata, vale a dire uno per la chiave master e uno per ogni sottochiave.
+Verificate che nella directory di backup ci sia la sotto-directory\newline \texttt{private-keys-v1.d} con all'interno i file privati delle chiavi. Ce ne devono essere uno per ogni chiave privata, vale a dire uno per la chiave master e uno per ogni sottochiave.
 
 \subsection{Backup delle chiavi}
+\label{sec:backup-chiavi}
 
 Vediamo anzitutto la situazione delle nostre chiavi private:
 
-\begin{verbatim}
+\begin{lstlisting}
 gpg --list-secret-keys
-\end{verbatim}
+\end{lstlisting}
 
 che restituirà qualcosa del tipo:
 
-\begin{verbatim}
+\begin{lstlisting}
 sec   rsa4096/0x9F676B5A4B6E6777 2018-04-01 [C] [expires: 2021-03-31]
       Key fingerprint = 4915 3275 9708 0147 25CF  E3A7 9F67 6B5A 4B6E 6777
       Keygrip = C6D1CD1D12CBBC8FA14D30004EAF381803A72597
@@ -699,7 +699,7 @@ ssb   rsa2048/0x3C91B3682F3AC08A 2018-04-01 [E] [expires: 2019-04-01]
       Keygrip = C74D47329D5D224B0716879DCF3A4EC2D8951C53
 ssb   rsa2048/0x465ED456AFBE0F10 2018-04-01 [A] [expires: 2019-04-01]
       Keygrip = 30DEE8A060F3562CD6F1384E0F883D65477E596A
-\end{verbatim}
+\end{lstlisting}
 
 Procediamo ad effettuare un backup di tutta la chiave (principale e sottochiavi) e anche delle singole chiavi. Questo è quello che otterremo:
 
@@ -748,19 +748,353 @@ Finito il backup, spostare la directory \texttt{~/Scrivania/backup} in almeno du
 A seconda di quanta importanza hanno queste chiavi per voi, posso consigliare una situazione del genere:
 
 \begin{itemize}
- \item copia della cartella su una chiavetta USB da usare **solo** per questo scopo, conservata in un luogo sicuro e nascosto, ad esempio la vostra cassaforte in casa;
- \item copia di sicurezza su una seconda chiavetta USB da usare **solo** per questo scopo, conservata in un altro luogo sicuro e nascosto, ad esempio la vostra cassetta di sicurezza in banca.
+ \item copia della cartella su una chiavetta USB da usare \textbf{solo} per questo scopo, conservata in un luogo sicuro e nascosto, ad esempio la vostra cassaforte in casa;
+ \item copia di sicurezza su una seconda chiavetta USB da usare \textbf{solo} per questo scopo, conservata in un altro luogo sicuro e nascosto, ad esempio la vostra cassetta di sicurezza in banca.
 \end{itemize}
 
 Chiaramente non complicatevi la vita, ma prendete le dovute precauzioni per proteggere le chiavi. Sappiate però che, se perdete la YubiKey (se la usate per le vostre sottochiavi) e se perdete i vostri backup, non potrete più accedere ai vostri file cifrati.
 
 \section{Trasferire le chiavi OpenPGP su YubiKey}
 
+Se avete un token \textsc{usb} come la YubiKey, potete trasferire le sottochiavi in essa. L'operazione è molto semplice.
 
+Prima di andare avanti, quando dico "trasferire" intendo proprio spostare una cosa da un posto a un altro. Nel nostro caso, intendo spostare le sottochiavi dal disco fisso alla YubiKey.
+
+Ricordo che trasferire le sottochiavi nel token USB è una \textbf{operazione a senso unico e non è possibile tornare indietro}, cioè non si possono trasferire le sottochiavi dal token al nostro disco fisso. Solo se abbiamo un backup delle chiavi possiamo ripristinare la situazione allo stato prima del trasferimento. Per cui \textbf{non procedete se non avete fatto il backup}.
+
+Diamo uno sguardo alla situazione attuale:
+
+\begin{lstlisting}
+gpg --list-secret-keys
+\end{lstlisting}
+
+\begin{lstlisting}
+sec   rsa4096/0x9F676B5A4B6E6777 2018-04-01 [C] [expires: 2021-03-31]
+      Key fingerprint = 4915 3275 9708 0147 25CF  E3A7 9F67 6B5A 4B6E 6777
+      Keygrip = C6D1CD1D12CBBC8FA14D30004EAF381803A72597
+uid                   [ultimate] Mario Rossi <mario.rossi@example.com>
+ssb   rsa2048/0xE7E0CAF69114F367 2018-04-01 [S] [expires: 2019-04-01]
+      Keygrip = 135159EDEFB9FCB6062F9DE0E21FD90CB07DA041
+ssb   rsa2048/0x3C91B3682F3AC08A 2018-04-01 [E] [expires: 2019-04-01]
+      Keygrip = C74D47329D5D224B0716879DCF3A4EC2D8951C53
+ssb   rsa2048/0x465ED456AFBE0F10 2018-04-01 [A] [expires: 2019-04-01]
+      Keygrip = 30DEE8A060F3562CD6F1384E0F883D65477E596A
+\end{lstlisting}
+
+Inseriamo il token nella porta USB e controlliamo che venga vista da GnuPG:
+
+\begin{lstlisting}
+gpg --card-status
+\end{lstlisting}
+
+Se restituisce:
+
+\begin{lstlisting}
+gpg: error getting version from 'scdaemon': No SmartCard daemon
+gpg: OpenPGP card not available: No SmartCard daemon
+\end{lstlisting}
+
+installiamo \texttt{scdaemon}:
+
+\begin{lstlisting}
+sudo apt-get install pcscd pcsc-tools scdaemon
+\end{lstlisting}
+
+e quindi di nuovo:
+
+\begin{lstlisting}
+gpg --card-status
+\end{lstlisting}
+
+che restituirà qualcosa del tipo:
+
+\begin{lstlisting}
+Reader ...........: Yubico Yubikey 4 OTP U2F CCID 00 00
+Application ID ...: XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+Version ..........: 2.1
+Manufacturer .....: Yubico
+Serial number ....: XXXXXXXX
+Name of cardholder: [not set]
+Language prefs ...: [not set]
+Sex ..............: unspecified
+URL of public key : [not set]
+Login data .......: [not set]
+Signature PIN ....: not forced
+Key attributes ...: rsa2048 rsa2048 rsa2048
+Max. PIN lengths .: 127 127 127
+PIN retry counter : 3 0 3
+Signature counter : 0
+Signature key ....: [none]
+Encryption key....: [none]
+Authentication key: [none]
+General key info..: [none]
+\end{lstlisting}
+
+Notate come ci siano i tre campi dedicati alla conservazione delle tre sottochiavi che abbiamo creato:
+
+\begin{lstlisting}
+Signature key ....: [none]
+Encryption key....: [none]
+Authentication key: [none]
+\end{lstlisting}
+
+Qui sposteremo le nostre tre sottochiavi. Iniziamo la procedura.
+
+Entriamo in modalità modifica:
+
+\begin{lstlisting}
+gpg --card-edit
+\end{lstlisting}
+
+Cambiamo anzitutto i \textsc{pin}. I \textsc{pin} predefiniti di fabbrica sono:
+
+\begin{itemize}
+   \item Admin PIN (8 cifre): \texttt{12345678}
+   \item PIN (6 cifre): \texttt{123456}
+\end{itemize}
+
+Entriamo in modalità amministratore dando:
+
+\begin{lstlisting}
+admin
+\end{lstlisting}
+
+\begin{lstlisting}
+passwd
+\end{lstlisting}
+
+Dal menu scegliere l'opzione da seguire, vale a dire \texttt{Change PIN} e, una volta finito, \texttt{Change Admin PIN}. Quindi alla fine salvare con \texttt{save} e uscire con \texttt{quit}.
+
+Una volta aggiornati i due \textsc{pin}, passare al trasferimento delle chiavi. Dal prompt del terminale dare:
+
+\begin{lstlisting}
+gpg --edit-key 0x9F676B5A4B6E6777
+\end{lstlisting}
+
+che restituirà:
+
+\begin{lstlisting}
+gpg (GnuPG) 2.1.11; Copyright (C) 2016 Free Software Foundation, Inc.
+This is free software: you are free to change and redistribute it.
+There is NO WARRANTY, to the extent permitted by law.
+
+Secret key is available.
+
+sec  rsa4096/0x9F676B5A4B6E6777
+     created: 2018-04-01  expires: 2021-03-31  usage: C
+     trust: ultimate      validity: ultimate
+ssb  rsa2048/0xE7E0CAF69114F367
+     created: 2018-04-01  expires: 2019-04-01  usage: S
+ssb  rsa2048/0x3C91B3682F3AC08A
+     created: 2018-04-01  expires: 2019-04-01  usage: E
+ssb  rsa2048/0x465ED456AFBE0F10
+     created: 2018-04-01  expires: 2019-04-01  usage: A
+[ultimate] (1). Mario Rossi <mario.rossi@example.com>
+\end{lstlisting}
+
+Selezioniamo la prima sottochiave con:
+
+\begin{lstlisting}
+key 1
+\end{lstlisting}
+
+che mostrerà la chiave selezionata con un asterisco \texttt{*}:
+
+\begin{lstlisting}
+sec  rsa4096/0x9F676B5A4B6E6777
+     created: 2018-04-01  expires: 2021-03-31  usage: C
+     trust: ultimate      validity: ultimate
+ssb* rsa2048/0xE7E0CAF69114F367
+     created: 2018-04-01  expires: 2019-04-01  usage: S
+ssb  rsa2048/0x3C91B3682F3AC08A
+     created: 2018-04-01  expires: 2019-04-01  usage: E
+ssb  rsa2048/0x465ED456AFBE0F10
+     created: 2018-04-01  expires: 2019-04-01  usage: A
+[ultimate] (1). Mario Rossi <mario.rossi@example.com>
+\end{lstlisting}
+
+Trasferiamo la chiave con:
+
+\begin{lstlisting}
+keytocard
+\end{lstlisting}
+
+Deselezioniamo quindi la chiave 1:
+
+\begin{lstlisting}
+key 1
+\end{lstlisting}
+
+L'asterisco verrà tolto. Quindi procedere con lo stesso metodo per le restanti due chiavi. Qui indico di seguito i comandi in sequenza:
+
+\begin{lstlisting}
+key 2
+keytocard
+key 2
+key 3
+keytocard
+key 3
+\end{lstlisting}
+
+Alla fine salviamo e usciamo:
+
+\begin{lstlisting}
+save
+\end{lstlisting}
+
+Una volta usciti al prompt dei comandi, diamo uno sguardo alla situazione:
+
+\begin{lstlisting}
+gpg --edit-key 0x9F676B5A4B6E6777
+\end{lstlisting}
+
+che restituirà:
+
+\begin{lstlisting}
+gpg (GnuPG) 2.1.11; Copyright (C) 2016 Free Software Foundation, Inc.
+This is free software: you are free to change and redistribute it.
+There is NO WARRANTY, to the extent permitted by law.
+
+Secret key is available.
+
+sec  rsa4096/0x9F676B5A4B6E6777
+     created: 2018-04-01  expires: 2021-03-31  usage: C
+     trust: ultimate      validity: ultimate
+ssb> rsa2048/0xE7E0CAF69114F367
+     created: 2018-04-01  expires: 2019-04-01  usage: S
+ssb> rsa2048/0x3C91B3682F3AC08A
+     created: 2018-04-01  expires: 2019-04-01  usage: E
+ssb> rsa2048/0x465ED456AFBE0F10
+     created: 2018-04-01  expires: 2019-04-01  usage: A
+[ultimate] (1). Mario Rossi <mario.rossi@example.com>
+\end{lstlisting}
+
+Come si vede abbiamo il segno \texttt{>} dopo ogni \texttt{ssb}, segno che le sottochiavi sono nel token. La chiave principale invece è ancora nel nostro disco. Date anche uno sguardo a com'è cambiata la YubiKey dando:
+
+\begin{lstlisting}
+gpg --card-status
+\end{lstlisting}
+
+Potremmo finire qua se abbiamo scelto di non cancellare la chiave principale dal disco.
 
 \section{Eliminare la chiave principale}
+
+Se abbiamo scelto di eliminare la chiave principale dal disco, dobbiamo anzitutto verificare che versione di GnuPG stiamo usando, perché a seconda della versione bisognerà procedere in due modi diversi:
+
+\begin{itemize}
+   \item \textbf{se abbiamo GnuPG versione 2.1 o successiva:} è sufficiente cancellare il file corrispondente alla chiave master dalla directory\newline \texttt{~/.gnupg/private-keys-v1.d};
+   \item \textbf{se abbiamo GnuPG precedente alla versione 2.1:} dopo aver fatto il backup delle sottochiavi, bisogna dapprima cancellare tutta la chiave (master e sottochiavi) e poi reimportare solo le sottochiavi.
+\end{itemize}
+
+Nonostante all'inizio della guida ho specificato di usare solo la versione di GnuPG 2.1 o successiva, vediamo comunque i due procedimenti nel dettaglio.
+
 \subsection{GnuPG versione 2.1 o successiva}
+
+GnuPG, dalla versione 2.1 in su, deposita le chiavi private nella directory\newline \texttt{~/.gnupg/private-keys-v1.d/} e non più nel file \texttt{~/.gnupg/secring.gpg}. Perciò, se avete una chiave master e 3 sottochiavi, dovreste avere 4 file con estensione \texttt{.key} in quella directory:
+
+\begin{lstlisting}
+C6D1CD1D12CBBC8FA14D30004EAF381803A72597.key
+135159EDEFB9FCB6062F9DE0E21FD90CB07DA041.key
+C74D47329D5D224B0716879DCF3A4EC2D8951C53.key
+30DEE8A060F3562CD6F1384E0F883D65477E596A.key
+\end{lstlisting}
+
+Per identificare quale di questi file è la chiave master, dare nel terminale questo comando:
+
+\begin{lstlisting}
+gpg --with-keygrip --list-key 0x9F676B5A4B6E6777
+\end{lstlisting}
+
+Siccome è stato fatto il \hyperref[sec:backup-directory-gnupg]{backup della directory di GnuPG}, potete eliminare il file \texttt{.key} corrispondente alla chiave master. Per ogni evenienza, prima di cancellare il file, verificate che nel backup ci sia il file che state per cancellare. Il comando per eliminare il file è:
+
+\begin{lstlisting}
+cp rm ~/.gnupg/private-keys-v1.d/C6D1CD1D12CBBC8FA14D30004EAF381803A72597.key
+\end{lstlisting}
+
+oppure usate un programma come \texttt{shred} per eliminarlo in modo sicuro:
+
+\begin{lstlisting}
+shred -vuzn25 ~/.gnupg/private-keys-v1.d/C6D1CD1D12CBBC8FA14D30004EAF381803A72597.key
+\end{lstlisting}
+
+Per le opzioni di \texttt{shred} vedi la Tabella \ref{table:shred}.
+
+\begin{table}[ht!]
+	\begin{tabular}{cl}
+ 		\hline
+		\textsc{Opzione} & \textsc{Descrizione} \\
+		\hline
+		\texttt{v} & \texttt{Show progress} \\
+		\texttt{u} & \texttt{Truncate and remove file after overwriting} \\
+		\texttt{z} & \texttt{Overwrite N times instead of the default (3)} \\
+		\texttt{n} & \texttt{Add a final overwrite with zeros to hide shredding} \\
+		\hline
+	\end{tabular}
+	\caption{Le opzioni di shred usate in questo \textit{how-to}.}
+	\label{table:shred}
+\end{table}
+
+Se avete fatto da poco la migrazione a GnuPG versione 2.1 o superiore, il vecchio file \texttt{secring.gpg} che conteneva le chiavi private potrebbe ancora averla al suo interno. Per cui, se la dimensione del file è zero, il file non contiene più nulla; altrimenti, se la dimensione del file è maggiore di zero, cancellatelo del tutto.
+
+Quando in futuro vi servirà usare la chiave master (ad esempio, per firmare una chiave altrui), potrete semplicemente prendere dal backup il file \texttt{.key} della chiave master e copiarlo nella directory \texttt{private-keys-v1.d} di lavoro. Una volta terminata l'esigenza, potrete eliminare nuovamente il file.
+
 \subsection{GnuPG precedente alla versione 2.1}
+
+Se avete questa versione di GnuPG, bisognerà procedere con questi passi:
+
+1. Essere sicuri di avere il \hyperref[sec:backup-chiavi]{backup funzionante delle chiavi};
+1. Rimuovere la chiave privata completa (cioè master e sottochiavi);
+1. Reimportare dal backup solo le sottochiavi.
+
+La chiave completa si elimina con:
+
+\begin{lstlisting}
+gpg --delete-secret-keys 0x9F676B5A4B6E6777
+\end{lstlisting}
+
+Le sottochiavi si importano con:
+
+\begin{lstlisting}
+gpg --import 0xE7E0CAF69114F367
+gpg --import 0x3C91B3682F3AC08A
+gpg --import 0x465ED456AFBE0F10
+\end{lstlisting}
+
+Vediamo quindi la situazione:
+
+\begin{lstlisting}
+gpg --list-secret-keys
+\end{lstlisting}
+
+Ora, \textbf{se avete spostato le sottochiavi nella YubiKey}, la risposta sarà:
+
+\begin{lstlisting}
+sec#  rsa4096/0x9F676B5A4B6E6777 2018-04-01 [C] [expires: 2021-03-31]
+      Key fingerprint = 4915 3275 9708 0147 25CF  E3A7 9F67 6B5A 4B6E 6777
+      Keygrip = C6D1CD1D12CBBC8FA14D30004EAF381803A72597
+uid                   [ultimate] Mario Rossi <mario.rossi@example.com>
+ssb>  rsa2048/0xE7E0CAF69114F367 2018-04-01 [S] [expires: 2019-04-01]
+      Keygrip = 135159EDEFB9FCB6062F9DE0E21FD90CB07DA041
+ssb>  rsa2048/0x3C91B3682F3AC08A 2018-04-01 [E] [expires: 2019-04-01]
+      Keygrip = C74D47329D5D224B0716879DCF3A4EC2D8951C53
+ssb>  rsa2048/0x465ED456AFBE0F10 2018-04-01 [A] [expires: 2019-04-01]
+      Keygrip = 30DEE8A060F3562CD6F1384E0F883D65477E596A
+\end{lstlisting}
+
+mentre, \textbf{se avete deciso di tenere le sottochiavi nel disco}, la risposta sarà:
+
+\begin{lstlisting}
+sec#  rsa4096/0x9F676B5A4B6E6777 2018-04-01 [C] [expires: 2021-03-31]
+      Key fingerprint = 4915 3275 9708 0147 25CF  E3A7 9F67 6B5A 4B6E 6777
+      Keygrip = C6D1CD1D12CBBC8FA14D30004EAF381803A72597
+uid                   [ultimate] Mario Rossi <mario.rossi@example.com>
+ssb   rsa2048/0xE7E0CAF69114F367 2018-04-01 [S] [expires: 2019-04-01]
+      Keygrip = 135159EDEFB9FCB6062F9DE0E21FD90CB07DA041
+ssb   rsa2048/0x3C91B3682F3AC08A 2018-04-01 [E] [expires: 2019-04-01]
+      Keygrip = C74D47329D5D224B0716879DCF3A4EC2D8951C53
+ssb   rsa2048/0x465ED456AFBE0F10 2018-04-01 [A] [expires: 2019-04-01]
+      Keygrip = 30DEE8A060F3562CD6F1384E0F883D65477E596A
+\end{lstlisting}
 
 \section{Gli agenti}
 
