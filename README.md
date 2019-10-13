@@ -1074,7 +1074,7 @@ gpg-connect-agent killagent /bye
 gpg-connect-agent /bye
 ```
 
-Inseriamo la riga seguente in `~/.bashrc`
+Inseriamo la riga seguente in `~/.bashrc`:
 
 ```text
 # You should always add the following lines to your .bashrc or whatever initialization file is used for all shell invocations.

@@ -109,6 +109,8 @@ gpg --with-keygrip --list-key 0x9F676B5A4B6E6777
 
 dovrete sostituire \texttt{0x9F676B5A4B6E6777} con l'\textsc{id} corretto della vostra chiave.
 
+Inoltre, il percorso \texttt{/home/user} va modificato inserendo il nome utente corretto al posto di \texttt{user}.
+
 \section{Generazione delle chiavi}
 
 Con questa guida genereremo la nostra chiave privata che avrà questo schema:
@@ -137,7 +139,7 @@ Per la lunghezza delle chiavi avremo la chiave primaria a 4096 bit mentre le sot
  \item È necessario un token \textsc{usb} come, ad esempio, una YubiKey, nel caso si decida di spostare le sottochiavi su questo supporto.
 \end{enumerate}
 
-Qualora il comando \texttt{gpg} lanci GnuPG versione 1, accertarsi che la versione 2 sia installata e aggiungere questa riga a \texttt{~/.bash\_aliases}:
+Qualora il comando \texttt{gpg} lanci GnuPG versione 1, accertarsi che la versione 2 sia installata e aggiungere questa riga a \texttt{/home/user/.bash\_aliases}:
 
 \begin{lstlisting}
 alias gpg='gpg2'
@@ -469,16 +471,15 @@ gpg --expert --edit-key 0x4B6E6777
 
 e poi con \texttt{adduid}.
 
-\subsection{Il certificato di revoca}
-\label{sec:certificato-revoca}
+\subsection{Il certificato di revoca} \label{certificato-revoca}
 
-Con GnuPG versione 2 la generazione del certificato di revoca è stata fatta automaticamente quando le chiavi sono state generate e si trova nella directory\newline \texttt{~/.gnupg/openpgp-revocs.d/}. Il file ha lo stesso nome dell'impronta della chiave, nel nostro caso:
+Con GnuPG versione 2 la generazione del certificato di revoca è stata fatta automaticamente quando le chiavi sono state generate e si trova nella directory\newline \texttt{/home/user/.gnupg/openpgp-revocs.d/}. Il file ha lo stesso nome dell'impronta della chiave, nel nostro caso:
 
 \begin{lstlisting}
 491532759708014725CFE3A79F676B5A4B6E6777.rev
 \end{lstlisting}
 
-Questo file andrà tolto da questa directory e conservato in un luogo sicuro. Lo vedremo nel \hyperref[sec:backup-certificato-revoca]{paragrafo dedicato al backup}.
+Questo file andrà tolto da questa directory e conservato in un luogo sicuro. Lo vedremo nel \hyperref[backup-certificato-revoca]{paragrafo dedicato al backup}.
 
 \subsection{Impostare le preferenze della chiave}
 
@@ -494,7 +495,7 @@ Dal prompt di Gnupg dare:
 setpref S10 S9 S8 H10 H9 H8 Z2 Z3 Z1 Z0
 \end{lstlisting}
 
-Per il significato dei codici, vedi la Tabella \ref{table:codici}.
+Per il significato dei codici, vedi la Tabella \hypertarget{table:codici}.
 
 \begin{table}[ht!]
 	\begin{tabular}{cl}
@@ -536,7 +537,7 @@ save
 
 \subsection{Impostare il file gpg.conf}
 
-Aprire il file \texttt{gpg.conf} dentro la directory \texttt{~/.gnupg}, eliminare tutto il contenuto e incollarvi questo testo, ricordandosi di \textbf{aggiornare le due \textsc{id} di chiave} nelle righe \texttt{default-key} e \texttt{encrypt-to} con l'\textsc{id} della vostra chiave:
+Aprire il file \texttt{gpg.conf} dentro la directory \texttt{/home/user/.gnupg}, eliminare tutto il contenuto e incollarvi questo testo, ricordandosi di \textbf{aggiornare le due \textsc{id} di chiave} nelle righe \texttt{default-key} e \texttt{encrypt-to} con l'\textsc{id} della vostra chiave:
 
 \begin{lstlisting}
 # Per lo skeleton di questo file vedi:
@@ -616,7 +617,7 @@ default-preference-list SHA512 SHA384 SHA256 SHA224 TWOFISH AES256 AES192 3DES Z
 
 \subsection{Impostare il keyserver}
 
-Modificare (o creare) il file \texttt{~/.gnupg/dirmngr.conf}:
+Modificare (o creare) il file \texttt{/home/user/.gnupg/dirmngr.conf}:
 
 \begin{lstlisting}
 # Per lo skeleton di questo file vedi:
@@ -658,27 +659,25 @@ Faremo il backup di questi tre elementi:
 Creiamo una directory \texttt{backup} e relative sottodirectory sulla scrivania del \textsc{pc} dove metteremo tutti i file del backup:
 
 \begin{lstlisting}
-mkdir -p ~/Scrivania/backup/directory_gnupg
-mkdir ~/Scrivania/backup/chiavi
-mkdir ~/Scrivania/backup/certificato_di_revoca
+mkdir -p /home/user/Scrivania/backup/directory_gnupg
+mkdir /home/user/Scrivania/backup/chiavi
+mkdir /home/user/Scrivania/backup/certificato_di_revoca
 \end{lstlisting}
 
 
 Cambiate \texttt{Scrivania} con \texttt{Desktop} se è il vostro caso.
 
-\subsection{Backup della directory di GnuPG}
-\label{sec:backup-directory-gnupg}
+\subsection{Backup della directory di GnuPG} \label{backup-directory-gnupg}
 
 Anzitutto facciamo il backup di tutta la directory di GnuPG così come si trova in questo momento. Qualora qualcosa dovesse andare storto, potremmo sempre ripristinarla e cominciare daccapo.
 
 \begin{lstlisting}
-cp -r ~/.gnupg/ ~/Scrivania/backup/directory_gnupg/
+cp -r /home/user/.gnupg/ /home/user/Scrivania/backup/directory_gnupg/
 \end{lstlisting}
 
 Verificate che nella directory di backup ci sia la sotto-directory\newline \texttt{private-keys-v1.d} con all'interno i file privati delle chiavi. Ce ne devono essere uno per ogni chiave privata, vale a dire uno per la chiave master e uno per ogni sottochiave.
 
-\subsection{Backup delle chiavi}
-\label{sec:backup-chiavi}
+\subsection{Backup delle chiavi} \label{backup-chiavi}
 
 Vediamo anzitutto la situazione delle nostre chiavi private:
 
@@ -718,38 +717,37 @@ Procediamo ad effettuare un backup di tutta la chiave (principale e sottochiavi)
 Qui di sotto gli otto comandi di cui sopra, eseguiti uno dopo l'altro. Notate come in alcuni casi l'opzione è \texttt{--export-secret-keys} oppure \texttt{export-secret-key} senza \texttt{s} e con un punto esclamativo \texttt{!} dopo l'\textsc{id} della chiave.
 
 \begin{lstlisting}
-gpg --armor --export-secret-keys 0x9F676B5A4B6E6777 > ~/Scrivania/backup/chiavi/1_principale_con_sottochiavi_0x9F676B5A4B6E6777.asc
-gpg --armor --export-secret-key 0x9F676B5A4B6E6777! > ~/Scrivania/backup/chiavi/2_principale_soltanto_0x9F676B5A4B6E6777.asc
-gpg --armor --export-secret-subkeys 0x9F676B5A4B6E6777 > ~/Scrivania/backup/chiavi/3_sottochiavi_0x9F676B5A4B6E6777.asc
-gpg --armor --export-secret-subkey 0xE7E0CAF69114F367! > ~/Scrivania/backup/chiavi/4_sottochiave_firma_0xE7E0CAF69114F367.asc
-gpg --armor --export-secret-subkey 0x3C91B3682F3AC08A! > ~/Scrivania/backup/chiavi/5_sottochiave_cifratura_0x3C91B3682F3AC08A.asc
-gpg --armor --export-secret-subkey 0x465ED456AFBE0F10! > ~/Scrivania/backup/chiavi/6_sottochiave_autenticazione_0x465ED456AFBE0F10.asc
-gpg --armor --export 0x9F676B5A4B6E6777 > ~/Scrivania/backup/chiavi/7_chiave_pubblica_0x9F676B5A4B6E6777.asc
-gpg --armor --export-ssh-key 0x9F676B5A4B6E6777 > ~/Scrivania/backup/chiavi/8_chiave_pubblica_ssh_0x9F676B5A4B6E6777.asc
+gpg --armor --export-secret-keys 0x9F676B5A4B6E6777 > /home/user/Scrivania/backup/chiavi/1_principale_con_sottochiavi_0x9F676B5A4B6E6777.asc
+gpg --armor --export-secret-key 0x9F676B5A4B6E6777! > /home/user/Scrivania/backup/chiavi/2_principale_soltanto_0x9F676B5A4B6E6777.asc
+gpg --armor --export-secret-subkeys 0x9F676B5A4B6E6777 > /home/user/Scrivania/backup/chiavi/3_sottochiavi_0x9F676B5A4B6E6777.asc
+gpg --armor --export-secret-subkey 0xE7E0CAF69114F367! > /home/user/Scrivania/backup/chiavi/4_sottochiave_firma_0xE7E0CAF69114F367.asc
+gpg --armor --export-secret-subkey 0x3C91B3682F3AC08A! > /home/user/Scrivania/backup/chiavi/5_sottochiave_cifratura_0x3C91B3682F3AC08A.asc
+gpg --armor --export-secret-subkey 0x465ED456AFBE0F10! > /home/user/Scrivania/backup/chiavi/6_sottochiave_autenticazione_0x465ED456AFBE0F10.asc
+gpg --armor --export 0x9F676B5A4B6E6777 > /home/user/Scrivania/backup/chiavi/7_chiave_pubblica_0x9F676B5A4B6E6777.asc
+gpg --armor --export-ssh-key 0x9F676B5A4B6E6777 > /home/user/Scrivania/backup/chiavi/8_chiave_pubblica_ssh_0x9F676B5A4B6E6777.asc
 \end{lstlisting}
 
-\subsection{Backup del certificato di revoca}
-\label{sec:backup-certificato-revoca}
+\subsection{Backup del certificato di revoca} \label{backup-certificato-revoca}
 
-Come abbiamo detto al paragrafo \hyperref[sec:certificato-revoca]{Il certificato di revoca}, questo è stato già creato da GnuPG versione 2 nella directory \texttt{~/.gnupg/openpgp-revocs.d/} ed il file ha lo stesso nome dell'impronta della chiave, nel nostro caso \newline \texttt{491532759708014725CFE3A79F676B5A4B6E6777.rev}.
+Come abbiamo detto al paragrafo \textit{\hyperref[certificato-revoca]{Il certificato di revoca}}, questo è stato già creato da GnuPG versione 2 nella directory \texttt{/home/user/.gnupg/openpgp-revocs.d/} ed il file ha lo stesso nome dell'impronta della chiave, nel nostro caso \newline \texttt{491532759708014725CFE3A79F676B5A4B6E6777.rev}.
 
-Spostiamolo dalla directory \texttt{~/.gnupg} alla directory di backup:
+Spostiamolo dalla directory \texttt{/home/user/.gnupg} alla directory di backup:
 
 \begin{lstlisting}
-mv ~/.gnupg/openpgp-revocs.d/491532759708014725CFE3A79F676B5A4B6E6777.rev ~/Scrivania/backup/certificato_di_revoca/
+mv /home/user/.gnupg/openpgp-revocs.d/491532759708014725CFE3A79F676B5A4B6E6777.rev /home/user/Scrivania/backup/certificato_di_revoca/
 \end{lstlisting}
 
 Eventualmente è anche possibile stampare su carta il certificato e conservarlo in cassaforte.
 
 \subsection{Spostare la directory di backup in un luogo sicuro}
 
-Finito il backup, spostare la directory \texttt{~/Scrivania/backup} in almeno due supporti da conservare in due luoghi distinti e sicuri.
+Finito il backup, spostare la directory \texttt{/home/user/Scrivania/backup} in almeno due supporti da conservare in due luoghi distinti e sicuri.
 
 A seconda di quanta importanza hanno queste chiavi per voi, posso consigliare una situazione del genere:
 
 \begin{itemize}
- \item copia della cartella su una chiavetta USB da usare \textbf{solo} per questo scopo, conservata in un luogo sicuro e nascosto, ad esempio la vostra cassaforte in casa;
- \item copia di sicurezza su una seconda chiavetta USB da usare \textbf{solo} per questo scopo, conservata in un altro luogo sicuro e nascosto, ad esempio la vostra cassetta di sicurezza in banca.
+ \item copia della cartella su una chiavetta \textsc{usb} da usare \textbf{solo} per questo scopo, conservata in un luogo sicuro e nascosto, ad esempio la vostra cassaforte in casa;
+ \item copia di sicurezza su una seconda chiavetta \textsc{usb} da usare \textbf{solo} per questo scopo, conservata in un altro luogo sicuro e nascosto, ad esempio la vostra cassetta di sicurezza in banca.
 \end{itemize}
 
 Chiaramente non complicatevi la vita, ma prendete le dovute precauzioni per proteggere le chiavi. Sappiate però che, se perdete la YubiKey (se la usate per le vostre sottochiavi) e se perdete i vostri backup, non potrete più accedere ai vostri file cifrati.
@@ -760,7 +758,7 @@ Se avete un token \textsc{usb} come la YubiKey, potete trasferire le sottochiavi
 
 Prima di andare avanti, quando dico "trasferire" intendo proprio spostare una cosa da un posto a un altro. Nel nostro caso, intendo spostare le sottochiavi dal disco fisso alla YubiKey.
 
-Ricordo che trasferire le sottochiavi nel token USB è una \textbf{operazione a senso unico e non è possibile tornare indietro}, cioè non si possono trasferire le sottochiavi dal token al nostro disco fisso. Solo se abbiamo un backup delle chiavi possiamo ripristinare la situazione allo stato prima del trasferimento. Per cui \textbf{non procedete se non avete fatto il backup}.
+Ricordo che trasferire le sottochiavi nel token \textsc{usb} è una \textbf{operazione a senso unico e non è possibile tornare indietro}, cioè non si possono trasferire le sottochiavi dal token al nostro disco fisso. Solo se abbiamo un backup delle chiavi possiamo ripristinare la situazione allo stato prima del trasferimento. Per cui \textbf{non procedete se non avete fatto il backup}.
 
 Diamo uno sguardo alla situazione attuale:
 
@@ -781,7 +779,7 @@ ssb   rsa2048/0x465ED456AFBE0F10 2018-04-01 [A] [expires: 2019-04-01]
       Keygrip = 30DEE8A060F3562CD6F1384E0F883D65477E596A
 \end{lstlisting}
 
-Inseriamo il token nella porta USB e controlliamo che venga vista da GnuPG:
+Inseriamo il token nella porta \textsc{usb} e controlliamo che venga vista da GnuPG:
 
 \begin{lstlisting}
 gpg --card-status
@@ -982,7 +980,7 @@ Potremmo finire qua se abbiamo scelto di non cancellare la chiave principale dal
 Se abbiamo scelto di eliminare la chiave principale dal disco, dobbiamo anzitutto verificare che versione di GnuPG stiamo usando, perché a seconda della versione bisognerà procedere in due modi diversi:
 
 \begin{itemize}
-   \item \textbf{se abbiamo GnuPG versione 2.1 o successiva:} è sufficiente cancellare il file corrispondente alla chiave master dalla directory\newline \texttt{~/.gnupg/private-keys-v1.d};
+   \item \textbf{se abbiamo GnuPG versione 2.1 o successiva:} è sufficiente cancellare il file corrispondente alla chiave master dalla directory\newline \texttt{/home/user/.gnupg/private-keys-v1.d};
    \item \textbf{se abbiamo GnuPG precedente alla versione 2.1:} dopo aver fatto il backup delle sottochiavi, bisogna dapprima cancellare tutta la chiave (master e sottochiavi) e poi reimportare solo le sottochiavi.
 \end{itemize}
 
@@ -990,7 +988,7 @@ Nonostante all'inizio della guida ho specificato di usare solo la versione di Gn
 
 \subsection{GnuPG versione 2.1 o successiva}
 
-GnuPG, dalla versione 2.1 in su, deposita le chiavi private nella directory\newline \texttt{~/.gnupg/private-keys-v1.d/} e non più nel file \texttt{~/.gnupg/secring.gpg}. Perciò, se avete una chiave master e 3 sottochiavi, dovreste avere 4 file con estensione \texttt{.key} in quella directory:
+GnuPG, dalla versione 2.1 in su, deposita le chiavi private nella directory\newline \texttt{/home/user/.gnupg/private-keys-v1.d/} e non più nel file\newline \texttt{/home/user/.gnupg/secring.gpg}. Perciò, se avete una chiave master e 3 sottochiavi, dovreste avere 4 file con estensione \texttt{.key} in quella directory:
 
 \begin{lstlisting}
 C6D1CD1D12CBBC8FA14D30004EAF381803A72597.key
@@ -1005,19 +1003,19 @@ Per identificare quale di questi file è la chiave master, dare nel terminale qu
 gpg --with-keygrip --list-key 0x9F676B5A4B6E6777
 \end{lstlisting}
 
-Siccome è stato fatto il \hyperref[sec:backup-directory-gnupg]{backup della directory di GnuPG}, potete eliminare il file \texttt{.key} corrispondente alla chiave master. Per ogni evenienza, prima di cancellare il file, verificate che nel backup ci sia il file che state per cancellare. Il comando per eliminare il file è:
+Siccome è stato fatto il \hyperref[backup-directory-gnupg]{backup della directory di GnuPG}, potete eliminare il file \texttt{.key} corrispondente alla chiave master. Per ogni evenienza, prima di cancellare il file, verificate che nel backup ci sia il file che state per cancellare. Il comando per eliminare il file è:
 
 \begin{lstlisting}
-cp rm ~/.gnupg/private-keys-v1.d/C6D1CD1D12CBBC8FA14D30004EAF381803A72597.key
+cp rm /home/user/.gnupg/private-keys-v1.d/C6D1CD1D12CBBC8FA14D30004EAF381803A72597.key
 \end{lstlisting}
 
 oppure usate un programma come \texttt{shred} per eliminarlo in modo sicuro:
 
 \begin{lstlisting}
-shred -vuzn25 ~/.gnupg/private-keys-v1.d/C6D1CD1D12CBBC8FA14D30004EAF381803A72597.key
+shred -vuzn25 /home/user/.gnupg/private-keys-v1.d/C6D1CD1D12CBBC8FA14D30004EAF381803A72597.key
 \end{lstlisting}
 
-Per le opzioni di \texttt{shred} vedi la Tabella \ref{table:shred}.
+Per le opzioni di \texttt{shred} vedi la Tabella \hypertarget{table:shred}.
 
 \begin{table}[ht!]
 	\begin{tabular}{cl}
@@ -1026,8 +1024,8 @@ Per le opzioni di \texttt{shred} vedi la Tabella \ref{table:shred}.
 		\hline
 		\texttt{v} & \texttt{Show progress} \\
 		\texttt{u} & \texttt{Truncate and remove file after overwriting} \\
-		\texttt{z} & \texttt{Overwrite N times instead of the default (3)} \\
-		\texttt{n} & \texttt{Add a final overwrite with zeros to hide shredding} \\
+		\texttt{z} & \texttt{Add a final overwrite with zeros to hide shredding} \\
+		\texttt{n} & \texttt{Overwrite N times instead of the default (3)} \\
 		\hline
 	\end{tabular}
 	\caption{Le opzioni di shred usate in questo \textit{how-to}.}
@@ -1043,7 +1041,7 @@ Quando in futuro vi servirà usare la chiave master (ad esempio, per firmare una
 Se avete questa versione di GnuPG, bisognerà procedere con questi passi:
 
 \begin{enumerate}
-   \item Essere sicuri di avere il \hyperref[sec:backup-chiavi]{backup funzionante delle chiavi};
+   \item Essere sicuri di avere il \hyperref[backup-chiavi]{backup funzionante delle chiavi};
    \item Rimuovere la chiave privata completa (cioè master e sottochiavi);
    \item Reimportare dal backup solo le sottochiavi.
 \end{enumerate}
@@ -1100,10 +1098,207 @@ ssb   rsa2048/0x465ED456AFBE0F10 2018-04-01 [A] [expires: 2019-04-01]
 
 \section{Gli agenti}
 
-\section{Importare la chiave principale per operazioni speciali}
+Fermiamo \texttt{ssh-agent}:
+
+\begin{lstlisting}
+killall ssh-agent
+\end{lstlisting}
+
+Disabilitiamo \texttt{ssh-agent} permanentemente:
+
+\begin{lstlisting}
+sudo nano /etc/X11/Xsession.options
+\end{lstlisting}
+
+e commentiamo la riga aggiungendo un cancelletto \texttt{\#} all'inizio:
+
+\begin{lstlisting}
+# use-ssh-agent
+\end{lstlisting}
+
+Abilitiamo il supporto SSH in GnuPG aggiungendo la seguente riga in\newline \texttt{/home/user/.gnupg/gpg-agent.conf}:
+
+\begin{lstlisting}
+enable-ssh-support
+\end{lstlisting}
+
+Già che ci siamo aggiungiamo pure la scelta di quale \texttt{pinentry} usare:
+
+\begin{lstlisting}
+pinentry-program /usr/bin/pinentry-gtk-2
+\end{lstlisting}
+
+Alternative sono, ad esempio:
+
+\begin{lstlisting}
+pinentry-program /usr/bin/pinentry-curses
+pinentry-program /usr/bin/pinentry-tty
+pinentry-program /usr/bin/pinentry-qt
+pinentry-program /usr/bin/pinentry-gnome3
+\end{lstlisting}
+
+Riavviamo l'agente di GnuPG:
+
+\begin{lstlisting}
+gpg-connect-agent killagent /bye
+gpg-connect-agent /bye
+\end{lstlisting}
+
+Inseriamo la riga seguente in \texttt{/home/user/.bashrc}:
+
+\begin{lstlisting}
+# You should always add the following lines to your .bashrc or whatever initialization file is used for all shell invocations.
+# @link https://gnupg.org/documentation/manuals/gnupg/Invoking-GPG_002dAGENT.html#Invoking-GPG_002dAGENT
+GPG_TTY=$(tty)
+export GPG_TTY
+
+# Launch gpg-agent
+gpg-connect-agent /bye
+
+# When using SSH support, use the current TTY for passphrase prompts
+gpg-connect-agent updatestartuptty /bye > /dev/null
+
+# Point the SSH_AUTH_SOCK to the one handled by gpg-agent
+if [ -S $(gpgconf --list-dirs agent-ssh-socket) ]; then
+  export SSH_AUTH_SOCK=$(gpgconf --list-dirs agent-ssh-socket)
+else
+  echo "$(gpgconf --list-dirs agent-ssh-socket) doesn't exist. Is gpg-agent running ?"
+fi
+\end{lstlisting}
+
+Facciamo rileggere questo file:
+
+\begin{lstlisting}
+source .bashrc
+\end{lstlisting}
+
+Infine, se non l'abbiamo già fatto, assicuriamoci di usare \texttt{gpg2} invece della versione 1:
+
+\begin{lstlisting}
+echo "alias gpg=gpg2" >> /home/user/.bash_aliases
+\end{lstlisting}
+
+\section{Importare la chiave principale per operazioni speciali} \label{importare-chiave}
+
+Quando periodicamente dovrete fare operazioni occasionali sul vostro portachiavi o se dovete firmare (certificare) una chiave altrui, vi servirà la chiave principale. Per fare queste operazioni dovrete importare la chiave principale nel vostro portachiavi, fare l'operazione e quindi cancellarla nuovamente.
+
+C'è un altro metodo per fare uso della chiave principale, come ad esempio dire momentaneamente a GnuPG che la sua \textit{home} non è \texttt{/home/user/.gnupg} ma un'altra directory. Io non ho mai usato questo sistema, per cui scrivo solo quello che uso io.
+
+Accertatevi di avere accesso dal terminale alla directory dove c'è il vostro backup. Lo scopo è quello di copiare il file \texttt{.key} della chiave master dal backup alla directory attuale di lavoro di GnuPG.
+
+\begin{lstlisting}
+cp directory-backup-gnupg/private-keys-v1.d/C6D1CD1D12CBBC8FA14D30004EAF381803A72597.key /home/user/.gnupg/private-keys-v1.d/C6D1CD1D12CBBC8FA14D30004EAF381803A72597.key
+\end{lstlisting}
+
+Effettuare quindi le operazioni che dovevamo compiere e, alla fine, eliminarla nuovamente:
+
+\begin{lstlisting}
+cp rm /home/user/.gnupg/private-keys-v1.d/C6D1CD1D12CBBC8FA14D30004EAF381803A72597.key
+\end{lstlisting}
+
+Accertatevi ora che la chiave master non ci sia più con:
+
+\begin{lstlisting}
+gpg --list-secret-keys
+\end{lstlisting}
+
+che dovrebbe restituire qualcosa di simile a questo:
+
+\begin{lstlisting}
+sec#  rsa4096/0x9F676B5A4B6E6777 2018-04-01 [C] [expires: 2021-03-31]
+      Key fingerprint = 4915 3275 9708 0147 25CF  E3A7 9F67 6B5A 4B6E 6777
+      Keygrip = C6D1CD1D12CBBC8FA14D30004EAF381803A72597
+uid                   [ultimate] Mario Rossi <mario.rossi@example.com>
+ssb>  rsa2048/0xE7E0CAF69114F367 2018-04-01 [S] [expires: 2019-04-01]
+      Keygrip = 135159EDEFB9FCB6062F9DE0E21FD90CB07DA041
+ssb>  rsa2048/0x3C91B3682F3AC08A 2018-04-01 [E] [expires: 2019-04-01]
+      Keygrip = C74D47329D5D224B0716879DCF3A4EC2D8951C53
+ssb>  rsa2048/0x465ED456AFBE0F10 2018-04-01 [A] [expires: 2019-04-01]
+      Keygrip = 30DEE8A060F3562CD6F1384E0F883D65477E596A
+\end{lstlisting}
+
+o a questo, se avete deciso di tenere le sottochiavi nel disco:
+
+\begin{lstlisting}
+sec#  rsa4096/0x9F676B5A4B6E6777 2018-04-01 [C] [expires: 2021-03-31]
+      Key fingerprint = 4915 3275 9708 0147 25CF  E3A7 9F67 6B5A 4B6E 6777
+      Keygrip = C6D1CD1D12CBBC8FA14D30004EAF381803A72597
+uid                   [ultimate] Mario Rossi <mario.rossi@example.com>
+ssb   rsa2048/0xE7E0CAF69114F367 2018-04-01 [S] [expires: 2019-04-01]
+      Keygrip = 135159EDEFB9FCB6062F9DE0E21FD90CB07DA041
+ssb   rsa2048/0x3C91B3682F3AC08A 2018-04-01 [E] [expires: 2019-04-01]
+      Keygrip = C74D47329D5D224B0716879DCF3A4EC2D8951C53
+ssb   rsa2048/0x465ED456AFBE0F10 2018-04-01 [A] [expires: 2019-04-01]
+      Keygrip = 30DEE8A060F3562CD6F1384E0F883D65477E596A
+\end{lstlisting}
+
+
+C'è il simbolo \texttt{\#} dopo la parola \texttt{sec}, per cui la chiave master non c'è più.
 
 \section{Estendere la validità delle nostre chiavi}
 
+Se abbiamo scelto una validità a tempo per le nostre chiavi, periodicamente potremo estenderne la validità se ancora sono valide per noi. Teniamo presente che possiamo rinnovare la validità di una chiave già scaduta.
+
+Se abbiamo scelto di togliere la chiave principale dal nostro disco, dovremo importarla nuovamente, come descritto al paragrafo \textit{\hyperref[importare-chiave]{Importare la chiave principale per operazioni speciali}}.
+
+Se abbiamo scelto, poi, di tenere le sottochiavi nel token \textsc{usb}, dovremo inserirlo in una porta \textsc{usb}.
+
+Iniziamo quindi la procedura di rinnovo:
+
+\begin{lstlisting}
+gpg --edit-key 0x9F676B5A4B6E6777
+\end{lstlisting}
+
+\begin{lstlisting}
+sec  rsa4096/0x9F676B5A4B6E6777
+     created: 2018-04-01  expires: 2021-03-31  usage: C
+     trust: ultimate      validity: ultimate
+ssb  rsa2048/0xE7E0CAF69114F367
+     created: 2018-04-01  expires: 2019-04-01  usage: S
+ssb  rsa2048/0x3C91B3682F3AC08A
+     created: 2018-04-01  expires: 2019-04-01  usage: E
+ssb  rsa2048/0x465ED456AFBE0F10
+     created: 2018-04-01  expires: 2019-04-01  usage: A
+[ultimate] (1). Mario Rossi <mario.rossi@example.com>
+\end{lstlisting}
+
+I passi di rinnovo per ogni chiave sono i seguenti:
+
+\begin{enumerate}
+   \item selezione della sottochiave da rinnovare;
+   \item invio del comando \textsc{expire};
+   \item scelta della durata della validità;
+   \item deselezione della sottochiave.
+\end{enumerate}
+
+Nel nostro caso, essendo tre le chiavi, questi i passaggi tutti di seguito:
+
+\begin{lstlisting}
+key 1 (per la prima sottochiave; key 2 per seconda; key 3 per terza)
+   expire (e seguire le istruzioni)
+      1y (per un anno di validita)
+key 1 (deseleziona)
+key 2 (seleziona la seconda sottochiave)
+   expire
+      1y
+key 2 (deseleziona)
+key 3 (seleziona la terza sottochiave)
+   expire
+      1y
+check (verifichiamo che tutto sia stato eseguito)
+save
+\end{lstlisting}
+
 \section{Bibliografia}
+
+\begin{itemize}
+   \item \textsc{Debian Wiki}, \href{https://wiki.debian.org/Subkeys}{Subkeys}.
+   \item \textsc{Riseup}, \href{https://riseup.net/en/security/message-security/openpgp/best-practices}{OpenPGP Best Practices}.
+   \item \textsc{Tjl73}, \href{http://tjl73.altervista.org/secure_keygen/}{Creazione di chiavi sicure (ossìa, come generare con GnuPG una coppia di chiavi per poterla conservare in modo "abbastanza" sicuro}.
+   \item \textsc{Eric Severance}, \href{https://www.esev.com/blog/post/2015-01-pgp-ssh-key-on-yubikey-neo/}{PGP and SSH keys on a Yubikey NEO}.
+   \item \textsc{Alex Cabal}, \href{https://alexcabal.com/creating-the-perfect-gpg-keypair/}{Creating the perfect GPG keypair}.
+   \item \textsc{Suva.sh}, \href{https://suva.sh/posts/gpg-ssh-smartcard-yubikey-keybase/}{Using GPG and SSH keys (GnuPG 2.1) with a Smartcard (Yubikey 4)}.
+   \item \textsc{Drduh}, \href{https://github.com/drduh/YubiKey-Guide}{Guide to using YubiKey as a SmartCard for GPG and SSH}.
+\end{itemize}
 
 \end{document}
