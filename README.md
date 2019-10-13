@@ -7,8 +7,6 @@ Licenza: [Creative Commons Attribuzione - Condividi allo stesso modo 4.0 Interna
 
 ## Indice
 
-<!-- @import "[TOC]" {cmd="toc" depthFrom=1 depthTo=6 orderedList=false} -->
-<!-- code_chunk_output -->
 * [Generazione sicura di chiavi OpenPGP](#generazione-sicura-di-chiavi-openpgp)
   * [Indice](#indice)
   * [Introduzione](#introduzione)
@@ -29,13 +27,12 @@ Licenza: [Creative Commons Attribuzione - Condividi allo stesso modo 4.0 Interna
     * [Spostare la directory di backup in un luogo sicuro](#spostare-la-directory-di-backup-in-un-luogo-sicuro)
   * [Trasferire le chiavi OpenPGP su YubiKey](#trasferire-le-chiavi-openpgp-su-yubikey)
   * [Eliminare la chiave principale](#eliminare-la-chiave-principale)
-    * [GnuPG versione 2.1 o superiore](#gnupg-versione-21-o-superiore)
-    * [GnuPG inferiore alla versione 2.1](#gnupg-inferiore-alla-versione-21)
+    * [GnuPG versione 2.1 o successiva](#gnupg-versione-21-o-successiva)
+    * [GnuPG precedente alla versione 2.1](#gnupg-precedente-alla-versione-21)
   * [Gli agenti](#gli-agenti)
   * [Importare la chiave principale per operazioni speciali](#importare-la-chiave-principale-per-operazioni-speciali)
   * [Estendere la validità delle nostre chiavi](#estendere-la-validità-delle-nostre-chiavi)
   * [Bibliografia](#bibliografia)
-<!-- /code_chunk_output -->
 
 ## Introduzione
 
