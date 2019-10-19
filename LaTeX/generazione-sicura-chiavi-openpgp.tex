@@ -4,7 +4,8 @@
 \usepackage{textcomp}
 \usepackage[italian]{babel}
 
-\usepackage{multicol}
+\usepackage{graphicx}
+\graphicspath{{img/}}
 
 \usepackage{hyperref}
 \hypersetup{
@@ -29,16 +30,17 @@ breaklines=true
 
 \date{1 aprile 2018 -- 14 luglio 2019}
 
-
 \begin{document}
 
 \maketitle
 
-%\newpage
-
 \begin{abstract}
 Una guida dettagliata, per quanto possibile, sulla generazione, conservazione e protezione delle chiavi OpenPGP. La guida è stata pubblicata la prima volta su \href{https://github.com/aldolat/generazione-sicura-chiavi-openpgp}{GitHub}.
+
+Licenza: \href{https://creativecommons.org/licenses/by-sa/4.0/deed.it}{\includegraphics[width=0.09\textwidth]{cc-80x15} Creative Commons Attribuzione - Condividi allo stesso modo 4.0 Internazionale (CC BY-SA 4.0)}
 \end{abstract}
+
+\newpage
 
 \tableofcontents
 
@@ -205,7 +207,7 @@ Current allowed actions: Certify Encrypt
 Your selection?
 \end{lstlisting}
 
-Rimuoviamo le capacità di cifratura premendo \texttt{E}`:
+Rimuoviamo le capacità di cifratura premendo \texttt{E}:
 
 \begin{lstlisting}
 Possible actions for a RSA key: Sign Certify Encrypt Authenticate
