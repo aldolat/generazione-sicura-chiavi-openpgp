@@ -1,0 +1,147 @@
+\chapter{Eliminare la chiave principale}
+
+Se abbiamo scelto di eliminare la chiave principale dal disco, dobbiamo
+anzitutto verificare che versione di GnuPG stiamo usando, perché a seconda della
+versione bisognerà procedere in due modi diversi:
+
+\begin{itemize}
+   \item \emph{se abbiamo GnuPG versione 2.1 o successiva:} è sufficiente
+   cancellare il file corrispondente alla chiave master dalla directory
+   \texttt{/home/user/.gnupg/private-keys-v1.d};
+   \item \emph{se abbiamo GnuPG precedente alla versione 2.1:} dopo aver fatto
+   il backup delle sottochiavi, bisogna dapprima cancellare tutta la chiave
+   (master e sottochiavi) e poi reimportare solo le sottochiavi.
+\end{itemize}
+
+Nonostante all'inizio della guida ho specificato di usare solo la versione di
+GnuPG 2.1 o successiva, vediamo comunque i due procedimenti nel dettaglio.
+
+\section{GnuPG versione 2.1 o successiva}
+
+GnuPG, dalla versione 2.1 in su, deposita le chiavi private nella directory
+\texttt{/home/user/.gnupg/private-keys-v1.d/} e non più nel file
+\texttt{/home/user/.gnupg/secring.gpg}. Perciò, se avete una chiave master e 3
+sottochiavi, dovreste avere 4 file con estensione \texttt{.key} in quella
+directory:
+
+\begin{lstlisting}
+C6D1CD1D12CBBC8FA14D30004EAF381803A72597.key
+135159EDEFB9FCB6062F9DE0E21FD90CB07DA041.key
+C74D47329D5D224B0716879DCF3A4EC2D8951C53.key
+30DEE8A060F3562CD6F1384E0F883D65477E596A.key
+\end{lstlisting}
+
+Per identificare quale di questi file è la chiave master, dare nel terminale
+questo comando:
+
+\begin{lstlisting}
+gpg --with-keygrip --list-key 0x9F676B5A4B6E6777
+\end{lstlisting}
+
+Siccome è stato fatto il backup della directory di GnuPG come descritto al
+paragrafo \vref{backup-directory-gnupg}, potete eliminare il file \texttt{.key}
+corrispondente alla chiave master. Per ogni evenienza, prima di cancellare il
+file, verificate che nel backup ci sia il file che state per cancellare. Il
+comando per eliminare il file è:
+
+\begin{lstlisting}
+cp rm /home/user/.gnupg/private-keys-v1.d/C6D1CD1D12CBBC8FA14D30004EAF381803A72597.key
+\end{lstlisting}
+
+\noindent oppure usate un programma come \texttt{shred} per eliminarlo in modo
+sicuro:
+
+\begin{lstlisting}
+shred -vuzn25 /home/user/.gnupg/private-keys-v1.d/C6D1CD1D12CBBC8FA14D30004EAF381803A72597.key
+\end{lstlisting}
+
+Per le opzioni di \texttt{shred} vedi la tabella \vref{table:shred}.
+
+\begin{table}
+    \centering
+    \begin{tabularx}{1\textwidth}{c l}
+        \toprule
+        \textsc{Opzione} & \textsc{Descrizione} \\
+        \midrule
+        \texttt{v} & Show progress. \\
+        \texttt{u} & Truncate and remove file after overwriting. \\
+        \texttt{z} & Add a final overwrite with zeros to hide shredding. \\
+        \texttt{n} & Overwrite $n$ times instead of the default (3). \\
+        \bottomrule
+    \end{tabularx}
+    \caption{Le opzioni di shred usate in questo \textit{how-to}.}
+    \label{table:shred}
+\end{table}
+
+Se avete fatto da poco la migrazione a GnuPG versione 2.1 o superiore, il
+vecchio file \texttt{secring.gpg} che conteneva le chiavi private potrebbe
+ancora averla al suo interno. Per cui, se la dimensione del file è zero, il file
+non contiene più nulla; altrimenti, se la dimensione del file è maggiore di
+zero, cancellatelo del tutto.
+
+Quando in futuro vi servirà usare la chiave master (ad esempio, per firmare una
+chiave altrui), potrete semplicemente prendere dal backup il file \texttt{.key}
+della chiave master e copiarlo nella directory \texttt{private-keys-v1.d} di
+lavoro. Una volta terminata l'esigenza, potrete eliminare nuovamente il file.
+
+\section{GnuPG precedente alla versione 2.1}
+
+Se avete questa versione di GnuPG, bisognerà procedere con questi passi:
+
+\begin{enumerate}
+   \item Essere sicuri di avere il backup funzionante delle chiavi, come
+   spiegato al paragrafo \vref{backup-chiavi};
+   \item Rimuovere la chiave privata completa (cioè master e sottochiavi);
+   \item Reimportare dal backup solo le sottochiavi.
+\end{enumerate}
+
+La chiave completa si elimina con:
+
+\begin{lstlisting}
+gpg --delete-secret-keys 0x9F676B5A4B6E6777
+\end{lstlisting}
+
+Le sottochiavi si importano con:
+
+\begin{lstlisting}
+gpg --import 0xE7E0CAF69114F367
+gpg --import 0x3C91B3682F3AC08A
+gpg --import 0x465ED456AFBE0F10
+\end{lstlisting}
+
+Vediamo quindi la situazione:
+
+\begin{lstlisting}
+gpg --list-secret-keys
+\end{lstlisting}
+
+Ora, \emph{se avete spostato le sottochiavi nella YubiKey}, la risposta sarà:
+
+\begin{lstlisting}
+sec#  rsa4096/0x9F676B5A4B6E6777 2018-04-01 [C] [expires: 2021-03-31]
+      Key fingerprint = 4915 3275 9708 0147 25CF  E3A7 9F67 6B5A 4B6E 6777
+      Keygrip = C6D1CD1D12CBBC8FA14D30004EAF381803A72597
+uid                   [ultimate] Mario Rossi <mario.rossi@example.com>
+ssb>  rsa2048/0xE7E0CAF69114F367 2018-04-01 [S] [expires: 2019-04-01]
+      Keygrip = 135159EDEFB9FCB6062F9DE0E21FD90CB07DA041
+ssb>  rsa2048/0x3C91B3682F3AC08A 2018-04-01 [E] [expires: 2019-04-01]
+      Keygrip = C74D47329D5D224B0716879DCF3A4EC2D8951C53
+ssb>  rsa2048/0x465ED456AFBE0F10 2018-04-01 [A] [expires: 2019-04-01]
+      Keygrip = 30DEE8A060F3562CD6F1384E0F883D65477E596A
+\end{lstlisting}
+
+mentre, \emph{se avete deciso di tenere le sottochiavi nel disco}, la risposta
+sarà:
+
+\begin{lstlisting}
+sec#  rsa4096/0x9F676B5A4B6E6777 2018-04-01 [C] [expires: 2021-03-31]
+      Key fingerprint = 4915 3275 9708 0147 25CF  E3A7 9F67 6B5A 4B6E 6777
+      Keygrip = C6D1CD1D12CBBC8FA14D30004EAF381803A72597
+uid                   [ultimate] Mario Rossi <mario.rossi@example.com>
+ssb   rsa2048/0xE7E0CAF69114F367 2018-04-01 [S] [expires: 2019-04-01]
+      Keygrip = 135159EDEFB9FCB6062F9DE0E21FD90CB07DA041
+ssb   rsa2048/0x3C91B3682F3AC08A 2018-04-01 [E] [expires: 2019-04-01]
+      Keygrip = C74D47329D5D224B0716879DCF3A4EC2D8951C53
+ssb   rsa2048/0x465ED456AFBE0F10 2018-04-01 [A] [expires: 2019-04-01]
+      Keygrip = 30DEE8A060F3562CD6F1384E0F883D65477E596A
+\end{lstlisting}

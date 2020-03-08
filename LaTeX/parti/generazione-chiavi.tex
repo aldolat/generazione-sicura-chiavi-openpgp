@@ -1,0 +1,566 @@
+\chapter{Generazione delle chiavi}
+
+Con questa guida genereremo la nostra chiave privata che avrà questo schema:
+
+\begin{itemize}
+    \item \emph{Chiave master (o principale)} [C -- Certification/Certificazione]
+    \begin{itemize}
+        \item \emph{Sottochiave per firma} [S -- Signing/Firma]
+        \item \emph{Sottochiave per cifratura} [E -- Encryption/Cifratura]
+        \item \emph{Sottochiave per autenticazione} [A --
+    Authentication/Autenticazione]
+    \end{itemize}
+\end{itemize}
+
+Per la lunghezza delle chiavi avremo la chiave primaria a 4096 bit mentre le
+sottochiavi a 2048 bit.\footnote{Per ulteriori informazioni su questo dibattito
+della lunghezza delle chiavi si può vedere: \cite{gnupg:keylength} e anche
+\cite{yubico:keylength}}
+
+\section{Prerequisiti}
+
+\begin{enumerate}
+ \item È necessario lavorare su un sistema avviato con una distribuzione Linux
+ in modalità \textit{live}. È preferibile una
+ \href{https://tails.boum.org/index.it.html}{Tails}, ma va bene una qualunque.
+ La distribuzione va avviata isolandola da qualsiasi rete.
+ \item È necessario usare GnuPG versione 2.1 o successiva.
+ \item È necessario un token \textsc{usb} come, ad esempio, una YubiKey, nel
+ caso si decida di spostare le sottochiavi su questo supporto.
+\end{enumerate}
+
+Qualora il comando \texttt{gpg} lanci GnuPG versione 1, accertarsi che la
+versione 2 sia installata e aggiungere questa riga al seguente file:\newline
+\texttt{/home/user/.bash\_aliases}:
+
+\begin{lstlisting}
+alias gpg='gpg2'
+\end{lstlisting}
+
+Questa scorciatoia permetterà l'avvio di GnuPG versione 2 ogni volta che
+digitiamo \texttt{gpg}.
+
+\section{Generare le chiavi}
+
+Sul sistema di generazione delle chiavi accertarsi di avere GnuPG versione 2.1 o
+successiva:
+
+\begin{lstlisting}
+gpg --version
+\end{lstlisting}
+
+Iniziare quindi la procedura con:
+
+\begin{lstlisting}
+gpg --expert --full-gen-key
+\end{lstlisting}
+
+che darà:
+
+\begin{lstlisting}
+Please select what kind of key you want:
+   (1) RSA and RSA (default)
+   (2) DSA and Elgamal
+   (3) DSA (sign only)
+   (4) RSA (sign only)
+   (7) DSA (set your own capabilities)
+   (8) RSA (set your own capabilities)
+   (9) ECC and ECC
+  (10) ECC (sign only)
+  (11) ECC (set your own capabilities)
+Your selection?
+\end{lstlisting}
+
+Scegliamo \texttt{8}:
+
+\begin{lstlisting}
+Possible actions for a RSA key: Sign Certify Encrypt Authenticate
+Current allowed actions: Sign Certify Encrypt
+
+   (S) Toggle the sign capability
+   (E) Toggle the encrypt capability
+   (A) Toggle the authenticate capability
+   (Q) Finished
+
+Your selection?
+\end{lstlisting}
+
+Come si vede le attuali capacità della chiave che stiamo creando sono:
+\texttt{Sign Certify Encrypt}. Rimuoviamo le capacità di firma premendo
+\texttt{S}:
+
+\begin{lstlisting}
+Possible actions for a RSA key: Sign Certify Encrypt Authenticate
+Current allowed actions: Certify Encrypt
+
+   (S) Toggle the sign capability
+   (E) Toggle the encrypt capability
+   (A) Toggle the authenticate capability
+   (Q) Finished
+
+Your selection?
+\end{lstlisting}
+
+Rimuoviamo le capacità di cifratura premendo \texttt{E}:
+
+\begin{lstlisting}
+Possible actions for a RSA key: Sign Certify Encrypt Authenticate
+Current allowed actions: Certify
+
+   (S) Toggle the sign capability
+   (E) Toggle the encrypt capability
+   (A) Toggle the authenticate capability
+   (Q) Finished
+
+Your selection?
+\end{lstlisting}
+
+Ora la chiave primaria avrà solo la capacità di certificazione
+(\texttt{Certify}) su altre chiavi.
+
+Premiamo \texttt{Q}:
+
+\begin{lstlisting}
+RSA keys may be between 1024 and 4096 bits long.
+What keysize do you want? (2048)
+\end{lstlisting}
+
+
+Inserire \texttt{4096}:
+
+\begin{lstlisting}
+Requested keysize is 4096 bits
+Please specify how long the key should be valid.
+         0 = key does not expire
+      <n>  = key expires in n days
+      <n>w = key expires in n weeks
+      <n>m = key expires in n months
+      <n>y = key expires in n years
+Key is valid for? (0)
+\end{lstlisting}
+
+
+Inseriamo \texttt{3y} (3 anni):
+
+\begin{lstlisting}
+Key expires at mer 31 mar 2021 19:46:05 CEST
+Is this correct? (y/N)
+\end{lstlisting}
+
+Premiamo \texttt{Y}:
+
+\begin{lstlisting}
+GnuPG needs to construct a user ID to identify your key.
+
+Real name:
+Email address:
+Comment:
+\end{lstlisting}
+
+
+Inseriamo il nostro nome e cognome e quindi l'indirizzo email. Come commento
+lasciamo il campo vuoto.
+
+\begin{lstlisting}
+You selected this USER-ID:
+    "Mario Rossi <mario.rossi@example.com>"
+
+Change (N)ame, (C)omment, (E)mail or (O)kay/(Q)uit?
+\end{lstlisting}
+
+Accettare con \texttt{O}:
+
+\begin{lstlisting}
+We need to generate a lot of random bytes. It is a good idea to perform
+some other action (type on the keyboard, move the mouse, utilize the
+disks) during the prime generation; this gives the random number
+generator a better chance to gain enough entropy.
+\end{lstlisting}
+
+A seguire GnuPG chiederà di impostare la passphrase.
+
+Impostiamo la passphrase.
+
+\begin{lstlisting}
+gpg: key 4B6E6777 marked as ultimately trusted
+gpg: directory '/home/mariorossi/.gnupg/openpgp-revocs.d' created
+gpg: revocation certificate stored as '/home/mariorossi/.gnupg/openpgp-revocs.d/491532759708014725CFE3A79F676B5A4B6E6777.rev'
+public and secret key created and signed.
+
+gpg: checking the trustdb
+gpg: marginals needed: 3  completes needed: 1  trust model: PGP
+gpg: depth: 0  valid:   1  signed:   0  trust: 0-, 0q, 0n, 0m, 0f, 1u
+gpg: next trustdb check due at 2021-03-31
+pub   rsa4096/4B6E6777 2018-04-01 [C] [expires: 2021-03-31]
+      Key fingerprint = 4915 3275 9708 0147 25CF  E3A7 9F67 6B5A 4B6E 6777
+uid         [ultimate] Mario Rossi <mario.rossi@example.com>
+\end{lstlisting}
+
+GnuPG mostra la chiave appena generata ed esce.
+
+Come si vede, esiste solo la chiave principale con la sola capacità di
+certificazione \texttt{[C]}. Bisogna ora generare le sottochiavi con:
+
+\begin{lstlisting}
+gpg --expert --edit-key 0x4B6E6777
+\end{lstlisting}
+
+
+\begin{lstlisting}
+gpg (GnuPG) 2.1.11; Copyright (C) 2016 Free Software Foundation, Inc.
+This is free software: you are free to change and redistribute it.
+There is NO WARRANTY, to the extent permitted by law.
+
+Secret key is available.
+
+sec  rsa4096/4B6E6777
+     created: 2018-04-01  expires: 2021-03-31  usage: C
+     trust: ultimate      validity: ultimate
+[ultimate] (1). Mario Rossi <mario.rossi@example.com>
+
+gpg>
+\end{lstlisting}
+
+Dare il comando \texttt{addkey}:
+
+\begin{lstlisting}
+Please select what kind of key you want:
+   (3) DSA (sign only)
+   (4) RSA (sign only)
+   (5) Elgamal (encrypt only)
+   (6) RSA (encrypt only)
+   (7) DSA (set your own capabilities)
+   (8) RSA (set your own capabilities)
+  (10) ECC (sign only)
+  (11) ECC (set your own capabilities)
+  (12) ECC (encrypt only)
+  (13) Existing key
+Your selection?
+\end{lstlisting}
+
+Scegliere \texttt{8}:
+
+\begin{lstlisting}
+Possible actions for a RSA key: Sign Encrypt Authenticate
+Current allowed actions: Sign Encrypt
+
+   (S) Toggle the sign capability
+   (E) Toggle the encrypt capability
+   (A) Toggle the authenticate capability
+   (Q) Finished
+
+Your selection?
+\end{lstlisting}
+
+Togliere la capacità di cifratura premendo \texttt{E}:
+
+\begin{lstlisting}
+Possible actions for a RSA key: Sign Encrypt Authenticate
+Current allowed actions: Sign
+
+   (S) Toggle the sign capability
+   (E) Toggle the encrypt capability
+   (A) Toggle the authenticate capability
+   (Q) Finished
+
+Your selection?
+\end{lstlisting}
+
+Scegliere \texttt{Q}:
+
+\begin{lstlisting}
+RSA keys may be between 1024 and 4096 bits long.
+What keysize do you want? (2048)
+\end{lstlisting}
+
+Premere \texttt{Invio} per accettare \texttt{2048}:
+
+\begin{lstlisting}
+Requested keysize is 2048 bits
+Please specify how long the key should be valid.
+         0 = key does not expire
+      <n>  = key expires in n days
+      <n>w = key expires in n weeks
+      <n>m = key expires in n months
+      <n>y = key expires in n years
+Key is valid for? (0)
+\end{lstlisting}
+
+Inserire \texttt{1y} per farla scadere dopo 1 anno:
+
+\begin{lstlisting}
+Key expires at lun 01 apr 2019 19:57:16 CEST
+Is this correct? (y/N)
+\end{lstlisting}
+
+Accettare inserendo \texttt{Y}:
+
+\begin{lstlisting}
+Really create? (y/N)
+\end{lstlisting}
+
+Accettare inserendo \texttt{Y}.
+
+Inserire quindi la passphrase e la sottochiave sarà aggiunta al portachiavi:
+
+\begin{lstlisting}
+We need to generate a lot of random bytes. It is a good idea to perform
+some other action (type on the keyboard, move the mouse, utilize the
+disks) during the prime generation; this gives the random number
+generator a better chance to gain enough entropy.
+\end{lstlisting}
+
+
+Attendiamo che finisca, quindi apparirà:
+
+\begin{lstlisting}
+sec  rsa4096/4B6E6777
+     created: 2018-04-01  expires: 2021-03-31  usage: C
+     trust: ultimate      validity: ultimate
+ssb  rsa2048/9114F367
+     created: 2018-04-01  expires: 2019-04-01  usage: S
+[ultimate] (1). Mario Rossi <mario.rossi@example.com>
+
+gpg>
+\end{lstlisting}
+
+
+Aggiungiamo ora con la stessa procedura (partendo da \texttt{addkey}) la chiave
+di cifratura e poi quella di autenticazione. Alla fine, dopo aver aggiunto la
+sottochiave di autenticazione, dare il comando:
+
+\begin{lstlisting}
+save
+\end{lstlisting}
+
+\noindent per salvare e uscire.
+
+Alla fine avremo questo portachiavi:
+
+\begin{lstlisting}
+gpg --list-secret-keys
+\end{lstlisting}
+
+
+\begin{lstlisting}
+/home/mariorossi/.gnupg/pubring.kbx
+-----------------------------
+sec   rsa4096/4B6E6777 2018-04-01 [C] [expires: 2021-03-31]
+uid         [ultimate] Mario Rossi <mario.rossi@example.com>
+ssb   rsa2048/9114F367 2018-04-01 [S] [expires: 2019-04-01]
+ssb   rsa2048/2F3AC08A 2018-04-01 [E] [expires: 2019-04-01]
+ssb   rsa2048/AFBE0F10 2018-04-01 [A] [expires: 2019-04-01]
+\end{lstlisting}
+
+La situazione è, quindi, la seguente:
+
+\begin{itemize}
+    \item \emph{chiave principale}, adibita alla sola \emph{certificazione e
+    gestione del portachiavi}: \newline \texttt{sec   rsa4096/4B6E6777 2018-04-01
+    [C]};
+    \item \emph{sottochiave di firma}: \newline \texttt{ssb   rsa2048/9114F367
+    2018-04-01 [S]};
+    \item \emph{sottochiave di cifratura}: \newline \texttt{ssb
+    rsa2048/2F3AC08A 2018-04-01 [E] [expires: 2019-04-01]};
+    \item \emph{sottochiave di autenticazione}: \newline \texttt{ssb
+    rsa2048/AFBE0F10 2018-04-01 [A] [expires: 2019-04-01]}.
+\end{itemize}
+
+Possiamo aggiungere anche altri UserID o una foto con:
+
+\begin{lstlisting}
+gpg --expert --edit-key 0x4B6E6777
+\end{lstlisting}
+
+\noindent e poi con \texttt{adduid}.
+
+\section{Il certificato di revoca}
+\label{certificato-revoca}
+
+Con GnuPG versione 2 la generazione del certificato di revoca è stata fatta
+automaticamente quando le chiavi sono state generate e si trova nella
+directory \texttt{/home/user/.gnupg/openpgp-revocs.d/}. Il file ha lo
+stesso nome dell'impronta della chiave, nel nostro caso:
+
+\begin{lstlisting}
+491532759708014725CFE3A79F676B5A4B6E6777.rev
+\end{lstlisting}
+
+Questo file andrà tolto da questa directory e conservato in un luogo sicuro. Lo
+vedremo nel paragrafo \vref{backup-certificato-revoca} dedicato al backup.
+
+\section{Impostare le preferenze della chiave}
+
+Modificare la chiave con:
+
+\begin{lstlisting}
+gpg --expert --edit-key 0x4B6E6777
+\end{lstlisting}
+
+Dal prompt di Gnupg dare:
+
+\begin{lstlisting}
+setpref S10 S9 S8 H10 H9 H8 Z2 Z3 Z1 Z0
+\end{lstlisting}
+
+Per il significato dei codici, vedi la Tabella \vref{table:codici}.
+
+\begin{table}
+   \centering
+	\begin{tabularx}{6cm}{cl}
+ 		\toprule
+		\textsc{Codice} & \textsc{Descrizione} \\
+		\midrule
+		\texttt{S10} & Cifrario Twofish \\
+		\texttt{S9}  & Cifrario AES256 \\
+		\texttt{S8}  & Cifrario AES192 \\
+		\texttt{H10} & Hash SHA512 \\
+		\texttt{H9}  & Hash SHA384 \\
+		\texttt{H8}  & Hash SHA256 \\
+		\texttt{Z2}  & Compressione ZLIB \\
+		\texttt{Z3}  & Compressione BZIP2 \\
+		\texttt{Z1}  & Compressione ZIP \\
+		\texttt{Z0}  & Non compresso \\
+		\bottomrule
+	\end{tabularx}
+	\caption{I codici GnuPG per cifrari, hash e compressione.}
+	\label{table:codici}
+\end{table}
+
+Alla domanda di GnuPG seguente:
+
+\begin{lstlisting}
+Set preference list to:
+     Cipher: TWOFISH, AES256, AES192, 3DES
+     Digest: SHA512, SHA384, SHA256, SHA1
+     Compression: ZLIB, BZIP2, ZIP, Uncompressed
+     Features: MDC, Keyserver no-modify
+Really update the preferences? (y/N)
+\end{lstlisting}
+
+\noindent premere \texttt{Y} e quindi:
+
+\begin{lstlisting}
+save
+\end{lstlisting}
+
+\section{Impostare il file gpg.conf}
+
+Aprire il file \texttt{gpg.conf} dentro la directory \texttt{/home/user/.gnupg},
+eliminare tutto il contenuto e incollarvi questo testo, ricordandosi di
+\emph{aggiornare le due \textsc{id} di chiave} nelle righe
+\texttt{default-key} e \texttt{encrypt-to} con l'\textsc{id} della vostra
+chiave:
+
+\begin{lstlisting}
+# Per lo skeleton di questo file vedi:
+# /usr/share/gnupg2/gpg-conf.skel
+
+#-----------------------------
+# default key
+#-----------------------------
+
+# The default key to sign with. If this option is not used, the default key is
+# the first key found in the secret keyring
+
+default-key 0x9F676B5A4B6E6777
+encrypt-to  0x9F676B5A4B6E6777
+
+#-----------------------------
+# behavior
+#-----------------------------
+
+# Disable inclusion of the version string in ASCII armored output
+no-emit-version
+
+# Disable comment string in clear text signatures and ASCII armored messages
+no-comments
+
+# Display long key IDs
+keyid-format 0xlong
+
+# List all keys (or the specified ones) along with their fingerprints
+with-fingerprint
+
+# List all keys (or the specified ones) along with their keygrips
+with-keygrip
+
+# Display the calculated validity of user IDs during key listings
+list-options show-uid-validity
+verify-options show-uid-validity
+
+# Try to use the GnuPG-Agent. With this option, GnuPG first tries to connect to
+# the agent before it asks for a passphrase.
+use-agent
+
+#-----------------------------
+# keyserver
+#-----------------------------
+
+# When using --refresh-keys, if the key in question has a preferred keyserver
+# URL, then disable use of that preferred keyserver to refresh the key from
+keyserver-options no-honor-keyserver-url
+
+# When searching for a key with --search-keys, include keys that are marked on
+# the keyserver as revoked
+keyserver-options include-revoked
+
+#-----------------------------
+# algorithm and ciphers
+#-----------------------------
+
+# List of personal digest preferences. When multiple digests are supported by
+# all recipients, choose the strongest one
+personal-cipher-preferences TWOFISH AES256 AES192 3DES
+
+# List of personal digest preferences. When multiple ciphers are supported by
+# all recipients, choose the strongest one
+personal-digest-preferences SHA512 SHA384 SHA256 SHA224
+
+# Message digest algorithm used when signing a key
+cert-digest-algo SHA512
+
+# List of personal compression preferences.
+personal-compress-preferences ZLIB BZIP2 ZIP Uncompressed
+
+# This preference list is used for new keys and becomes the default for
+# "setpref" in the edit menu
+default-preference-list SHA512 SHA384 SHA256 SHA224 TWOFISH AES256 AES192 3DES ZLIB BZIP2 ZIP Uncompressed
+\end{lstlisting}
+
+\section{Impostare il keyserver}
+
+Modificare (o creare) il file \texttt{/home/user/.gnupg/dirmngr.conf}:
+
+\begin{lstlisting}
+# Per lo skeleton di questo file vedi:
+# /usr/share/gnupg2/dirmngr-conf.skel
+
+# This is the server that --recv-keys, --send-keys, and --search-keys will
+# communicate with to receive keys from, send keys to, and search for keys on
+keyserver hkps://hkps.pool.sks-keyservers.net
+\end{lstlisting}
+
+\section{Copiare la directory \texttt{.gnupg} nel proprio computer di lavoro}
+
+A questo punto, se avete usato una distribuzione \textit{live} per la
+generazione delle chiavi, copiate tutta la directory \texttt{.gnupg} su una
+chiavetta \textsc{usb} e quindi trasferitela sul disco fisso del computer di
+lavoro.
+
+Dopo il trasferimento non dimenticate di distruggere la directory
+\texttt{.gnupg} sulla chiavetta. Si possono usare diversi strumenti come ad
+esempio \texttt{shred}.
+
+\section{Esportare la chiave pubblica sul keyserver}
+
+\begin{lstlisting}
+gpg --send-keys 0x9F676B5A4B6E6777
+\end{lstlisting}
+
+\section{Segnarsi la data di scadenza delle proprie chiavi nel calendario}
+
+Segnatevi nel vostro calendario quando scadranno le chiavi e fatevi mandare un
+avviso almeno un mese prima. Una volta rinnovate le chiavi, inviatele al
+keyserver. Ricordate che le chiavi scadute possono essere ancora rinnovate, ma
+non è buona norma farle scadere.

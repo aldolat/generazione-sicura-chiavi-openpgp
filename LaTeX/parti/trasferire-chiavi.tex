@@ -1,0 +1,239 @@
+\chapter{Trasferire le chiavi OpenPGP su YubiKey}
+
+Se avete un token \textsc{usb} come la YubiKey, potete trasferire le sottochiavi
+in essa. L'operazione è molto semplice.
+
+Prima di andare avanti, quando dico ``trasferire'' intendo proprio spostare una
+cosa da un posto a un altro. Nel nostro caso, intendo spostare le sottochiavi
+dal disco fisso alla YubiKey.
+
+Ricordo che trasferire le sottochiavi nel token \textsc{usb} è una
+\emph{operazione a senso unico e non è possibile tornare indietro}, cioè non
+si possono trasferire le sottochiavi dal token al nostro disco fisso. Solo se
+abbiamo un backup delle chiavi possiamo ripristinare la situazione allo stato
+prima del trasferimento. Per cui \emph{non procedete se non avete fatto il
+backup}.
+
+Diamo uno sguardo alla situazione attuale:
+
+\begin{lstlisting}
+gpg --list-secret-keys
+\end{lstlisting}
+
+\begin{lstlisting}
+sec   rsa4096/0x9F676B5A4B6E6777 2018-04-01 [C] [expires: 2021-03-31]
+      Key fingerprint = 4915 3275 9708 0147 25CF  E3A7 9F67 6B5A 4B6E 6777
+      Keygrip = C6D1CD1D12CBBC8FA14D30004EAF381803A72597
+uid                   [ultimate] Mario Rossi <mario.rossi@example.com>
+ssb   rsa2048/0xE7E0CAF69114F367 2018-04-01 [S] [expires: 2019-04-01]
+      Keygrip = 135159EDEFB9FCB6062F9DE0E21FD90CB07DA041
+ssb   rsa2048/0x3C91B3682F3AC08A 2018-04-01 [E] [expires: 2019-04-01]
+      Keygrip = C74D47329D5D224B0716879DCF3A4EC2D8951C53
+ssb   rsa2048/0x465ED456AFBE0F10 2018-04-01 [A] [expires: 2019-04-01]
+      Keygrip = 30DEE8A060F3562CD6F1384E0F883D65477E596A
+\end{lstlisting}
+
+Inseriamo il token nella porta \textsc{usb} e controlliamo che venga vista da
+GnuPG:
+
+\begin{lstlisting}
+gpg --card-status
+\end{lstlisting}
+
+Se restituisce:
+
+\begin{lstlisting}
+gpg: error getting version from 'scdaemon': No SmartCard daemon
+gpg: OpenPGP card not available: No SmartCard daemon
+\end{lstlisting}
+
+installiamo \texttt{scdaemon}:
+
+\begin{lstlisting}
+sudo apt-get install pcscd pcsc-tools scdaemon
+\end{lstlisting}
+
+e quindi di nuovo:
+
+\begin{lstlisting}
+gpg --card-status
+\end{lstlisting}
+
+che restituirà qualcosa del tipo:
+
+\begin{lstlisting}
+Reader ...........: Yubico Yubikey 4 OTP U2F CCID 00 00
+Application ID ...: XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+Version ..........: 2.1
+Manufacturer .....: Yubico
+Serial number ....: XXXXXXXX
+Name of cardholder: [not set]
+Language prefs ...: [not set]
+Sex ..............: unspecified
+URL of public key : [not set]
+Login data .......: [not set]
+Signature PIN ....: not forced
+Key attributes ...: rsa2048 rsa2048 rsa2048
+Max. PIN lengths .: 127 127 127
+PIN retry counter : 3 0 3
+Signature counter : 0
+Signature key ....: [none]
+Encryption key....: [none]
+Authentication key: [none]
+General key info..: [none]
+\end{lstlisting}
+
+Notate come ci siano i tre campi dedicati alla conservazione delle tre
+sottochiavi che abbiamo creato:
+
+\begin{lstlisting}
+Signature key ....: [none]
+Encryption key....: [none]
+Authentication key: [none]
+\end{lstlisting}
+
+Qui sposteremo le nostre tre sottochiavi. Iniziamo la procedura.
+
+Entriamo in modalità modifica:
+
+\begin{lstlisting}
+gpg --card-edit
+\end{lstlisting}
+
+Cambiamo anzitutto i \textsc{pin}. I \textsc{pin} predefiniti di fabbrica sono:
+
+\begin{itemize}
+    \item Admin PIN (8 cifre): \texttt{12345678}
+    \item PIN (6 cifre): \texttt{123456}
+\end{itemize}
+
+Entriamo in modalità amministratore dando:
+
+\begin{lstlisting}
+admin
+\end{lstlisting}
+
+\begin{lstlisting}
+passwd
+\end{lstlisting}
+
+Dal menu scegliere l'opzione da seguire, vale a dire \texttt{Change PIN} e, una
+volta finito, \texttt{Change Admin PIN}. Quindi alla fine salvare con
+\texttt{save} e uscire con \texttt{quit}.
+
+Una volta aggiornati i due \textsc{pin}, passare al trasferimento delle chiavi.
+Dal prompt del terminale dare:
+
+\begin{lstlisting}
+gpg --edit-key 0x9F676B5A4B6E6777
+\end{lstlisting}
+
+che restituirà:
+
+\begin{lstlisting}
+gpg (GnuPG) 2.1.11; Copyright (C) 2016 Free Software Foundation, Inc.
+This is free software: you are free to change and redistribute it.
+There is NO WARRANTY, to the extent permitted by law.
+
+Secret key is available.
+
+sec  rsa4096/0x9F676B5A4B6E6777
+     created: 2018-04-01  expires: 2021-03-31  usage: C
+     trust: ultimate      validity: ultimate
+ssb  rsa2048/0xE7E0CAF69114F367
+     created: 2018-04-01  expires: 2019-04-01  usage: S
+ssb  rsa2048/0x3C91B3682F3AC08A
+     created: 2018-04-01  expires: 2019-04-01  usage: E
+ssb  rsa2048/0x465ED456AFBE0F10
+     created: 2018-04-01  expires: 2019-04-01  usage: A
+[ultimate] (1). Mario Rossi <mario.rossi@example.com>
+\end{lstlisting}
+
+Selezioniamo la prima sottochiave con:
+
+\begin{lstlisting}
+key 1
+\end{lstlisting}
+
+che mostrerà la chiave selezionata con un asterisco \texttt{*}:
+
+\begin{lstlisting}
+sec  rsa4096/0x9F676B5A4B6E6777
+     created: 2018-04-01  expires: 2021-03-31  usage: C
+     trust: ultimate      validity: ultimate
+ssb* rsa2048/0xE7E0CAF69114F367
+     created: 2018-04-01  expires: 2019-04-01  usage: S
+ssb  rsa2048/0x3C91B3682F3AC08A
+     created: 2018-04-01  expires: 2019-04-01  usage: E
+ssb  rsa2048/0x465ED456AFBE0F10
+     created: 2018-04-01  expires: 2019-04-01  usage: A
+[ultimate] (1). Mario Rossi <mario.rossi@example.com>
+\end{lstlisting}
+
+Trasferiamo la chiave con:
+
+\begin{lstlisting}
+keytocard
+\end{lstlisting}
+
+Deselezioniamo quindi la chiave 1:
+
+\begin{lstlisting}
+key 1
+\end{lstlisting}
+
+L'asterisco verrà tolto. Quindi procedere con lo stesso metodo per le restanti
+due chiavi. Qui indico di seguito i comandi in sequenza:
+
+\begin{lstlisting}
+key 2
+keytocard
+key 2
+key 3
+keytocard
+key 3
+\end{lstlisting}
+
+Alla fine salviamo e usciamo:
+
+\begin{lstlisting}
+save
+\end{lstlisting}
+
+Una volta usciti al prompt dei comandi, diamo uno sguardo alla situazione:
+
+\begin{lstlisting}
+gpg --edit-key 0x9F676B5A4B6E6777
+\end{lstlisting}
+
+che restituirà:
+
+\begin{lstlisting}
+gpg (GnuPG) 2.1.11; Copyright (C) 2016 Free Software Foundation, Inc.
+This is free software: you are free to change and redistribute it.
+There is NO WARRANTY, to the extent permitted by law.
+
+Secret key is available.
+
+sec  rsa4096/0x9F676B5A4B6E6777
+     created: 2018-04-01  expires: 2021-03-31  usage: C
+     trust: ultimate      validity: ultimate
+ssb> rsa2048/0xE7E0CAF69114F367
+     created: 2018-04-01  expires: 2019-04-01  usage: S
+ssb> rsa2048/0x3C91B3682F3AC08A
+     created: 2018-04-01  expires: 2019-04-01  usage: E
+ssb> rsa2048/0x465ED456AFBE0F10
+     created: 2018-04-01  expires: 2019-04-01  usage: A
+[ultimate] (1). Mario Rossi <mario.rossi@example.com>
+\end{lstlisting}
+
+Come si vede abbiamo il segno \texttt{>} dopo ogni \texttt{ssb}, segno che le
+sottochiavi sono nel token. La chiave principale invece è ancora nel nostro
+disco. Date anche uno sguardo a com'è cambiata la YubiKey dando:
+
+\begin{lstlisting}
+gpg --card-status
+\end{lstlisting}
+
+Potremmo finire qua se abbiamo scelto di non cancellare la chiave principale dal
+disco.

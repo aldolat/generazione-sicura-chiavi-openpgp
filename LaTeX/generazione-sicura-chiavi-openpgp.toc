@@ -1,0 +1,53 @@
+\boolfalse {citerequest}\boolfalse {citetracker}\boolfalse {pagetracker}\boolfalse {backtracker}\relax 
+\defcounter {refsection}{0}\relax 
+\vspace {-\cftbeforepartskip }
+\babel@toc {italian}{}
+\babel@toc {italian}{}
+\defcounter {refsection}{0}\relax 
+\contentsline {chapter}{\numberline {1}{Introduzione}}{5}{chapter.1}%
+\defcounter {refsection}{0}\relax 
+\contentsline {chapter}{\numberline {2}{Generazione delle chiavi}}{9}{chapter.2}%
+\defcounter {refsection}{0}\relax 
+\contentsline {section}{\numberline {2.1}{Prerequisiti}}{9}{section.2.1}%
+\defcounter {refsection}{0}\relax 
+\contentsline {section}{\numberline {2.2}{Generare le chiavi}}{10}{section.2.2}%
+\defcounter {refsection}{0}\relax 
+\contentsline {section}{\numberline {2.3}{Il certificato di revoca}}{14}{section.2.3}%
+\defcounter {refsection}{0}\relax 
+\contentsline {section}{\numberline {2.4}{Impostare le preferenze della chiave}}{15}{section.2.4}%
+\defcounter {refsection}{0}\relax 
+\contentsline {section}{\numberline {2.5}{Impostare il file gpg.conf}}{15}{section.2.5}%
+\defcounter {refsection}{0}\relax 
+\contentsline {section}{\numberline {2.6}{Impostare il keyserver}}{17}{section.2.6}%
+\defcounter {refsection}{0}\relax 
+\contentsline {section}{\numberline {2.7}{Copiare la directory \texttt {.gnupg} nel proprio computer di lavoro}}{18}{section.2.7}%
+\defcounter {refsection}{0}\relax 
+\contentsline {section}{\numberline {2.8}{Esportare la chiave pubblica sul keyserver}}{18}{section.2.8}%
+\defcounter {refsection}{0}\relax 
+\contentsline {section}{\numberline {2.9}{Segnarsi la data di scadenza delle proprie chiavi nel calendario}}{18}{section.2.9}%
+\defcounter {refsection}{0}\relax 
+\contentsline {chapter}{\numberline {3}{Fare il backup}}{19}{chapter.3}%
+\defcounter {refsection}{0}\relax 
+\contentsline {section}{\numberline {3.1}{Backup della directory di GnuPG}}{19}{section.3.1}%
+\defcounter {refsection}{0}\relax 
+\contentsline {section}{\numberline {3.2}{Backup delle chiavi}}{19}{section.3.2}%
+\defcounter {refsection}{0}\relax 
+\contentsline {section}{\numberline {3.3}{Backup del certificato di revoca}}{21}{section.3.3}%
+\defcounter {refsection}{0}\relax 
+\contentsline {section}{\numberline {3.4}{Spostare la directory di backup in un luogo sicuro}}{22}{section.3.4}%
+\defcounter {refsection}{0}\relax 
+\contentsline {chapter}{\numberline {4}{Trasferire le chiavi OpenPGP su YubiKey}}{23}{chapter.4}%
+\defcounter {refsection}{0}\relax 
+\contentsline {chapter}{\numberline {5}{Eliminare la chiave principale}}{27}{chapter.5}%
+\defcounter {refsection}{0}\relax 
+\contentsline {section}{\numberline {5.1}{GnuPG versione 2.1 o successiva}}{27}{section.5.1}%
+\defcounter {refsection}{0}\relax 
+\contentsline {section}{\numberline {5.2}{GnuPG precedente alla versione 2.1}}{28}{section.5.2}%
+\defcounter {refsection}{0}\relax 
+\contentsline {chapter}{\numberline {6}{Gli agenti}}{30}{chapter.6}%
+\defcounter {refsection}{0}\relax 
+\contentsline {chapter}{\numberline {7}{Importare la chiave principale}}{32}{chapter.7}%
+\defcounter {refsection}{0}\relax 
+\contentsline {chapter}{\numberline {8}{Estendere la validità delle nostre chiavi}}{34}{chapter.8}%
+\defcounter {refsection}{0}\relax 
+\contentsline {chapter}{Bibliografia}{36}{section*.7}%

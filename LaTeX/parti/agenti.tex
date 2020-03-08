@@ -1,0 +1,83 @@
+\chapter{Gli agenti}
+
+Fermiamo \texttt{ssh-agent}:
+
+\begin{lstlisting}
+killall ssh-agent
+\end{lstlisting}
+
+Disabilitiamo \texttt{ssh-agent} permanentemente:
+
+\begin{lstlisting}
+sudo nano /etc/X11/Xsession.options
+\end{lstlisting}
+
+e commentiamo la riga aggiungendo un cancelletto \texttt{\#} all'inizio:
+
+\begin{lstlisting}
+# use-ssh-agent
+\end{lstlisting}
+
+Abilitiamo il supporto SSH in GnuPG aggiungendo la seguente riga in
+\texttt{/home/user/.gnupg/gpg-agent.conf}:
+
+\begin{lstlisting}
+enable-ssh-support
+\end{lstlisting}
+
+Già che ci siamo aggiungiamo pure la scelta di quale \texttt{pinentry} usare:
+
+\begin{lstlisting}
+pinentry-program /usr/bin/pinentry-gtk-2
+\end{lstlisting}
+
+Alternative sono, ad esempio:
+
+\begin{lstlisting}
+pinentry-program /usr/bin/pinentry-curses
+pinentry-program /usr/bin/pinentry-tty
+pinentry-program /usr/bin/pinentry-qt
+pinentry-program /usr/bin/pinentry-gnome3
+\end{lstlisting}
+
+Riavviamo l'agente di GnuPG:
+
+\begin{lstlisting}
+gpg-connect-agent killagent /bye
+gpg-connect-agent /bye
+\end{lstlisting}
+
+Inseriamo la riga seguente in \texttt{/home/user/.bashrc}:
+
+\begin{lstlisting}
+# You should always add the following lines to your .bashrc or whatever initialization file is used for all shell invocations.
+# @link https://gnupg.org/documentation/manuals/gnupg/Invoking-GPG_002dAGENT.html#Invoking-GPG_002dAGENT
+GPG_TTY=$(tty)
+export GPG_TTY
+
+# Launch gpg-agent
+gpg-connect-agent /bye
+
+# When using SSH support, use the current TTY for passphrase prompts
+gpg-connect-agent updatestartuptty /bye > /dev/null
+
+# Point the SSH_AUTH_SOCK to the one handled by gpg-agent
+if [ -S $(gpgconf --list-dirs agent-ssh-socket) ]; then
+  export SSH_AUTH_SOCK=$(gpgconf --list-dirs agent-ssh-socket)
+else
+  echo "$(gpgconf --list-dirs agent-ssh-socket) doesn't exist. Is gpg-agent running ?"
+fi
+\end{lstlisting}
+
+Facciamo rileggere questo file:
+
+\begin{lstlisting}
+source .bashrc
+\end{lstlisting}
+
+Infine, se non l'abbiamo già fatto, assicuriamoci di usare \texttt{gpg2} invece
+della versione 1:
+
+\begin{lstlisting}
+echo "alias gpg=gpg2" >> /home/user/.bash_aliases
+\end{lstlisting}

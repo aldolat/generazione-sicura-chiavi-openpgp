@@ -1,0 +1,53 @@
+\chapter{Estendere la validità delle nostre chiavi}
+
+Se abbiamo scelto una validità a tempo per le nostre chiavi, periodicamente
+potremo estenderne la validità se ancora sono valide per noi. Teniamo presente
+che possiamo rinnovare la validità di una chiave già scaduta. Se abbiamo scelto
+di togliere la chiave principale dal nostro disco, dovremo importarla
+nuovamente, come descritto al paragrafo \vref{importare-chiave}. Se abbiamo
+scelto, poi, di tenere le sottochiavi nel token \textsc{usb}, dovremo inserirlo
+in una porta \textsc{usb}. Iniziamo quindi la procedura di rinnovo:
+
+\begin{lstlisting}
+gpg --edit-key 0x9F676B5A4B6E6777
+\end{lstlisting}
+
+\begin{lstlisting}
+sec  rsa4096/0x9F676B5A4B6E6777
+     created: 2018-04-01  expires: 2021-03-31  usage: C
+     trust: ultimate      validity: ultimate
+ssb  rsa2048/0xE7E0CAF69114F367
+     created: 2018-04-01  expires: 2019-04-01  usage: S
+ssb  rsa2048/0x3C91B3682F3AC08A
+     created: 2018-04-01  expires: 2019-04-01  usage: E
+ssb  rsa2048/0x465ED456AFBE0F10
+     created: 2018-04-01  expires: 2019-04-01  usage: A
+[ultimate] (1). Mario Rossi <mario.rossi@example.com>
+\end{lstlisting}
+
+I passi di rinnovo per ogni chiave sono i seguenti:
+
+\begin{enumerate}
+    \item selezione della sottochiave da rinnovare;
+    \item invio del comando \texttt{expire};
+    \item scelta della durata della validità;
+    \item deselezione della sottochiave.
+\end{enumerate}
+
+Nel nostro caso, essendo tre le chiavi, questi i passaggi tutti di seguito:
+
+\begin{lstlisting}
+key 1 (per la prima sottochiave; key 2 per la seconda; key 3 per la terza)
+   expire (e seguire le istruzioni)
+      1y (per un anno di validita)
+key 1 (deseleziona)
+key 2 (seleziona la seconda sottochiave)
+   expire
+      1y
+key 2 (deseleziona)
+key 3 (seleziona la terza sottochiave)
+   expire
+      1y
+check (verifichiamo che tutto sia stato eseguito)
+save
+\end{lstlisting}

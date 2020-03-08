@@ -1,0 +1,369 @@
+% $ biblatex auxiliary file $
+% $ biblatex bbl format version 3.1 $
+% Do not modify the above lines!
+%
+% This is an auxiliary file used by the 'biblatex' package.
+% This file may safely be deleted. It will be recreated by
+% biber as required.
+%
+\begingroup
+\makeatletter
+\@ifundefined{ver@biblatex.sty}
+  {\@latex@error
+     {Missing 'biblatex' package}
+     {The bibliography requires the 'biblatex' package.}
+      \aftergroup\endinput}
+  {}
+\endgroup
+
+
+\refsection{0}
+  \datalist[entry]{nty/global//global/global}
+    \entry{cabal}{online}{}
+      \name{author}{1}{}{%
+        {{hash=9a907ef900044e9da3c1fbdbd795559c}{%
+           family={Cabal},
+           familyi={C\bibinitperiod},
+           given={Alex},
+           giveni={A\bibinitperiod}}}%
+      }
+      \strng{namehash}{9a907ef900044e9da3c1fbdbd795559c}
+      \strng{fullhash}{9a907ef900044e9da3c1fbdbd795559c}
+      \strng{bibnamehash}{9a907ef900044e9da3c1fbdbd795559c}
+      \strng{authorbibnamehash}{9a907ef900044e9da3c1fbdbd795559c}
+      \strng{authornamehash}{9a907ef900044e9da3c1fbdbd795559c}
+      \strng{authorfullhash}{9a907ef900044e9da3c1fbdbd795559c}
+      \field{labelalpha}{Cab13}
+      \field{sortinit}{C}
+      \field{sortinithash}{4c244ceae61406cdc0cc2ce1cb1ff703}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{title}{Creating the perfect GPG keypair}
+      \field{year}{2013}
+      \true{nocite}
+      \verb{urlraw}
+      \verb https://alexcabal.com/creating-the-perfect-gpg-keypair/
+      \endverb
+      \verb{url}
+      \verb https://alexcabal.com/creating-the-perfect-gpg-keypair/
+      \endverb
+      \keyw{inglese}
+    \endentry
+    \entry{drduh}{online}{}
+      \name{author}{1}{}{%
+        {{hash=4b456b4679e347ecc65cf395b9311659}{%
+           family={Drduh},
+           familyi={D\bibinitperiod}}}%
+      }
+      \strng{namehash}{4b456b4679e347ecc65cf395b9311659}
+      \strng{fullhash}{4b456b4679e347ecc65cf395b9311659}
+      \strng{bibnamehash}{4b456b4679e347ecc65cf395b9311659}
+      \strng{authorbibnamehash}{4b456b4679e347ecc65cf395b9311659}
+      \strng{authornamehash}{4b456b4679e347ecc65cf395b9311659}
+      \strng{authorfullhash}{4b456b4679e347ecc65cf395b9311659}
+      \field{labelalpha}{Drd20}
+      \field{sortinit}{D}
+      \field{sortinithash}{c438b3d5d027251ba63f5ed538d98af5}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{title}{Guide to using YubiKey as a SmartCard for GPG and SSH}
+      \field{year}{2020}
+      \true{nocite}
+      \verb{urlraw}
+      \verb https://github.com/drduh/YubiKey-Guide
+      \endverb
+      \verb{url}
+      \verb https://github.com/drduh/YubiKey-Guide
+      \endverb
+      \keyw{inglese}
+    \endentry
+    \entry{gnupg:keylength}{online}{}
+      \name{author}{1}{}{%
+        {{hash=e49deda8d4eec72db2bf76c16ffc6918}{%
+           family={Gnupg.org},
+           familyi={G\bibinitperiod}}}%
+      }
+      \strng{namehash}{e49deda8d4eec72db2bf76c16ffc6918}
+      \strng{fullhash}{e49deda8d4eec72db2bf76c16ffc6918}
+      \strng{bibnamehash}{e49deda8d4eec72db2bf76c16ffc6918}
+      \strng{authorbibnamehash}{e49deda8d4eec72db2bf76c16ffc6918}
+      \strng{authornamehash}{e49deda8d4eec72db2bf76c16ffc6918}
+      \strng{authorfullhash}{e49deda8d4eec72db2bf76c16ffc6918}
+      \field{labelalpha}{Gnu15}
+      \field{sortinit}{G}
+      \field{sortinithash}{62eb2aa29549e4fdbd3cb154ec5711cb}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{title}{Why does GnuPG default to 2048 bit RSA-2048?}
+      \field{year}{2015}
+      \verb{urlraw}
+      \verb https://www.gnupg.org/faq/gnupg-faq.html#default_rsa2048
+      \endverb
+      \verb{url}
+      \verb https://www.gnupg.org/faq/gnupg-faq.html#default_rsa2048
+      \endverb
+      \keyw{inglese}
+    \endentry
+    \entry{riseup}{online}{}
+      \name{author}{1}{}{%
+        {{hash=0b8678d65f821e9a765cf080aa8845f4}{%
+           family={Riseup},
+           familyi={R\bibinitperiod}}}%
+      }
+      \strng{namehash}{0b8678d65f821e9a765cf080aa8845f4}
+      \strng{fullhash}{0b8678d65f821e9a765cf080aa8845f4}
+      \strng{bibnamehash}{0b8678d65f821e9a765cf080aa8845f4}
+      \strng{authorbibnamehash}{0b8678d65f821e9a765cf080aa8845f4}
+      \strng{authornamehash}{0b8678d65f821e9a765cf080aa8845f4}
+      \strng{authorfullhash}{0b8678d65f821e9a765cf080aa8845f4}
+      \field{labelalpha}{Ris}
+      \field{sortinit}{R}
+      \field{sortinithash}{b9c68a358aea118dfa887b6e902414a7}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{title}{OpenPGP Best Practices}
+      \true{nocite}
+      \verb{urlraw}
+      \verb https://riseup.net/en/security/message-security/openpgp/best-practices
+      \endverb
+      \verb{url}
+      \verb https://riseup.net/en/security/message-security/openpgp/best-practices
+      \endverb
+      \keyw{inglese}
+    \endentry
+    \entry{severance}{online}{}
+      \name{author}{1}{}{%
+        {{hash=3b314ff4174574685049b9be80a85256}{%
+           family={Severance},
+           familyi={S\bibinitperiod},
+           given={Eric},
+           giveni={E\bibinitperiod}}}%
+      }
+      \strng{namehash}{3b314ff4174574685049b9be80a85256}
+      \strng{fullhash}{3b314ff4174574685049b9be80a85256}
+      \strng{bibnamehash}{3b314ff4174574685049b9be80a85256}
+      \strng{authorbibnamehash}{3b314ff4174574685049b9be80a85256}
+      \strng{authornamehash}{3b314ff4174574685049b9be80a85256}
+      \strng{authorfullhash}{3b314ff4174574685049b9be80a85256}
+      \field{labelalpha}{Sev15}
+      \field{sortinit}{S}
+      \field{sortinithash}{c319cff79d99c853d775f88277d4e45f}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{title}{PGP and SSH keys on a Yubikey NEO}
+      \field{year}{2015}
+      \true{nocite}
+      \verb{urlraw}
+      \verb https://www.esev.com/blog/post/2015-01-pgp-ssh-key-on-yubikey-neo/
+      \endverb
+      \verb{url}
+      \verb https://www.esev.com/blog/post/2015-01-pgp-ssh-key-on-yubikey-neo/
+      \endverb
+      \keyw{inglese}
+    \endentry
+    \entry{thapaliya}{online}{}
+      \name{author}{1}{}{%
+        {{hash=d08b5ceea8c0de7e69980ba2600682d1}{%
+           family={Thapaliya},
+           familyi={T\bibinitperiod},
+           given={Suvash},
+           giveni={S\bibinitperiod}}}%
+      }
+      \strng{namehash}{d08b5ceea8c0de7e69980ba2600682d1}
+      \strng{fullhash}{d08b5ceea8c0de7e69980ba2600682d1}
+      \strng{bibnamehash}{d08b5ceea8c0de7e69980ba2600682d1}
+      \strng{authorbibnamehash}{d08b5ceea8c0de7e69980ba2600682d1}
+      \strng{authornamehash}{d08b5ceea8c0de7e69980ba2600682d1}
+      \strng{authorfullhash}{d08b5ceea8c0de7e69980ba2600682d1}
+      \field{labelalpha}{Tha17}
+      \field{sortinit}{T}
+      \field{sortinithash}{51f9faf24c60c62ca764a77f78cf5666}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{title}{Using GPG and SSH keys (GnuPG 2.1) with a Smartcard (Yubikey 4)}
+      \field{year}{2017}
+      \true{nocite}
+      \verb{urlraw}
+      \verb https://suva.sh/posts/gpg-ssh-smartcard-yubikey-keybase/
+      \endverb
+      \verb{url}
+      \verb https://suva.sh/posts/gpg-ssh-smartcard-yubikey-keybase/
+      \endverb
+      \keyw{inglese}
+    \endentry
+    \entry{tjl73}{online}{}
+      \name{author}{1}{}{%
+        {{hash=478b3b43e0d6745989758f449bc8824c}{%
+           family={Tjl73},
+           familyi={T\bibinitperiod}}}%
+      }
+      \strng{namehash}{478b3b43e0d6745989758f449bc8824c}
+      \strng{fullhash}{478b3b43e0d6745989758f449bc8824c}
+      \strng{bibnamehash}{478b3b43e0d6745989758f449bc8824c}
+      \strng{authorbibnamehash}{478b3b43e0d6745989758f449bc8824c}
+      \strng{authornamehash}{478b3b43e0d6745989758f449bc8824c}
+      \strng{authorfullhash}{478b3b43e0d6745989758f449bc8824c}
+      \field{labelalpha}{Tjl13}
+      \field{sortinit}{T}
+      \field{sortinithash}{51f9faf24c60c62ca764a77f78cf5666}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{title}{Creazione di chiavi sicure (ossìa, come generare con GnuPG una coppia di chiavi per poterla conservare in modo ``abbastanza'' sicuro}
+      \field{year}{2013}
+      \true{nocite}
+      \verb{urlraw}
+      \verb http://tjl73.altervista.org/secure_keygen/
+      \endverb
+      \verb{url}
+      \verb http://tjl73.altervista.org/secure_keygen/
+      \endverb
+      \keyw{italiano}
+    \endentry
+    \entry{debian}{online}{}
+      \name{author}{1}{}{%
+        {{hash=f86b99cfc51c39098d792fa0189cabfb}{%
+           family={Wiki},
+           familyi={W\bibinitperiod},
+           given={Debian},
+           giveni={D\bibinitperiod}}}%
+      }
+      \strng{namehash}{f86b99cfc51c39098d792fa0189cabfb}
+      \strng{fullhash}{f86b99cfc51c39098d792fa0189cabfb}
+      \strng{bibnamehash}{f86b99cfc51c39098d792fa0189cabfb}
+      \strng{authorbibnamehash}{f86b99cfc51c39098d792fa0189cabfb}
+      \strng{authornamehash}{f86b99cfc51c39098d792fa0189cabfb}
+      \strng{authorfullhash}{f86b99cfc51c39098d792fa0189cabfb}
+      \field{labelalpha}{Wik18}
+      \field{sortinit}{W}
+      \field{sortinithash}{1af34bd8c148ffb32de1494636b49713}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{title}{Subkeys}
+      \field{year}{2018}
+      \true{nocite}
+      \verb{urlraw}
+      \verb https://wiki.debian.org/Subkeys
+      \endverb
+      \verb{url}
+      \verb https://wiki.debian.org/Subkeys
+      \endverb
+      \keyw{inglese}
+    \endentry
+    \entry{wiki:crittografia}{online}{}
+      \name{author}{1}{}{%
+        {{hash=9c677286866aad38f8e9b660f5411814}{%
+           family={Wikipedia},
+           familyi={W\bibinitperiod}}}%
+      }
+      \strng{namehash}{9c677286866aad38f8e9b660f5411814}
+      \strng{fullhash}{9c677286866aad38f8e9b660f5411814}
+      \strng{bibnamehash}{9c677286866aad38f8e9b660f5411814}
+      \strng{authorbibnamehash}{9c677286866aad38f8e9b660f5411814}
+      \strng{authornamehash}{9c677286866aad38f8e9b660f5411814}
+      \strng{authorfullhash}{9c677286866aad38f8e9b660f5411814}
+      \field{extraname}{1}
+      \field{labelalpha}{Wik20}
+      \field{sortinit}{W}
+      \field{sortinithash}{1af34bd8c148ffb32de1494636b49713}
+      \field{extraalpha}{1}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{title}{Crittografia asimmetrica}
+      \field{year}{2020}
+      \verb{urlraw}
+      \verb https://it.wikipedia.org/wiki/Crittografia_asimmetrica
+      \endverb
+      \verb{url}
+      \verb https://it.wikipedia.org/wiki/Crittografia_asimmetrica
+      \endverb
+      \keyw{italiano}
+    \endentry
+    \entry{wiki:ksp}{online}{}
+      \name{author}{1}{}{%
+        {{hash=9c677286866aad38f8e9b660f5411814}{%
+           family={Wikipedia},
+           familyi={W\bibinitperiod}}}%
+      }
+      \strng{namehash}{9c677286866aad38f8e9b660f5411814}
+      \strng{fullhash}{9c677286866aad38f8e9b660f5411814}
+      \strng{bibnamehash}{9c677286866aad38f8e9b660f5411814}
+      \strng{authorbibnamehash}{9c677286866aad38f8e9b660f5411814}
+      \strng{authornamehash}{9c677286866aad38f8e9b660f5411814}
+      \strng{authorfullhash}{9c677286866aad38f8e9b660f5411814}
+      \field{extraname}{2}
+      \field{labelalpha}{Wik20}
+      \field{sortinit}{W}
+      \field{sortinithash}{1af34bd8c148ffb32de1494636b49713}
+      \field{extraalpha}{2}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{title}{Key signing party}
+      \field{year}{2020}
+      \verb{urlraw}
+      \verb https://it.wikipedia.org/wiki/Key_signing_party
+      \endverb
+      \verb{url}
+      \verb https://it.wikipedia.org/wiki/Key_signing_party
+      \endverb
+      \keyw{italiano}
+    \endentry
+    \entry{wiki:webtrust}{online}{}
+      \name{author}{1}{}{%
+        {{hash=9c677286866aad38f8e9b660f5411814}{%
+           family={Wikipedia},
+           familyi={W\bibinitperiod}}}%
+      }
+      \strng{namehash}{9c677286866aad38f8e9b660f5411814}
+      \strng{fullhash}{9c677286866aad38f8e9b660f5411814}
+      \strng{bibnamehash}{9c677286866aad38f8e9b660f5411814}
+      \strng{authorbibnamehash}{9c677286866aad38f8e9b660f5411814}
+      \strng{authornamehash}{9c677286866aad38f8e9b660f5411814}
+      \strng{authorfullhash}{9c677286866aad38f8e9b660f5411814}
+      \field{extraname}{3}
+      \field{labelalpha}{Wik20}
+      \field{sortinit}{W}
+      \field{sortinithash}{1af34bd8c148ffb32de1494636b49713}
+      \field{extraalpha}{3}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{title}{Web of Trust}
+      \field{year}{2020}
+      \verb{urlraw}
+      \verb https://it.wikipedia.org/wiki/Web_of_trust
+      \endverb
+      \verb{url}
+      \verb https://it.wikipedia.org/wiki/Web_of_trust
+      \endverb
+      \keyw{italiano}
+    \endentry
+    \entry{yubico:keylength}{online}{}
+      \name{author}{1}{}{%
+        {{hash=d64537cc32debef2d5eed7f739f6ea5c}{%
+           family={Yubico},
+           familyi={Y\bibinitperiod}}}%
+      }
+      \strng{namehash}{d64537cc32debef2d5eed7f739f6ea5c}
+      \strng{fullhash}{d64537cc32debef2d5eed7f739f6ea5c}
+      \strng{bibnamehash}{d64537cc32debef2d5eed7f739f6ea5c}
+      \strng{authorbibnamehash}{d64537cc32debef2d5eed7f739f6ea5c}
+      \strng{authornamehash}{d64537cc32debef2d5eed7f739f6ea5c}
+      \strng{authorfullhash}{d64537cc32debef2d5eed7f739f6ea5c}
+      \field{labelalpha}{Yub15}
+      \field{sortinit}{Y}
+      \field{sortinithash}{6ae2ff5458ff901249c2745238c951b7}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{title}{The Big Debate, 2048 vs. 4096, Yubico’s Position}
+      \field{year}{2015}
+      \verb{urlraw}
+      \verb https://www.yubico.com/2015/02/big-debate-2048-4096-yubicos-stand/
+      \endverb
+      \verb{url}
+      \verb https://www.yubico.com/2015/02/big-debate-2048-4096-yubicos-stand/
+      \endverb
+      \keyw{inglese}
+    \endentry
+  \enddatalist
+\endrefsection
+\endinput
+

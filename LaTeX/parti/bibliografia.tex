@@ -1,0 +1,11 @@
+\cleardoublepage
+\phantomsection
+\addcontentsline{toc}{chapter}{\bibname}
+\printbibheading
+
+% Includi le opere non citate espressamente nel documento ma da includere nella
+% bibliografia.
+\nocite{*}
+
+\printbibliography[keyword=italiano,heading=subbibliography,title={Opere in italiano}]
+\printbibliography[keyword=inglese,heading=subbibliography,title={Opere in inglese}]

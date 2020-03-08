@@ -1,0 +1,153 @@
+\chapter{Fare il backup}
+
+Dopo aver generato il nostro mazzo di chiavi \emph{è fondamentale farne il
+backup}. Davvero, non si prenda alla leggera questo passaggio e \emph{non
+proseguite oltre se non fate il backup}.
+
+Faremo il backup di questi tre elementi:
+
+\begin{itemize}
+    \item directory di GnuPG;
+    \item chiavi;
+    \item certificato di revoca.
+\end{itemize}
+
+Creiamo una directory \texttt{backup} e relative sottodirectory sulla scrivania
+del \textsc{pc} dove metteremo tutti i file del backup:
+
+\begin{lstlisting}
+mkdir -p /home/user/Scrivania/backup/directory_gnupg
+mkdir /home/user/Scrivania/backup/chiavi
+mkdir /home/user/Scrivania/backup/certificato_di_revoca
+\end{lstlisting}
+
+
+Cambiate \texttt{Scrivania} con \texttt{Desktop} se è il vostro caso.
+
+\section{Backup della directory di GnuPG}
+\label{backup-directory-gnupg}
+
+Anzitutto facciamo il backup di tutta la directory di GnuPG così come si trova
+in questo momento. Qualora qualcosa dovesse andare storto, potremmo sempre
+ripristinarla e cominciare daccapo.
+
+\begin{lstlisting}
+cp -r /home/user/.gnupg/ /home/user/Scrivania/backup/directory_gnupg/
+\end{lstlisting}
+
+Verificate che nella directory di backup ci sia la sotto-directory\newline
+\texttt{private-keys-v1.d} con all'interno i file privati delle chiavi. Ce ne
+devono essere uno per ogni chiave privata, vale a dire uno per la chiave master
+e uno per ogni sottochiave.
+
+\section{Backup delle chiavi} \label{backup-chiavi}
+
+Vediamo anzitutto la situazione delle nostre chiavi private:
+
+\begin{lstlisting}
+gpg --list-secret-keys
+\end{lstlisting}
+
+che restituirà qualcosa del tipo:
+
+\begin{lstlisting}
+sec   rsa4096/0x9F676B5A4B6E6777 2018-04-01 [C] [expires: 2021-03-31]
+      Key fingerprint = 4915 3275 9708 0147 25CF  E3A7 9F67 6B5A 4B6E 6777
+      Keygrip = C6D1CD1D12CBBC8FA14D30004EAF381803A72597
+uid                   [ultimate] Mario Rossi <mario.rossi@example.com>
+ssb   rsa2048/0xE7E0CAF69114F367 2018-04-01 [S] [expires: 2019-04-01]
+      Keygrip = 135159EDEFB9FCB6062F9DE0E21FD90CB07DA041
+ssb   rsa2048/0x3C91B3682F3AC08A 2018-04-01 [E] [expires: 2019-04-01]
+      Keygrip = C74D47329D5D224B0716879DCF3A4EC2D8951C53
+ssb   rsa2048/0x465ED456AFBE0F10 2018-04-01 [A] [expires: 2019-04-01]
+      Keygrip = 30DEE8A060F3562CD6F1384E0F883D65477E596A
+\end{lstlisting}
+
+Procediamo ad effettuare un backup di tutta la chiave (principale e sottochiavi)
+e anche delle singole chiavi. Questo è quello che otterremo:
+
+\begin{enumerate}
+ \item backup chiave completa;
+ \item backup chiave principale;
+ \item backup di tutte le sottochiavi;
+ \item backup sottochiave di firma;
+ \item backup sottochiave di cifratura;
+ \item backup sottochiave di autenticazione;
+ \item backup chiave pubblica;
+ \item backup chiave \textsc{ssh}.
+\end{enumerate}
+
+Qui di sotto gli otto comandi di cui sopra, eseguiti uno dopo l'altro. Notate
+come in alcuni casi l'opzione è \verb+--export-secret-keys+ oppure
+\verb+--export-secret-key+ senza \texttt{s} e con un punto esclamativo
+\texttt{!} dopo l'\textsc{id} della chiave. Stesso discorso per
+\verb+--export-secret-subkeys+ ed \verb+--export-secret-subkey+. Si veda la
+tabella \vref{table:exportkeys} per una visione d'insieme.
+
+\begin{lstlisting}
+gpg --armor --export-secret-keys 0x9F676B5A4B6E6777 > /home/user/Scrivania/backup/chiavi/1_principale_con_sottochiavi_0x9F676B5A4B6E6777.asc
+gpg --armor --export-secret-key 0x9F676B5A4B6E6777! > /home/user/Scrivania/backup/chiavi/2_principale_soltanto_0x9F676B5A4B6E6777.asc
+gpg --armor --export-secret-subkeys 0x9F676B5A4B6E6777 > /home/user/Scrivania/backup/chiavi/3_sottochiavi_0x9F676B5A4B6E6777.asc
+gpg --armor --export-secret-subkey 0xE7E0CAF69114F367! > /home/user/Scrivania/backup/chiavi/4_sottochiave_firma_0xE7E0CAF69114F367.asc
+gpg --armor --export-secret-subkey 0x3C91B3682F3AC08A! > /home/user/Scrivania/backup/chiavi/5_sottochiave_cifratura_0x3C91B3682F3AC08A.asc
+gpg --armor --export-secret-subkey 0x465ED456AFBE0F10! > /home/user/Scrivania/backup/chiavi/6_sottochiave_autenticazione_0x465ED456AFBE0F10.asc
+gpg --armor --export 0x9F676B5A4B6E6777 > /home/user/Scrivania/backup/chiavi/7_chiave_pubblica_0x9F676B5A4B6E6777.asc
+gpg --armor --export-ssh-key 0x9F676B5A4B6E6777 > /home/user/Scrivania/backup/chiavi/8_chiave_pubblica_ssh_0x9F676B5A4B6E6777.asc
+\end{lstlisting}
+
+\begin{table}
+    \centering
+	\begin{tabularx}{\textwidth}{l p{5cm}}
+ 		\toprule
+		\textsc{Opzione} & \textsc{Descrizione} \\
+		\midrule
+		\texttt{export \{chiave\}}                & Esporta la chiave pubblica identificata da \{chiave\}              \\
+		\texttt{export-ssh-key \{chiave\}}        & Esporta la chiave pubblica \textsc{ssh} identificata da \{chiave\} \\
+		\texttt{export-secret-keys \{chiave\}}    & Esporta tutto il mazzo di chiavi private                           \\
+		\texttt{export-secret-key \{chiave\}!}    & Esporta solo la chiave privata master identificata da \{chiave\}   \\
+		\texttt{export-secret-subkeys \{chiave\}} & Esporta tutte le sottochiavi private                               \\
+		\texttt{export-secret-subkey \{chiave\}!} & Esporta la sottochiave privata identificata da \{chiave\}          \\
+		\bottomrule
+	\end{tabularx}
+	\caption{Le opzioni di GnuPG per esportare le chiavi.}
+	\label{table:exportkeys}
+\end{table}
+
+\section{Backup del certificato di revoca} \label{backup-certificato-revoca}
+
+Come abbiamo detto al paragrafo \vref{certificato-revoca} sul certificato di
+revoca, questo è stato già creato da GnuPG versione 2 nella directory
+\texttt{/home/user/.gnupg/openpgp-revocs.d/} ed il file ha lo stesso nome
+dell'impronta della chiave, nel nostro caso \newline
+\texttt{491532759708014725CFE3A79F676B5A4B6E6777.rev}.
+
+Spostiamolo dalla directory \texttt{/home/user/.gnupg} alla directory di backup:
+
+\begin{lstlisting}
+mv /home/user/.gnupg/openpgp-revocs.d/491532759708014725CFE3A79F676B5A4B6E6777.rev /home/user/Scrivania/backup/certificato_di_revoca/
+\end{lstlisting}
+
+Eventualmente è anche possibile stampare su carta il certificato e conservarlo
+in cassaforte.
+
+\section{Spostare la directory di backup in un luogo sicuro}
+
+Finito il backup, spostare la directory \texttt{/home/user/Scrivania/backup} in
+almeno due supporti da conservare in due luoghi distinti e sicuri.
+
+A seconda di quanta importanza hanno queste chiavi per voi, posso consigliare
+una situazione del genere:
+
+\begin{itemize}
+ \item copia della cartella su una chiavetta \textsc{usb} da usare \emph{solo}
+ per questo scopo, conservata in un luogo sicuro e nascosto, ad esempio la
+ vostra cassaforte in casa;
+ \item copia di sicurezza su una seconda chiavetta \textsc{usb} da usare
+ \emph{solo} per questo scopo, conservata in un altro luogo sicuro e nascosto,
+ ad esempio la vostra cassetta di sicurezza in banca.
+\end{itemize}
+
+Chiaramente non complicatevi la vita, ma prendete le dovute precauzioni per
+proteggere le chiavi. Sappiate però che, se perdete la YubiKey (se la usate per
+le vostre sottochiavi) e se perdete i vostri backup, non potrete più accedere ai
+vostri file cifrati.

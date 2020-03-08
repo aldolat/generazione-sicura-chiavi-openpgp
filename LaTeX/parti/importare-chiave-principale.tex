@@ -1,0 +1,66 @@
+\chapter{Importare la chiave principale} \label{importare-chiave}
+
+Quando periodicamente dovrete fare operazioni occasionali sul vostro portachiavi
+o se dovete firmare (certificare) una chiave altrui, vi servirà la chiave
+principale. Per fare queste operazioni dovrete importare la chiave principale
+nel vostro portachiavi, fare l'operazione e quindi cancellarla nuovamente.
+
+C'è un altro metodo per fare uso della chiave principale, come ad esempio dire
+momentaneamente a GnuPG che la sua \emph{home} non è \texttt{/home/user/.gnupg}
+ma un'altra directory. Io non ho mai usato questo sistema, per cui scrivo solo
+quello che uso io.
+
+Accertatevi di avere accesso dal terminale alla directory dove c'è il vostro
+backup. Lo scopo è quello di copiare il file \texttt{.key} della chiave master
+dal backup alla directory attuale di lavoro di GnuPG.
+
+\begin{lstlisting}
+cp directory-backup-gnupg/private-keys-v1.d/C6D1CD1D12CBBC8FA14D30004EAF381803A72597.key /home/user/.gnupg/private-keys-v1.d/C6D1CD1D12CBBC8FA14D30004EAF381803A72597.key
+\end{lstlisting}
+
+Effettuare quindi le operazioni che dovevamo compiere e, alla fine, eliminarla
+nuovamente:
+
+\begin{lstlisting}
+cp rm /home/user/.gnupg/private-keys-v1.d/C6D1CD1D12CBBC8FA14D30004EAF381803A72597.key
+\end{lstlisting}
+
+Accertatevi ora che la chiave master non ci sia più con:
+
+\begin{lstlisting}
+gpg --list-secret-keys
+\end{lstlisting}
+
+che dovrebbe restituire qualcosa di simile a questo:
+
+\begin{lstlisting}
+sec#  rsa4096/0x9F676B5A4B6E6777 2018-04-01 [C] [expires: 2021-03-31]
+      Key fingerprint = 4915 3275 9708 0147 25CF  E3A7 9F67 6B5A 4B6E 6777
+      Keygrip = C6D1CD1D12CBBC8FA14D30004EAF381803A72597
+uid                   [ultimate] Mario Rossi <mario.rossi@example.com>
+ssb>  rsa2048/0xE7E0CAF69114F367 2018-04-01 [S] [expires: 2019-04-01]
+      Keygrip = 135159EDEFB9FCB6062F9DE0E21FD90CB07DA041
+ssb>  rsa2048/0x3C91B3682F3AC08A 2018-04-01 [E] [expires: 2019-04-01]
+      Keygrip = C74D47329D5D224B0716879DCF3A4EC2D8951C53
+ssb>  rsa2048/0x465ED456AFBE0F10 2018-04-01 [A] [expires: 2019-04-01]
+      Keygrip = 30DEE8A060F3562CD6F1384E0F883D65477E596A
+\end{lstlisting}
+
+o a questo, se avete deciso di tenere le sottochiavi nel disco:
+
+\begin{lstlisting}
+sec#  rsa4096/0x9F676B5A4B6E6777 2018-04-01 [C] [expires: 2021-03-31]
+      Key fingerprint = 4915 3275 9708 0147 25CF  E3A7 9F67 6B5A 4B6E 6777
+      Keygrip = C6D1CD1D12CBBC8FA14D30004EAF381803A72597
+uid                   [ultimate] Mario Rossi <mario.rossi@example.com>
+ssb   rsa2048/0xE7E0CAF69114F367 2018-04-01 [S] [expires: 2019-04-01]
+      Keygrip = 135159EDEFB9FCB6062F9DE0E21FD90CB07DA041
+ssb   rsa2048/0x3C91B3682F3AC08A 2018-04-01 [E] [expires: 2019-04-01]
+      Keygrip = C74D47329D5D224B0716879DCF3A4EC2D8951C53
+ssb   rsa2048/0x465ED456AFBE0F10 2018-04-01 [A] [expires: 2019-04-01]
+      Keygrip = 30DEE8A060F3562CD6F1384E0F883D65477E596A
+\end{lstlisting}
+
+
+C'è il simbolo \texttt{\#} dopo la parola \texttt{sec}, per cui la chiave master
+non c'è più.
