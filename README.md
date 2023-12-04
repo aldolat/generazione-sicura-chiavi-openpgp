@@ -660,15 +660,15 @@ Procediamo ad effettuare un backup di tutta la chiave (principale e sottochiavi)
 1. backup chiave pubblica;
 1. backup chiave SSH.
 
-Qui di sotto gli otto comandi di cui sopra, eseguiti uno dopo l'altro. Notate come in alcuni casi l'opzione è `--export-secret-keys` oppure `export-secret-key` senza `s` e con un punto esclamativo `!` dopo l'ID della chiave.
+Qui di sotto gli otto comandi di cui sopra, eseguiti uno dopo l'altro. Notate come in alcuni casi l'opzione è `--export-secret-keys` oppure `export-secret-subkeys` e con un punto esclamativo `!` dopo l'ID della chiave.
 
 ```bash
 gpg --armor --export-secret-keys 0x9F676B5A4B6E6777 > ~/Scrivania/backup/chiavi/1_principale_con_sottochiavi_0x9F676B5A4B6E6777.asc
 gpg --armor --export-secret-key 0x9F676B5A4B6E6777! > ~/Scrivania/backup/chiavi/2_principale_soltanto_0x9F676B5A4B6E6777.asc
 gpg --armor --export-secret-subkeys 0x9F676B5A4B6E6777 > ~/Scrivania/backup/chiavi/3_sottochiavi_0x9F676B5A4B6E6777.asc
-gpg --armor --export-secret-subkey 0xE7E0CAF69114F367! > ~/Scrivania/backup/chiavi/4_sottochiave_firma_0xE7E0CAF69114F367.asc
-gpg --armor --export-secret-subkey 0x3C91B3682F3AC08A! > ~/Scrivania/backup/chiavi/5_sottochiave_cifratura_0x3C91B3682F3AC08A.asc
-gpg --armor --export-secret-subkey 0x465ED456AFBE0F10! > ~/Scrivania/backup/chiavi/6_sottochiave_autenticazione_0x465ED456AFBE0F10.asc
+gpg --armor --export-secret-subkeys 0xE7E0CAF69114F367! > ~/Scrivania/backup/chiavi/4_sottochiave_firma_0xE7E0CAF69114F367.asc
+gpg --armor --export-secret-subkeys 0x3C91B3682F3AC08A! > ~/Scrivania/backup/chiavi/5_sottochiave_cifratura_0x3C91B3682F3AC08A.asc
+gpg --armor --export-secret-subkeys 0x465ED456AFBE0F10! > ~/Scrivania/backup/chiavi/6_sottochiave_autenticazione_0x465ED456AFBE0F10.asc
 gpg --armor --export 0x9F676B5A4B6E6777 > ~/Scrivania/backup/chiavi/7_chiave_pubblica_0x9F676B5A4B6E6777.asc
 gpg --armor --export-ssh-key 0x9F676B5A4B6E6777 > ~/Scrivania/backup/chiavi/8_chiave_pubblica_ssh_0x9F676B5A4B6E6777.asc
 ```

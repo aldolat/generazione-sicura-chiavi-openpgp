@@ -1,0 +1,15 @@
+[0] Config.pm:307> INFO - This is Biber 2.19
+[0] Config.pm:310> INFO - Logfile is 'generazione-sicura-chiavi-openpgp.blg'
+[134] biber:340> INFO - === lun dic  4, 2023, 18:31:05
+[159] Biber.pm:419> INFO - Reading 'generazione-sicura-chiavi-openpgp.bcf'
+[258] Biber.pm:976> INFO - Using all citekeys in bib section 0
+[281] Biber.pm:4419> INFO - Processing section 0
+[296] Biber.pm:4610> INFO - Looking for bibtex file 'bibliografia.bib' for section 0
+[297] bibtex.pm:1713> INFO - LaTeX decoding ...
+[309] bibtex.pm:1519> INFO - Found BibTeX data source 'bibliografia.bib'
+[423] UCollate.pm:68> INFO - Overriding locale 'it-IT' defaults 'normalization = NFD' with 'normalization = prenormalized'
+[423] UCollate.pm:68> INFO - Overriding locale 'it-IT' defaults 'variable = shifted' with 'variable = non-ignorable'
+[423] Biber.pm:4239> INFO - Sorting list 'nty/global//global/global' of type 'entry' with template 'nty' and locale 'it-IT'
+[423] Biber.pm:4245> INFO - No sort tailoring available for locale 'it-IT'
+[445] bbl.pm:660> INFO - Writing 'generazione-sicura-chiavi-openpgp.bbl' with encoding 'UTF-8'
+[451] bbl.pm:763> INFO - Output to generazione-sicura-chiavi-openpgp.bbl

@@ -79,14 +79,14 @@ e anche delle singole chiavi. Questo è quello che otterremo:
 
 Qui di sotto gli otto comandi di cui sopra, eseguiti uno dopo l'altro. Notate
 come in alcuni casi l'opzione è \verb+--export-secret-keys+ oppure
-\verb+--export-secret-key+ senza \texttt{s} e con un punto esclamativo
+\verb+--export-secret-subkeys+ e con un punto esclamativo
 \texttt{!} dopo l'\textsc{id} della chiave. Stesso discorso per
 \verb+--export-secret-subkeys+ ed \verb+--export-secret-subkey+. Si veda la
 tabella \vref{table:exportkeys} per una visione d'insieme.
 
 \begin{lstlisting}
 gpg --armor --export-secret-keys 0x9F676B5A4B6E6777 > /home/user/Scrivania/backup/chiavi/1_principale_con_sottochiavi_0x9F676B5A4B6E6777.asc
-gpg --armor --export-secret-key 0x9F676B5A4B6E6777! > /home/user/Scrivania/backup/chiavi/2_principale_soltanto_0x9F676B5A4B6E6777.asc
+gpg --armor --export-secret-keys 0x9F676B5A4B6E6777! > /home/user/Scrivania/backup/chiavi/2_principale_soltanto_0x9F676B5A4B6E6777.asc
 gpg --armor --export-secret-subkeys 0x9F676B5A4B6E6777 > /home/user/Scrivania/backup/chiavi/3_sottochiavi_0x9F676B5A4B6E6777.asc
 gpg --armor --export-secret-subkey 0xE7E0CAF69114F367! > /home/user/Scrivania/backup/chiavi/4_sottochiave_firma_0xE7E0CAF69114F367.asc
 gpg --armor --export-secret-subkey 0x3C91B3682F3AC08A! > /home/user/Scrivania/backup/chiavi/5_sottochiave_cifratura_0x3C91B3682F3AC08A.asc
@@ -101,12 +101,12 @@ gpg --armor --export-ssh-key 0x9F676B5A4B6E6777 > /home/user/Scrivania/backup/ch
  		\toprule
 		\textsc{Opzione} & \textsc{Descrizione} \\
 		\midrule
-		\texttt{export \{chiave\}}                & Esporta la chiave pubblica identificata da \{chiave\}              \\
-		\texttt{export-ssh-key \{chiave\}}        & Esporta la chiave pubblica \textsc{ssh} identificata da \{chiave\} \\
-		\texttt{export-secret-keys \{chiave\}}    & Esporta tutto il mazzo di chiavi private                           \\
-		\texttt{export-secret-key \{chiave\}!}    & Esporta solo la chiave privata master identificata da \{chiave\}   \\
-		\texttt{export-secret-subkeys \{chiave\}} & Esporta tutte le sottochiavi private                               \\
-		\texttt{export-secret-subkey \{chiave\}!} & Esporta la sottochiave privata identificata da \{chiave\}          \\
+		\texttt{export \{chiave\}}                 & Esporta la chiave pubblica identificata da \{chiave\}              \\
+		\texttt{export-ssh-key \{chiave\}}         & Esporta la chiave pubblica \textsc{ssh} identificata da \{chiave\} \\
+		\texttt{export-secret-keys \{chiave\}}     & Esporta tutto il mazzo di chiavi private                           \\
+		\texttt{export-secret-keys \{chiave\}!}    & Esporta solo la chiave privata master identificata da \{chiave\}   \\
+		\texttt{export-secret-subkeys \{chiave\}}  & Esporta tutte le sottochiavi private                               \\
+		\texttt{export-secret-subkeys \{chiave\}!} & Esporta la sottochiave privata identificata da \{chiave\}          \\
 		\bottomrule
 	\end{tabularx}
 	\caption{Le opzioni di GnuPG per esportare le chiavi.}
