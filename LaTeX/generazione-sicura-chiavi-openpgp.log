@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023/Arch Linux) (preloaded format=pdflatex 2023.8.25)  4 DEC 2023 18:31
+This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023/Arch Linux) (preloaded format=pdflatex 2023.8.25)  6 DEC 2023 19:56
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -1188,7 +1188,7 @@ Overfull \hbox (26.44461pt too wide) has occurred while \output is active
 [18] [19
 
 ] [20]
-Overfull \hbox (3.96143pt too wide) in alignment at lines 111--111
+Overfull \hbox (3.96143pt too wide) in alignment at lines 110--110
 [][] 
  []
 
@@ -1240,7 +1240,7 @@ Here is how much of TeX's memory you used:
  59 hyphenation exceptions out of 8191
  108i,24n,132p,10688b,2236s stack positions out of 10000i,1000n,20000p,200000b,200000s
 </usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/euler/eurb10.pfb></usr/share/texmf-dist/fonts/type1/public/fpl/fplrc8a.pfb></usr/share/texmf-dist/fonts/type1/public/fpl/fplrij8a.pfb></usr/share/texmf-dist/fonts/type1/public/bera/fvmr8a.pfb></usr/share/texmf-dist/fonts/type1/nowacki/iwona/iwonab.pfb></usr/share/texmf-dist/fonts/type1/nowacki/iwona/iwonar.pfb></usr/share/texmf-dist/fonts/type1/urw/palatino/uplb8a.pfb></usr/share/texmf-dist/fonts/type1/urw/palatino/uplr8a.pfb></usr/share/texmf-dist/fonts/type1/urw/palatino/uplri8a.pfb>
-Output written on generazione-sicura-chiavi-openpgp.pdf (37 pages, 2837509 bytes).
+Output written on generazione-sicura-chiavi-openpgp.pdf (37 pages, 2837427 bytes).
 PDF statistics:
  1169 PDF objects out of 1200 (max. 8388607)
  1096 compressed objects within 11 object streams

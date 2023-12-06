@@ -660,7 +660,8 @@ Procediamo ad effettuare un backup di tutta la chiave (principale e sottochiavi)
 1. backup chiave pubblica;
 1. backup chiave SSH.
 
-Qui di sotto gli otto comandi di cui sopra, eseguiti uno dopo l'altro. Notate come in alcuni casi l'opzione è `--export-secret-keys` oppure `export-secret-subkeys` e con un punto esclamativo `!` dopo l'ID della chiave.
+Qui di sotto gli otto comandi di cui sopra, eseguiti uno dopo l'altro. Notate come in alcuni casi l'opzione è `--export-secret-keys` oppure `export-secret-subkeys` e con un punto esclamativo `!` dopo l'ID della chiave. Si veda la
+tabella più sotto per una visione d'insieme.
 
 ```bash
 gpg --armor --export-secret-keys 0x9F676B5A4B6E6777 > ~/Scrivania/backup/chiavi/1_principale_con_sottochiavi_0x9F676B5A4B6E6777.asc
@@ -672,6 +673,15 @@ gpg --armor --export-secret-subkeys 0x465ED456AFBE0F10! > ~/Scrivania/backup/chi
 gpg --armor --export 0x9F676B5A4B6E6777 > ~/Scrivania/backup/chiavi/7_chiave_pubblica_0x9F676B5A4B6E6777.asc
 gpg --armor --export-ssh-key 0x9F676B5A4B6E6777 > ~/Scrivania/backup/chiavi/8_chiave_pubblica_ssh_0x9F676B5A4B6E6777.asc
 ```
+
+| Opzione                         | Descrizione                                                    |
+|---------------------------------|----------------------------------------------------------------|
+| export {chiave}                 | Esporta la chiave pubblica identificata da {chiave}            |
+| export-ssh-key {chiave}         | Esporta la chiave pubblica `ssh` identificata da {chiave}      |
+| export-secret-keys {chiave}     | Esporta tutto il mazzo di chiavi private                       |
+| export-secret-keys {chiave}!    | Esporta solo la chiave privata master identificata da {chiave} |
+| export-secret-subkeys {chiave}  | Esporta tutte le sottochiavi private                           |
+| export-secret-subkeys {chiave}! | Esporta la sottochiave privata identificata da {chiave}        |
 
 ### Backup del certificato di revoca
 
