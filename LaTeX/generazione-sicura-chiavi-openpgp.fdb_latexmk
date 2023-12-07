@@ -1,11 +1,11 @@
 # Fdb version 4
-["biber generazione-sicura-chiavi-openpgp"] 1701711064 "generazione-sicura-chiavi-openpgp.bcf" "generazione-sicura-chiavi-openpgp.bbl" "generazione-sicura-chiavi-openpgp" 1701889010 0
-  "generazione-sicura-chiavi-openpgp.bcf" 1701889009 108158 24c7e88bad799d171c813ea89ba2baf9 "pdflatex"
+["biber generazione-sicura-chiavi-openpgp"] 1701711064 "generazione-sicura-chiavi-openpgp.bcf" "generazione-sicura-chiavi-openpgp.bbl" "generazione-sicura-chiavi-openpgp" 1701971595 0
+  "generazione-sicura-chiavi-openpgp.bcf" 1701971595 108158 24c7e88bad799d171c813ea89ba2baf9 "pdflatex"
   (generated)
   "generazione-sicura-chiavi-openpgp.bbl"
   "generazione-sicura-chiavi-openpgp.blg"
   (rewritten before read)
-["pdflatex"] 1701889006 "/home/aldo/src/Generazione sicura di chiavi OpenPGP/LaTeX/generazione-sicura-chiavi-openpgp.tex" "generazione-sicura-chiavi-openpgp.pdf" "generazione-sicura-chiavi-openpgp" 1701889010 0
+["pdflatex"] 1701971591 "/home/aldo/src/Generazione sicura di chiavi OpenPGP/LaTeX/generazione-sicura-chiavi-openpgp.tex" "generazione-sicura-chiavi-openpgp.pdf" "generazione-sicura-chiavi-openpgp" 1701971595 0
   "/home/aldo/src/Generazione sicura di chiavi OpenPGP/LaTeX/generazione-sicura-chiavi-openpgp.tex" 1583680423 778 3483613c89b43da177421f1752aeafd6 ""
   "/usr/share/texmf-dist/fonts/enc/dvips/base/8r.enc" 1689853683 4850 80dc9bab7f31fb78a000ccfed0e27cab ""
   "/usr/share/texmf-dist/fonts/enc/dvips/iwona/ec-iwona-sc.enc" 1689853683 2452 388b1f44dfda03ab19527677af70e7fb ""
@@ -198,13 +198,13 @@
   "/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map" 1692995755 4517149 f6a8c7927b3f65fba9c78f7f956f2766 ""
   "/var/lib/texmf/web2c/pdftex/pdflatex.fmt" 1692995749 6799276 43a54545de9a54eafd5b6e3f89dc12da ""
   "classicthesis-config.tex" 1583680983 3842 780806eba1d9e8a3146c207891523949 ""
-  "generazione-sicura-chiavi-openpgp.aux" 1701889009 20095 ad3c3b6b5ade17f004d5c3b534134759 "pdflatex"
+  "generazione-sicura-chiavi-openpgp.aux" 1701971595 20095 ad3c3b6b5ade17f004d5c3b534134759 "pdflatex"
   "generazione-sicura-chiavi-openpgp.bbl" 1701711066 13911 40b01603ad1ff4c656808e89584f7aa5 "biber generazione-sicura-chiavi-openpgp"
-  "generazione-sicura-chiavi-openpgp.lot" 1701889009 687 5bc6730fa3f799545b201681d6981cbb "pdflatex"
-  "generazione-sicura-chiavi-openpgp.out" 1701889007 0 d41d8cd98f00b204e9800998ecf8427e "pdflatex"
-  "generazione-sicura-chiavi-openpgp.run.xml" 1701889009 2513 17ef4098c50141d111e02ce3cc0a885b "pdflatex"
+  "generazione-sicura-chiavi-openpgp.lot" 1701971595 687 5bc6730fa3f799545b201681d6981cbb "pdflatex"
+  "generazione-sicura-chiavi-openpgp.out" 1701971593 0 d41d8cd98f00b204e9800998ecf8427e "pdflatex"
+  "generazione-sicura-chiavi-openpgp.run.xml" 1701971595 2513 17ef4098c50141d111e02ce3cc0a885b "pdflatex"
   "generazione-sicura-chiavi-openpgp.tex" 1583680423 778 3483613c89b43da177421f1752aeafd6 ""
-  "generazione-sicura-chiavi-openpgp.toc" 1701889009 2335 d88fef706863bc17dc3589b7ea0cdfc0 "pdflatex"
+  "generazione-sicura-chiavi-openpgp.toc" 1701971595 2335 d88fef706863bc17dc3589b7ea0cdfc0 "pdflatex"
   "img//cc-80x15.png" 1483826191 441 3ce7b5b580d595387563ef301aea5f79 ""
   "img//yubikey4.jpg" 1583687910 2594868 24b344def5fa647fe2dad72ce6bde5c8 ""
   "parti/agenti.tex" 1583685054 2104 1192c573c052a3790602c9fafa85631f ""
@@ -212,7 +212,7 @@
   "parti/colophon.tex" 1583687994 656 da6a9f038f6d3085ca83e1460b731866 ""
   "parti/eliminare-chiave-principale.tex" 1583684931 5893 d61ea1509faa13ee2e709c729f2e5a6d ""
   "parti/estendere-validita.tex" 1583679986 1892 626c2b2a1838c0f4ec0fe41e553b9c15 ""
-  "parti/fare-backup.tex" 1701888485 6920 cadd0d0a269d0aefa3f896caccc34d08 ""
+  "parti/fare-backup.tex" 1701971590 6974 616252f7b6d0ca910f7b6457164deb6d ""
   "parti/generazione-chiavi.tex" 1583684576 16359 ad1e40ab2d34de1af1cf44ea359f6882 ""
   "parti/importare-chiave-principale.tex" 1583679759 2991 6dc180d7bea4c7e52f330cfa3e62f96b ""
   "parti/indici.tex" 1583685201 236 397ac589f2361018f323146f4611bab7 ""
