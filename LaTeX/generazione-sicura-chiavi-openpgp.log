@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023/Arch Linux) (preloaded format=pdflatex 2023.12.20)  30 DEC 2023 22:08
+This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023/Arch Linux) (preloaded format=pdflatex 2023.12.20)  31 DEC 2023 05:50
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -1232,15 +1232,15 @@ Package logreq Info: Writing requests to 'generazione-sicura-chiavi-openpgp.run.
 
  ) 
 Here is how much of TeX's memory you used:
- 34467 strings out of 477901
- 629020 string characters out of 5838159
+ 34477 strings out of 477901
+ 629108 string characters out of 5838159
  2118388 words of memory out of 5000000
  52822 multiletter control sequences out of 15000+600000
- 682672 words of font info for 623 fonts, out of 8000000 for 9000
+ 683243 words of font info for 631 fonts, out of 8000000 for 9000
  59 hyphenation exceptions out of 8191
  108i,24n,132p,10688b,2236s stack positions out of 10000i,1000n,20000p,200000b,200000s
 </usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/euler/eurb10.pfb></usr/share/texmf-dist/fonts/type1/public/fpl/fplrc8a.pfb></usr/share/texmf-dist/fonts/type1/public/fpl/fplrij8a.pfb></usr/share/texmf-dist/fonts/type1/public/bera/fvmr8a.pfb></usr/share/texmf-dist/fonts/type1/nowacki/iwona/iwonab.pfb></usr/share/texmf-dist/fonts/type1/nowacki/iwona/iwonar.pfb></usr/share/texmf-dist/fonts/type1/urw/palatino/uplb8a.pfb></usr/share/texmf-dist/fonts/type1/urw/palatino/uplr8a.pfb></usr/share/texmf-dist/fonts/type1/urw/palatino/uplri8a.pfb>
-Output written on generazione-sicura-chiavi-openpgp.pdf (37 pages, 2837203 bytes).
+Output written on generazione-sicura-chiavi-openpgp.pdf (37 pages, 2837192 bytes).
 PDF statistics:
  1169 PDF objects out of 1200 (max. 8388607)
  1096 compressed objects within 11 object streams
