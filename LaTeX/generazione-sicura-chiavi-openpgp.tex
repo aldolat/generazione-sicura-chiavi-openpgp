@@ -1,42 +1,52 @@
 \documentclass[
-	oneside,
-	%openright,
-	%titlepage,
-	numbers=noenddot,
-	%1headlines,
-	headinclude,
-	footinclude,
-	%cleardoublepage=empty,
-	abstract=on,
-	BCOR=5mm,
-	paper=a4,
-	fontsize=11pt
-]{scrreprt}
+	a4paper,
+    10pt,
+    oneside,
+    onecolumn,
+]{article}
 
-\input{classicthesis-config.tex}
+\input{config.tex}
+
+\author{\myName}
+\title{\myTitle}
+\date{\myTime}
+
+\includeonly{%
+    % Parti di servizio
+    parti/titlepage,
+    parti/colophon,
+    parti/indici,
+    % Corpo del testo
+    parti/introduzione,
+    parti/generazione-chiavi,
+    parti/fare-backup,
+    parti/trasferire-chiavi,
+    parti/eliminare-chiave-principale,
+    parti/agenti,
+    parti/importare-chiave-principale,
+    parti/estendere-validita,
+    % Bibliografia
+    parti/bibliografia,
+}
 
 \begin{document}
 
-    \frenchspacing
-
-    \title{\myTitle}
-    \date{\myTime}
-
     % Parti di servizio
-    \input{parti/titlepage}
-    \input{parti/colophon}
-    \input{parti/indici}
+    \include{parti/titlepage}
+    \include{parti/colophon}
+    \include{parti/indici}
 
     % Corpo del testo
-    \input{parti/introduzione}
-    \input{parti/generazione-chiavi}
-    \input{parti/fare-backup}
-    \input{parti/trasferire-chiavi}
-    \input{parti/eliminare-chiave-principale}
-    \input{parti/agenti}
-    \input{parti/importare-chiave-principale}
-    \input{parti/estendere-validita}
+    \include{parti/introduzione}
+    \include{parti/generazione-chiavi}
+    \include{parti/fare-backup}
+    \include{parti/trasferire-chiavi}
+    \include{parti/eliminare-chiave-principale}
+    \include{parti/agenti}
+    \include{parti/importare-chiave-principale}
+    \include{parti/estendere-validita}
 
-    \input{parti/bibliografia}
+    % Bibliografia
+    \include{parti/bibliografia}
 
 \end{document}

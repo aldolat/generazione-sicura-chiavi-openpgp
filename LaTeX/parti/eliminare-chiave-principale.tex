@@ -1,4 +1,4 @@
-\chapter{Eliminare la chiave principale}
+\section{Eliminare la chiave principale}
 
 Se abbiamo scelto di eliminare la chiave principale dal disco, dobbiamo
 anzitutto verificare che versione di GnuPG stiamo usando, perché a seconda della
@@ -16,7 +16,7 @@ versione bisognerà procedere in due modi diversi:
 Nonostante all'inizio della guida ho specificato di usare solo la versione di
 GnuPG 2.1 o successiva, vediamo comunque i due procedimenti nel dettaglio.
 
-\section{GnuPG versione 2.1 o successiva}
+\subsection{GnuPG versione 2.1 o successiva}
 
 GnuPG, dalla versione 2.1 in su, deposita le chiavi private nella directory
 \texttt{/home/user/.gnupg/private-keys-v1.d/} e non più nel file
@@ -48,7 +48,7 @@ comando per eliminare il file è:
 cp rm /home/user/.gnupg/private-keys-v1.d/C6D1CD1D12CBBC8FA14D30004EAF381803A72597.key
 \end{lstlisting}
 
-\noindent oppure usate un programma come \texttt{shred} per eliminarlo in modo
+oppure usate un programma come \texttt{shred} per eliminarlo in modo
 sicuro:
 
 \begin{lstlisting}
@@ -59,7 +59,7 @@ Per le opzioni di \texttt{shred} vedi la tabella \vref{table:shred}.
 
 \begin{table}
     \centering
-    \begin{tabularx}{1\textwidth}{c l}
+    \begin{tabularx}{.6\textwidth}{c l}
         \toprule
         \textsc{Opzione} & \textsc{Descrizione} \\
         \midrule
@@ -69,7 +69,7 @@ Per le opzioni di \texttt{shred} vedi la tabella \vref{table:shred}.
         \texttt{n} & Overwrite $n$ times instead of the default (3). \\
         \bottomrule
     \end{tabularx}
-    \caption{Le opzioni di shred usate in questo \textit{how-to}.}
+    \caption{Le opzioni di shred usate in questo \textit{how-to}}
     \label{table:shred}
 \end{table}
 
@@ -84,7 +84,7 @@ chiave altrui), potrete semplicemente prendere dal backup il file \texttt{.key}
 della chiave master e copiarlo nella directory \texttt{private-keys-v1.d} di
 lavoro. Una volta terminata l'esigenza, potrete eliminare nuovamente il file.
 
-\section{GnuPG precedente alla versione 2.1}
+\subsection{GnuPG precedente alla versione 2.1}
 
 Se avete questa versione di GnuPG, bisognerà procedere con questi passi:
 

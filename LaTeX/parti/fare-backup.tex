@@ -1,4 +1,4 @@
-\chapter{Fare il backup}
+\section{Fare il backup}
 
 Dopo aver generato il nostro mazzo di chiavi \emph{è fondamentale farne il
 backup}. Davvero, non si prenda alla leggera questo passaggio e \emph{non
@@ -24,7 +24,7 @@ mkdir /home/user/Scrivania/backup/certificato_di_revoca
 
 Cambiate \texttt{Scrivania} con \texttt{Desktop} se è il vostro caso.
 
-\section{Backup della directory di GnuPG}
+\subsection{Backup della directory di GnuPG}
 \label{backup-directory-gnupg}
 
 Anzitutto facciamo il backup di tutta la directory di GnuPG così come si trova
@@ -40,7 +40,7 @@ Verificate che nella directory di backup ci sia la sotto-directory\newline
 devono essere uno per ogni chiave privata, vale a dire uno per la chiave master
 e uno per ogni sottochiave.
 
-\section{Backup delle chiavi} \label{backup-chiavi}
+\subsection{Backup delle chiavi} \label{backup-chiavi}
 
 Vediamo anzitutto la situazione delle nostre chiavi private:
 
@@ -96,28 +96,28 @@ gpg --armor --export-ssh-key 0x9F676B5A4B6E6777 > /home/user/Scrivania/backup/ch
 
 \begin{table}
     \centering
-	\begin{tabularx}{\textwidth}{l p{5cm}}
+	\begin{tabularx}{\textwidth}{ll}
  		\toprule
 		\textsc{Opzione} & \textsc{Descrizione} \\
 		\midrule
-		\texttt{export \{chiave\}}                 & Esporta la chiave pubblica identificata \texttt{da \{chiave\}}              \\
-		\texttt{export-ssh-key \{chiave\}}         & Esporta la chiave pubblica \textsc{ssh} identificata \texttt{da \{chiave\}} \\
+		\texttt{export \{chiave\}}                 & Esporta la chiave pubblica identificata da \texttt{\{chiave\}}              \\
+		\texttt{export-ssh-key \{chiave\}}         & Esporta la chiave pubblica \textsc{ssh} identificata da \texttt{\{chiave\}} \\
 		\texttt{export-secret-keys \{chiave\}}     & Esporta tutto il mazzo di chiavi private                                    \\
-		\texttt{export-secret-keys \{chiave\}!}    & Esporta solo la chiave privata master identificata \texttt{da \{chiave\}}   \\
+		\texttt{export-secret-keys \{chiave\}!}    & Esporta solo la chiave privata master identificata da \texttt{\{chiave\}}   \\
 		\texttt{export-secret-subkeys \{chiave\}}  & Esporta tutte le sottochiavi private                                        \\
-		\texttt{export-secret-subkeys \{chiave\}!} & Esporta la sottochiave privata identificata \texttt{da \{chiave\}}          \\
+		\texttt{export-secret-subkeys \{chiave\}!} & Esporta la sottochiave privata identificata da \texttt{\{chiave\}}          \\
 		\bottomrule
 	\end{tabularx}
-	\caption{Le opzioni di GnuPG per esportare le chiavi.}
+	\caption{Le opzioni di GnuPG per esportare le chiavi}
 	\label{table:exportkeys}
 \end{table}
 
-\section{Backup del certificato di revoca} \label{backup-certificato-revoca}
+\subsection{Backup del certificato di revoca} \label{backup-certificato-revoca}
 
 Come abbiamo detto al paragrafo \vref{certificato-revoca} sul certificato di
 revoca, questo è stato già creato da GnuPG versione 2 nella directory
 \texttt{/home/user/.gnupg/openpgp-revocs.d/} ed il file ha lo stesso nome
-dell'impronta della chiave, nel nostro caso \newline
+dell'impronta della chiave, nel nostro caso
 \texttt{491532759708014725CFE3A79F676B5A4B6E6777.rev}.
 
 Spostiamolo dalla directory \texttt{/home/user/.gnupg} alla directory di backup:
@@ -129,7 +129,7 @@ mv /home/user/.gnupg/openpgp-revocs.d/491532759708014725CFE3A79F676B5A4B6E6777.r
 Eventualmente è anche possibile stampare su carta il certificato e conservarlo
 in cassaforte.
 
-\section{Spostare la directory di backup in un luogo sicuro}
+\subsection{Spostare la directory di backup in un luogo sicuro}
 
 Finito il backup, spostare la directory \texttt{/home/user/Scrivania/backup} in
 almeno due supporti da conservare in due luoghi distinti e sicuri.

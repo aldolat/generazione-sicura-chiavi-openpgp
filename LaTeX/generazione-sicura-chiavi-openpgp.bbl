@@ -33,7 +33,6 @@
       \strng{authorbibnamehash}{9a907ef900044e9da3c1fbdbd795559c}
       \strng{authornamehash}{9a907ef900044e9da3c1fbdbd795559c}
       \strng{authorfullhash}{9a907ef900044e9da3c1fbdbd795559c}
-      \field{labelalpha}{Cab13}
       \field{sortinit}{C}
       \field{sortinithash}{4d103a86280481745c9c897c925753c0}
       \field{labelnamesource}{author}
@@ -61,7 +60,6 @@
       \strng{authorbibnamehash}{4b456b4679e347ecc65cf395b9311659}
       \strng{authornamehash}{4b456b4679e347ecc65cf395b9311659}
       \strng{authorfullhash}{4b456b4679e347ecc65cf395b9311659}
-      \field{labelalpha}{Drd20}
       \field{sortinit}{D}
       \field{sortinithash}{6f385f66841fb5e82009dc833c761848}
       \field{labelnamesource}{author}
@@ -89,7 +87,6 @@
       \strng{authorbibnamehash}{e49deda8d4eec72db2bf76c16ffc6918}
       \strng{authornamehash}{e49deda8d4eec72db2bf76c16ffc6918}
       \strng{authorfullhash}{e49deda8d4eec72db2bf76c16ffc6918}
-      \field{labelalpha}{Gnu15}
       \field{sortinit}{G}
       \field{sortinithash}{32d67eca0634bf53703493fb1090a2e8}
       \field{labelnamesource}{author}
@@ -116,7 +113,6 @@
       \strng{authorbibnamehash}{0b8678d65f821e9a765cf080aa8845f4}
       \strng{authornamehash}{0b8678d65f821e9a765cf080aa8845f4}
       \strng{authorfullhash}{0b8678d65f821e9a765cf080aa8845f4}
-      \field{labelalpha}{Ris}
       \field{sortinit}{R}
       \field{sortinithash}{5e1c39a9d46ffb6bebd8f801023a9486}
       \field{labelnamesource}{author}
@@ -145,7 +141,6 @@
       \strng{authorbibnamehash}{3b314ff4174574685049b9be80a85256}
       \strng{authornamehash}{3b314ff4174574685049b9be80a85256}
       \strng{authorfullhash}{3b314ff4174574685049b9be80a85256}
-      \field{labelalpha}{Sev15}
       \field{sortinit}{S}
       \field{sortinithash}{b164b07b29984b41daf1e85279fbc5ab}
       \field{labelnamesource}{author}
@@ -175,7 +170,6 @@
       \strng{authorbibnamehash}{d08b5ceea8c0de7e69980ba2600682d1}
       \strng{authornamehash}{d08b5ceea8c0de7e69980ba2600682d1}
       \strng{authorfullhash}{d08b5ceea8c0de7e69980ba2600682d1}
-      \field{labelalpha}{Tha17}
       \field{sortinit}{T}
       \field{sortinithash}{9af77f0292593c26bde9a56e688eaee9}
       \field{labelnamesource}{author}
@@ -203,7 +197,6 @@
       \strng{authorbibnamehash}{478b3b43e0d6745989758f449bc8824c}
       \strng{authornamehash}{478b3b43e0d6745989758f449bc8824c}
       \strng{authorfullhash}{478b3b43e0d6745989758f449bc8824c}
-      \field{labelalpha}{Tjl13}
       \field{sortinit}{T}
       \field{sortinithash}{9af77f0292593c26bde9a56e688eaee9}
       \field{labelnamesource}{author}
@@ -233,7 +226,6 @@
       \strng{authorbibnamehash}{f86b99cfc51c39098d792fa0189cabfb}
       \strng{authornamehash}{f86b99cfc51c39098d792fa0189cabfb}
       \strng{authorfullhash}{f86b99cfc51c39098d792fa0189cabfb}
-      \field{labelalpha}{Wik18}
       \field{sortinit}{W}
       \field{sortinithash}{4315d78024d0cea9b57a0c6f0e35ed0d}
       \field{labelnamesource}{author}
@@ -262,10 +254,8 @@
       \strng{authornamehash}{9c677286866aad38f8e9b660f5411814}
       \strng{authorfullhash}{9c677286866aad38f8e9b660f5411814}
       \field{extraname}{1}
-      \field{labelalpha}{Wik20}
       \field{sortinit}{W}
       \field{sortinithash}{4315d78024d0cea9b57a0c6f0e35ed0d}
-      \field{extraalpha}{1}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
       \field{title}{Crittografia asimmetrica}
@@ -291,10 +281,8 @@
       \strng{authornamehash}{9c677286866aad38f8e9b660f5411814}
       \strng{authorfullhash}{9c677286866aad38f8e9b660f5411814}
       \field{extraname}{2}
-      \field{labelalpha}{Wik20}
       \field{sortinit}{W}
       \field{sortinithash}{4315d78024d0cea9b57a0c6f0e35ed0d}
-      \field{extraalpha}{2}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
       \field{title}{Key signing party}
@@ -320,10 +308,8 @@
       \strng{authornamehash}{9c677286866aad38f8e9b660f5411814}
       \strng{authorfullhash}{9c677286866aad38f8e9b660f5411814}
       \field{extraname}{3}
-      \field{labelalpha}{Wik20}
       \field{sortinit}{W}
       \field{sortinithash}{4315d78024d0cea9b57a0c6f0e35ed0d}
-      \field{extraalpha}{3}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
       \field{title}{Web of Trust}
@@ -348,7 +334,6 @@
       \strng{authorbibnamehash}{d64537cc32debef2d5eed7f739f6ea5c}
       \strng{authornamehash}{d64537cc32debef2d5eed7f739f6ea5c}
       \strng{authorfullhash}{d64537cc32debef2d5eed7f739f6ea5c}
-      \field{labelalpha}{Yub15}
       \field{sortinit}{Y}
       \field{sortinithash}{fd67ad5a9ef0f7456bdd9aab10fe1495}
       \field{labelnamesource}{author}

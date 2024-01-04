@@ -1,4 +1,4 @@
-\chapter{Generazione delle chiavi}
+\section{Generazione delle chiavi}
 
 Con questa guida genereremo la nostra chiave privata che avrà questo schema:
 
@@ -12,12 +12,12 @@ Con questa guida genereremo la nostra chiave privata che avrà questo schema:
     \end{itemize}
 \end{itemize}
 
-Per la lunghezza delle chiavi avremo la chiave primaria a 4096 bit mentre le
-sottochiavi a 2048 bit.\footnote{Per ulteriori informazioni su questo dibattito
-della lunghezza delle chiavi si può vedere: \cite{gnupg:keylength} e anche
-\cite{yubico:keylength}}
+Per la lunghezza delle chiavi avremo la chiave primaria a 4096 bit
+mentre le sottochiavi a 2048 bit.\footnote{Per ulteriori informazioni su questo
+dibattito della lunghezza delle chiavi si può vedere: \cite{gnupg:keylength} e
+anche \cite{yubico:keylength}}
 
-\section{Prerequisiti}
+\subsection{Prerequisiti}
 
 \begin{enumerate}
  \item È necessario lavorare su un sistema avviato con una distribuzione Linux
@@ -29,18 +29,18 @@ della lunghezza delle chiavi si può vedere: \cite{gnupg:keylength} e anche
  caso si decida di spostare le sottochiavi su questo supporto.
 \end{enumerate}
 
-Qualora il comando \texttt{gpg} lanci GnuPG versione 1, accertarsi che la
-versione 2 sia installata e aggiungere questa riga al seguente file:\newline
+Qualora il comando \texttt{gpg} lanci GnuPG versione 1, accertarsi che
+la versione 2 sia installata e aggiungere questa riga al seguente file:
 \texttt{/home/user/.bash\_aliases}:
 
 \begin{lstlisting}
 alias gpg='gpg2'
 \end{lstlisting}
 
-Questa scorciatoia permetterà l'avvio di GnuPG versione 2 ogni volta che
-digitiamo \texttt{gpg}.
+Questa scorciatoia permetterà l'avvio di GnuPG versione 2 ogni volta
+che digitiamo \texttt{gpg}.
 
-\section{Generare le chiavi}
+\subsection{Generare le chiavi}
 
 Sul sistema di generazione delle chiavi accertarsi di avere GnuPG versione 2.1 o
 successiva:
@@ -333,7 +333,7 @@ sottochiave di autenticazione, dare il comando:
 save
 \end{lstlisting}
 
-\noindent per salvare e uscire.
+per salvare e uscire.
 
 Alla fine avremo questo portachiavi:
 
@@ -372,9 +372,9 @@ Possiamo aggiungere anche altri UserID o una foto con:
 gpg --expert --edit-key 0x4B6E6777
 \end{lstlisting}
 
-\noindent e poi con \texttt{adduid}.
+e poi con \texttt{adduid}.
 
-\section{Il certificato di revoca}
+\subsection{Il certificato di revoca}
 \label{certificato-revoca}
 
 Con GnuPG versione 2 la generazione del certificato di revoca è stata fatta
@@ -389,7 +389,7 @@ stesso nome dell'impronta della chiave, nel nostro caso:
 Questo file andrà tolto da questa directory e conservato in un luogo sicuro. Lo
 vedremo nel paragrafo \vref{backup-certificato-revoca} dedicato al backup.
 
-\section{Impostare le preferenze della chiave}
+\subsection{Impostare le preferenze della chiave}
 
 Modificare la chiave con:
 
@@ -423,7 +423,7 @@ Per il significato dei codici, vedi la Tabella \vref{table:codici}.
 		\texttt{Z0}  & Non compresso \\
 		\bottomrule
 	\end{tabularx}
-	\caption{I codici GnuPG per cifrari, hash e compressione.}
+	\caption{I codici GnuPG per cifrari, hash e compressione}
 	\label{table:codici}
 \end{table}
 
@@ -438,13 +438,13 @@ Set preference list to:
 Really update the preferences? (y/N)
 \end{lstlisting}
 
-\noindent premere \texttt{Y} e quindi:
+premere \texttt{Y} e quindi:
 
 \begin{lstlisting}
 save
 \end{lstlisting}
 
-\section{Impostare il file gpg.conf}
+\subsection{Impostare il file gpg.conf}
 
 Aprire il file \texttt{gpg.conf} dentro la directory \texttt{/home/user/.gnupg},
 eliminare tutto il contenuto e incollarvi questo testo, ricordandosi di
@@ -528,7 +528,7 @@ personal-compress-preferences ZLIB BZIP2 ZIP Uncompressed
 default-preference-list SHA512 SHA384 SHA256 SHA224 TWOFISH AES256 AES192 3DES ZLIB BZIP2 ZIP Uncompressed
 \end{lstlisting}
 
-\section{Impostare il keyserver}
+\subsection{Impostare il keyserver}
 
 Modificare (o creare) il file \texttt{/home/user/.gnupg/dirmngr.conf}:
 
@@ -541,7 +541,7 @@ Modificare (o creare) il file \texttt{/home/user/.gnupg/dirmngr.conf}:
 keyserver hkps://hkps.pool.sks-keyservers.net
 \end{lstlisting}
 
-\section{Copiare la directory \texttt{.gnupg} nel proprio computer di lavoro}
+\subsection{Copiare la directory \texttt{.gnupg} nel proprio computer di lavoro}
 
 A questo punto, se avete usato una distribuzione \textit{live} per la
 generazione delle chiavi, copiate tutta la directory \texttt{.gnupg} su una
@@ -552,13 +552,13 @@ Dopo il trasferimento non dimenticate di distruggere la directory
 \texttt{.gnupg} sulla chiavetta. Si possono usare diversi strumenti come ad
 esempio \texttt{shred}.
 
-\section{Esportare la chiave pubblica sul keyserver}
+\subsection{Esportare la chiave pubblica sul keyserver}
 
 \begin{lstlisting}
 gpg --send-keys 0x9F676B5A4B6E6777
 \end{lstlisting}
 
-\section{Segnarsi la data di scadenza delle proprie chiavi nel calendario}
+\subsection{Segnarsi la data di scadenza delle proprie chiavi nel calendario}
 
 Segnatevi nel vostro calendario quando scadranno le chiavi e fatevi mandare un
 avviso almeno un mese prima. Una volta rinnovate le chiavi, inviatele al

@@ -1,21 +1,34 @@
+\phantomsection
+\pdfbookmark[1]{Frontespizio}{frontespizio}
+
 \begin{titlepage}
     \begin{center}
         \hfill
 
-        \vspace{4cm}
+        \vspace{1cm}
 
-        \LARGE\spacedlowsmallcaps{\myName}
+        {%
+            \fontsize{14pt}{16pt}\selectfont
+            \allscsp{\autore}
+        }
 
         \vspace{1cm}
 
-		\Huge\color{CTtitle}\rmfamily\normalfont\spacedallcaps{\myTitle} \\
+         {%
+         \fontsize{18pt}{20pt}\selectfont
+         \color{rosso}\MakeUppercase{\titolo}\par
+         }
 
 		\vspace{1cm}
 
-        \Large\color{gray}\emph{\mySubtitle} \\
+        \emph{\sottotitolo}
 
         \vfill
 
-        \small\color{black}\myTime
+        {%
+        \fontsize{10pt}{12pt}\selectfont
+        \allscsp{\data}
+        }
+
     \end{center}
 \end{titlepage}

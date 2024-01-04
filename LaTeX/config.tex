@@ -1,0 +1,257 @@
+%\usepackage{parskip}
+%\setlength{\parindent}{0pt}
+
+% ------------------------------------------------------------------------------
+% Comandi personalizzati
+% ------------------------------------------------------------------------------
+
+\newcommand{\titolo}{Generazione sicura di chiavi OpenPGP}
+\newcommand{\sottotitolo}{Guida dettagliata all'uso}
+\newcommand{\autore}{Aldo Latino}
+\newcommand{\luogo}{Italy}
+\newcommand{\data}{1 aprile 2018 -- 14 luglio 2019}
+% \renewcommand{\thefootnote}{\fnsymbol{footnote}}
+\usepackage{marginnote}
+\newcommand{\nota}[1]{\marginnote{\raggedright\footnotesize\itshape#1}}
+%\newcommand{\nota}[1]{\leavevmode\marginpar{\strut\raggedright\footnotesize\itshape#1}\strut}
+%\newcommand{\nota}[1]{\leavevmode\marginpar{\raggedright\footnotesize\itshape\strut#1}\strut\par}
+
+% Tutto maiuscoletto non spaziato
+\newcommand{\allsc}[1]{%
+    {\addfontfeature{RawFeature=+c2sc;+smcp;}\MakeUppercase{#1}}%
+}
+
+% Tutto maiuscoletto spaziato
+\newcommand{\allscsp}[1]{%
+    {\addfontfeature{LetterSpace=7,RawFeature=+c2sc;+smcp;}\MakeUppercase{#1}}%
+}
+
+% Maiuscoletto. La macro \sc già esiste in LaTeX ma non è racchiusa dentro un
+% gruppo {}, per cui la ridefinisco.
+\renewcommand{\sc}[1]{%
+    {\addfontfeature{RawFeature=+smcp;}#1}%
+}
+
+% Maiuscoletto spaziato.
+\newcommand{\scsp}[1]{%
+    {\addfontfeature{LetterSpace=7,RawFeature=+smcp;}#1}%
+}
+
+% Punto centrale
+\newcommand{\puntoc}{$\cdot$}
+
+% ------------------------------------------------------------------------------
+% Pacchetti
+% ------------------------------------------------------------------------------
+
+% Carico fontspec. Per compilare sarà necessario XeLaTeX.
+\usepackage{fontspec}
+\setmainfont{EB Garamond}[%
+    RawFeature={+kern;+pnum;+onum;+ss06}% +ss06 attiva la Q swash.
+]%
+
+\usepackage{polyglossia}
+\setmainlanguage{italian}
+\PolyglossiaSetup{italian}{indentfirst=false}
+
+% Carico geometry per poter definire pagina e margini.
+\usepackage[%
+    a4paper,%
+    top=35mm,%
+    bottom=30mm,%
+    inner=25mm,%
+    outer=35mm,%
+    marginparsep=5mm,
+    marginparwidth=20mm,
+    headsep=11pt,%
+]{geometry}
+
+% Carico fancyhdr che mi permette di ridefinire testatine e piè di pagina.
+% Le impostazioni si trovano nel file indice.tex.
+\usepackage{fancyhdr}
+\fancyhf{} % sets both header and footer to nothing
+\pagestyle{fancy}
+\lhead{\footnotesize{\sc{\autore}\enspace\puntoc\enspace\emph{\titolo}}}% A sinistra della testatina.
+\rhead{\footnotesize{\thepage}}% A destra della testatina.
+
+% Rimuove il numero di pagina dal piede della prima pagina di un capitolo.
+\fancypagestyle{plain}{
+    \renewcommand{\headrulewidth}{0pt}
+    \fancyhf{}
+}
+
+% Carico emptypage per eliminare le testatine dalle pagine bianche
+% alla fine di ogni capitolo.
+% https://tex.stackexchange.com/questions/1681/how-to-remove-headers-and-footers-for-pages-between-chapters
+\usepackage{emptypage}
+
+\usepackage[]{microtype}
+\usepackage{csquotes}
+\usepackage{tabularx}
+% Questo pacchetto crea dei filetti migliori nelle tabelle.
+\usepackage{booktabs}
+
+\usepackage[]{titlesec}
+
+\titleformat{\section}% command
+[block]% shape
+{\centering\normalfont\scshape\color{rosso}}% format
+{\thesection.\hspace{.5em}}% label
+{0pt}% sep
+{\normalsize}% before code
+{}% after code
+
+% Tolgo lo spazio prima del titolo di ogni sezione.
+% Macro di titlesec.
+\titlespacing*{\section}%
+{0pt}%   Left
+{24pt}%  Prima del titolo
+{12pt}%   Dopo il titolo
+
+\titleformat{\subsection}%
+[hang]%
+{\centering\normalfont\itshape\color{rosso}}%
+{\thesubsection.\hspace{.5em}}%
+{0pt}%
+{\normalsize}%
+{}
+
+% Tolgo lo spazio prima del titolo di ogni sottosezione.
+% Macro di titlesec.
+\titlespacing*{\subsection}%
+{0pt}%   Left
+{24pt}%  Prima del titolo
+{12pt}%   Dopo il titolo
+
+% Carico titletoc che permette di togliere la numerazione
+% dei capitoli e delle sezioni dall'indice.
+\usepackage{titletoc}
+
+% Sezioni nell'indice.
+\titlecontents{section}%
+[0em]% Spazio a sinistra.
+{\vskip 4ex}% Codice prima della riga.
+{\addfontfeature{RawFeature=+smcp;}\thecontentslabel.\hspace{1em}}% Formattazione delle parti numerate.
+{}% Formattazione delle parti non numerate.
+{\titlerule*[1pc]{}\addfontfeature{RawFeature=-pnum;}\contentspage}% I puntini dell'indice e il numero di pagina.
+[]% Codice dopo la riga.
+
+% Sottosezioni nell'indice.
+\titlecontents{subsection}%
+[1.7em]%
+{\vskip 0ex}%
+{\itshape\thecontentslabel.\hspace{1em}}% numbered sections formatting
+{}% unnumbered sections formatting
+{\titlerule*[1pc]{.}\addfontfeature{RawFeature=-pnum;}\contentspage}% Le parentesi graffe dopo \titlerule possono contenere . per i puntini nell'indice.
+
+
+\usepackage[
+  %backend=biber,
+  bibstyle=authortitle,%alphabetic,%authoryear,
+  citestyle=verbose,
+  sorting=nty
+]{biblatex}
+\bibliography{bibliografia}
+
+% \usepackage{acronym}
+
+\usepackage{graphicx}
+\graphicspath{{img/}}
+
+\usepackage{caption}
+\captionsetup{
+    font=footnotesize,%       Corpo delle didascalie
+    labelsep=period,%         Separatore tra etichetta e testo della didascalia
+    textformat=period,%       Mette un punto dopo la didascalia
+    format=hang,%             Rientra il testo della didascalia rispetto alla parola Figura 1
+    justification=justified,% Giustifica il testo della didascalia
+    labelfont=sc,%            Mette in maiuscoletto l'etichetta della didascalia
+}
+
+\usepackage{wrapfig}
+
+% Rimuove lo spazio tra le voci di una lista.
+\usepackage{enumitem}
+%\setlist[itemize]{noitemsep,nolistsep}
+%\setlist[enumerate]{noitemsep,nolistsep}
+\setlist{noitemsep}
+
+\usepackage[italian]{varioref}
+
+% \usepackage{xspace} % to get the spacing after macros right
+
+\usepackage[%
+	usenames,%
+	dvipsnames%
+]{xcolor}
+\definecolor{rosso}{RGB}{237, 61, 74}
+\definecolor{blu}{RGB}{8, 59, 125}
+\definecolor{codice}{RGB}{99, 99, 99}
+
+\usepackage{relsize}
+\def\UrlFont{\relsize{-1}\ttfamily}
+% Ri-definizione del comando \texttt con font ridotto
+\let\oldtexttt\texttt
+\renewcommand{\texttt}[1]{{\relsize{-.5}\oldtexttt{#1}}}
+
+\usepackage{tabularx} % better tables
+\setlength{\extrarowheight}{3pt} % increase table row height
+
+\usepackage[italian]{varioref}
+
+\usepackage{textcomp}
+\usepackage{listings}
+%\lstset{emph={trueIndex,root},emphstyle=\color{BlueViolet}}%\underbar} % for special keywords
+\lstset{
+  language=[LaTeX]Tex,
+  morekeywords={PassOptionsToPackage,selectlanguage},
+  basicstyle=\small\ttfamily\color{codice},
+  keywordstyle=\color{RoyalBlue},%\bfseries,
+  %identifierstyle=\color{NavyBlue},
+  commentstyle=\color{Green}\ttfamily,
+  stringstyle=\rmfamily,
+  numbers=none,%left,%none
+  numberstyle=\scriptsize,%\tiny
+  stepnumber=5,
+  numbersep=8pt,
+  showstringspaces=false,
+  breaklines=true,
+  %frameround=ftff,
+  %frame=single,
+  belowcaptionskip=.75\baselineskip,
+  upquote=true
+  %frame=L
+}
+
+% \usepackage{showframe}
+
+\usepackage{hyperref}
+\hypersetup{%
+  %draft, % hyperref's draft mode, for printing see below
+  colorlinks=true,
+  linktocpage=true,
+  pdfstartpage=1,
+  pdfstartview=FitV,
+  % uncomment the following line if you want to have black links (e.g., for printing)
+  %colorlinks=false, linktocpage=false, pdfstartpage=3, pdfstartview=FitV, pdfborder={0 0 0},%
+  breaklinks=true,
+  pageanchor=true,
+  pdfpagemode=UseNone,
+  % pdfpagemode=UseOutlines,
+  plainpages=false,
+  bookmarksnumbered,
+  bookmarksopen=true,
+  bookmarksopenlevel=1,
+  hypertexnames=true,
+  pdfhighlight=/O,
+  % nesting=true,
+  % frenchlinks,
+  urlcolor=blu, linkcolor=blu, citecolor=Black, %pagecolor=RoyalBlue,%
+  %urlcolor=Black, linkcolor=Black, citecolor=Black, %pagecolor=Black,%
+  pdftitle={\titolo},
+  pdfauthor={\autore},
+  pdfsubject={\sottotitolo},
+  pdfkeywords={Sicurezza, Crittografia, Privacy, GnuPG, OpenPGP},
+  pdfcreator={XeLaTeX},
+  pdfproducer={LaTeX with hyperref}%
+}
