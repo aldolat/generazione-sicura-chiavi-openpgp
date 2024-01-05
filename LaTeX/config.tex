@@ -37,6 +37,10 @@
     {\addfontfeature{LetterSpace=7,RawFeature=+smcp;}#1}%
 }
 
+\newcommand{\numerimaiuscoli}[1]{%
+    {\addfontfeature{RawFeature=+case}#1}%
+}
+
 % Punto centrale
 \newcommand{\puntoc}{$\cdot$}
 
@@ -132,20 +136,21 @@
 
 % Sezioni nell'indice.
 \titlecontents{section}%
-[0em]% Spazio a sinistra.
-{\vskip 4ex}% Codice prima della riga.
-{\addfontfeature{RawFeature=+smcp;}\thecontentslabel.\hspace{1em}}% Formattazione delle parti numerate.
+[17pt]% Spazio a sinistra.
+{\addvspace{15pt}\hspace*{-17pt}\addfontfeature{RawFeature=+smcp;}}% Codice prima della riga.
+{\thecontentslabel.\hspace*{10pt}}% Formattazione delle parti numerate.
 {}% Formattazione delle parti non numerate.
-{\titlerule*[1pc]{}\addfontfeature{RawFeature=-pnum;}\contentspage}% I puntini dell'indice e il numero di pagina.
+{\titlerule*{}\addfontfeature{RawFeature=-pnum;}\hspace*{4pt}\contentspage}% I puntini dell'indice e il numero di pagina.
 []% Codice dopo la riga.
 
 % Sottosezioni nell'indice.
 \titlecontents{subsection}%
-[1.7em]%
-{\vskip 0ex}%
-{\itshape\thecontentslabel.\hspace{1em}}% numbered sections formatting
+[34pt]%
+{\hspace*{-17pt}\itshape}%
+{\emph{\thecontentslabel.\hspace*{6pt}}}% numbered sections formatting
 {}% unnumbered sections formatting
-{\titlerule*[1pc]{.}\addfontfeature{RawFeature=-pnum;}\contentspage}% Le parentesi graffe dopo \titlerule possono contenere . per i puntini nell'indice.
+{\titlerule*[10pt]{\scriptsize.}\addfontfeature{RawFeature=-pnum;}\hspace*{4pt}\emph{\contentspage}}% Le parentesi graffe dopo \titlerule possono contenere . per i puntini nell'indice.
+[]% Codice dopo la riga.
 
 
 \usepackage[
@@ -189,13 +194,13 @@
 ]{xcolor}
 \definecolor{rosso}{RGB}{237, 61, 74}
 \definecolor{blu}{RGB}{8, 59, 125}
-\definecolor{codice}{RGB}{99, 99, 99}
+\definecolor{codice}{RGB}{75, 75, 75}
 
 \usepackage{relsize}
 \def\UrlFont{\relsize{-1}\ttfamily}
 % Ri-definizione del comando \texttt con font ridotto
 \let\oldtexttt\texttt
-\renewcommand{\texttt}[1]{{\relsize{-.5}\oldtexttt{#1}}}
+\renewcommand{\texttt}[1]{{\relsize{-.25}\oldtexttt{#1}}}
 
 \usepackage{tabularx} % better tables
 \setlength{\extrarowheight}{3pt} % increase table row height

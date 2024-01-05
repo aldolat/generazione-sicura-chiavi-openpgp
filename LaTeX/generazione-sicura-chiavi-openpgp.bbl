@@ -187,22 +187,22 @@
     \endentry
     \entry{tjl73}{online}{}
       \name{author}{1}{}{%
-        {{hash=478b3b43e0d6745989758f449bc8824c}{%
-           family={Tjl73},
+        {{hash=9f5b56535c1a815b87c8d370f97f77ad}{%
+           family={\numerimaiuscoli{TJL73}},
            familyi={T\bibinitperiod}}}%
       }
-      \strng{namehash}{478b3b43e0d6745989758f449bc8824c}
-      \strng{fullhash}{478b3b43e0d6745989758f449bc8824c}
-      \strng{bibnamehash}{478b3b43e0d6745989758f449bc8824c}
-      \strng{authorbibnamehash}{478b3b43e0d6745989758f449bc8824c}
-      \strng{authornamehash}{478b3b43e0d6745989758f449bc8824c}
-      \strng{authorfullhash}{478b3b43e0d6745989758f449bc8824c}
+      \strng{namehash}{9f5b56535c1a815b87c8d370f97f77ad}
+      \strng{fullhash}{9f5b56535c1a815b87c8d370f97f77ad}
+      \strng{bibnamehash}{9f5b56535c1a815b87c8d370f97f77ad}
+      \strng{authorbibnamehash}{9f5b56535c1a815b87c8d370f97f77ad}
+      \strng{authornamehash}{9f5b56535c1a815b87c8d370f97f77ad}
+      \strng{authorfullhash}{9f5b56535c1a815b87c8d370f97f77ad}
       \field{sortinit}{T}
       \field{sortinithash}{9af77f0292593c26bde9a56e688eaee9}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
       \field{title}{Creazione di chiavi sicure (ossìa, come generare con GnuPG una coppia di chiavi per poterla conservare in modo ``abbastanza'' sicuro)}
-      \field{year}{2013}
+      \field{year}{2021}
       \true{nocite}
       \verb{urlraw}
       \verb http://tjl73.altervista.org/secure_keygen/
@@ -259,7 +259,7 @@
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
       \field{title}{Crittografia asimmetrica}
-      \field{year}{2020}
+      \field{year}{2023}
       \verb{urlraw}
       \verb https://it.wikipedia.org/wiki/Crittografia_asimmetrica
       \endverb
@@ -286,7 +286,7 @@
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
       \field{title}{Key signing party}
-      \field{year}{2020}
+      \field{year}{2023}
       \verb{urlraw}
       \verb https://it.wikipedia.org/wiki/Key_signing_party
       \endverb
@@ -313,7 +313,7 @@
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
       \field{title}{Web of Trust}
-      \field{year}{2020}
+      \field{year}{2023}
       \verb{urlraw}
       \verb https://it.wikipedia.org/wiki/Web_of_trust
       \endverb
