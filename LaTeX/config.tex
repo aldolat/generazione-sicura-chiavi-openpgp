@@ -10,11 +10,9 @@
 \newcommand{\autore}{Aldo Latino}
 \newcommand{\luogo}{Italy}
 \newcommand{\data}{1 aprile 2018 -- 14 luglio 2019}
-% \renewcommand{\thefootnote}{\fnsymbol{footnote}}
+
 \usepackage{marginnote}
 \newcommand{\nota}[1]{\marginnote{\raggedright\footnotesize\itshape#1}}
-%\newcommand{\nota}[1]{\leavevmode\marginpar{\strut\raggedright\footnotesize\itshape#1}\strut}
-%\newcommand{\nota}[1]{\leavevmode\marginpar{\raggedright\footnotesize\itshape\strut#1}\strut\par}
 
 % Tutto maiuscoletto non spaziato
 \newcommand{\allsc}[1]{%
@@ -93,8 +91,9 @@
 \usepackage{emptypage}
 
 \usepackage[]{microtype}
-\usepackage{csquotes}
-\usepackage{tabularx}
+%\usepackage{csquotes}
+\usepackage{tabularx} % better tables
+\setlength{\extrarowheight}{3pt} % increase table row height
 % Questo pacchetto crea dei filetti migliori nelle tabelle.
 \usepackage{booktabs}
 
@@ -154,10 +153,15 @@
 
 
 \usepackage[
-  %backend=biber,
-  bibstyle=authortitle,%alphabetic,%authoryear,
-  citestyle=verbose,
-  sorting=nty
+  % backend=biber,
+  % bibstyle=authortitle,%authoryear,%alphabetic,%authortitle,
+  % citestyle=alphabetic,%authoryear-comp,
+  bibstyle=philosophy-verbose,% philosophy-classic % mette le virgole al posto dei numeri.
+  citestyle=authoryear,%authoryear-comp,
+  scauthorsbib,% mette in maiuscoletto i nomi.
+  %firstinits=true,% mette i nomi puntati.
+  % sorting=nty,
+  backref,% Indica, nella bibliografia, in quale pagina è citata l'opera in questione.
 ]{biblatex}
 \bibliography{bibliografia}
 
@@ -194,7 +198,8 @@
 ]{xcolor}
 \definecolor{rosso}{RGB}{237, 61, 74}
 \definecolor{blu}{RGB}{8, 59, 125}
-\definecolor{codice}{RGB}{75, 75, 75}
+\definecolor{codice}{RGB}{0, 0, 0}
+\definecolor{sfondocodice}{RGB}{240, 240, 240}
 
 \usepackage{relsize}
 \def\UrlFont{\relsize{-1}\ttfamily}
@@ -202,33 +207,36 @@
 \let\oldtexttt\texttt
 \renewcommand{\texttt}[1]{{\relsize{-.25}\oldtexttt{#1}}}
 
-\usepackage{tabularx} % better tables
-\setlength{\extrarowheight}{3pt} % increase table row height
-
 \usepackage[italian]{varioref}
 
 \usepackage{textcomp}
 \usepackage{listings}
 %\lstset{emph={trueIndex,root},emphstyle=\color{BlueViolet}}%\underbar} % for special keywords
 \lstset{
-  language=[LaTeX]Tex,
-  morekeywords={PassOptionsToPackage,selectlanguage},
-  basicstyle=\small\ttfamily\color{codice},
-  keywordstyle=\color{RoyalBlue},%\bfseries,
-  %identifierstyle=\color{NavyBlue},
-  commentstyle=\color{Green}\ttfamily,
-  stringstyle=\rmfamily,
-  numbers=none,%left,%none
-  numberstyle=\scriptsize,%\tiny
-  stepnumber=5,
-  numbersep=8pt,
-  showstringspaces=false,
-  breaklines=true,
-  %frameround=ftff,
-  %frame=single,
-  belowcaptionskip=.75\baselineskip,
-  upquote=true
-  %frame=L
+    language=[LaTeX]Tex,
+    morekeywords={PassOptionsToPackage,selectlanguage},
+    backgroundcolor=\color{sfondocodice},
+    rulecolor=\color{sfondocodice},
+    basicstyle=\small\ttfamily\color{codice},
+    %keywordstyle=\color{RoyalBlue},%\bfseries,
+    %identifierstyle=\color{NavyBlue},
+    commentstyle=\color{Green}\ttfamily,
+    stringstyle=\rmfamily,
+    numbers=none,%left,%none
+    numberstyle=\scriptsize,%\tiny
+    stepnumber=5,
+    numbersep=8pt,
+    showstringspaces=false,
+    breaklines=true,
+    %frameround=ftff,
+    belowcaptionskip=.75\baselineskip,
+    upquote=true,
+    columns=fullflexible,
+    xleftmargin=8pt,
+    xrightmargin=8pt,
+    frame=tlbr,
+    framesep=8pt,
+    framerule=0pt,
 }
 
 % \usepackage{showframe}
@@ -254,7 +262,7 @@
   pdfhighlight=/O,
   % nesting=true,
   % frenchlinks,
-  urlcolor=blu, linkcolor=blu, citecolor=Black, %pagecolor=RoyalBlue,%
+  urlcolor=blu, linkcolor=blu, citecolor=blu, %pagecolor=RoyalBlue,%
   %urlcolor=Black, linkcolor=Black, citecolor=Black, %pagecolor=Black,%
   pdftitle={\titolo},
   pdfauthor={\autore},

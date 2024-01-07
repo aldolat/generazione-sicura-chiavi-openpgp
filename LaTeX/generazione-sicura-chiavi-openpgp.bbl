@@ -21,11 +21,12 @@
   \datalist[entry]{nty/global//global/global}
     \entry{cabal}{online}{}
       \name{author}{1}{}{%
-        {{hash=9a907ef900044e9da3c1fbdbd795559c}{%
+        {{un=0,uniquepart=base,hash=9a907ef900044e9da3c1fbdbd795559c}{%
            family={Cabal},
            familyi={C\bibinitperiod},
            given={Alex},
-           giveni={A\bibinitperiod}}}%
+           giveni={A\bibinitperiod},
+           givenun=0}}%
       }
       \strng{namehash}{9a907ef900044e9da3c1fbdbd795559c}
       \strng{fullhash}{9a907ef900044e9da3c1fbdbd795559c}
@@ -35,6 +36,8 @@
       \strng{authorfullhash}{9a907ef900044e9da3c1fbdbd795559c}
       \field{sortinit}{C}
       \field{sortinithash}{4d103a86280481745c9c897c925753c0}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
       \field{title}{Creating the perfect GPG keypair}
@@ -48,9 +51,38 @@
       \endverb
       \keyw{inglese}
     \endentry
+    \entry{debian}{online}{}
+      \name{author}{1}{}{%
+        {{un=0,uniquepart=base,hash=dcd37979adc91f27c3123f1185465ea2}{%
+           family={{Debian Wiki}},
+           familyi={D\bibinitperiod}}}%
+      }
+      \strng{namehash}{dcd37979adc91f27c3123f1185465ea2}
+      \strng{fullhash}{dcd37979adc91f27c3123f1185465ea2}
+      \strng{bibnamehash}{dcd37979adc91f27c3123f1185465ea2}
+      \strng{authorbibnamehash}{dcd37979adc91f27c3123f1185465ea2}
+      \strng{authornamehash}{dcd37979adc91f27c3123f1185465ea2}
+      \strng{authorfullhash}{dcd37979adc91f27c3123f1185465ea2}
+      \field{sortinit}{D}
+      \field{sortinithash}{6f385f66841fb5e82009dc833c761848}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{title}{Subkeys}
+      \field{year}{2018}
+      \true{nocite}
+      \verb{urlraw}
+      \verb https://wiki.debian.org/Subkeys
+      \endverb
+      \verb{url}
+      \verb https://wiki.debian.org/Subkeys
+      \endverb
+      \keyw{inglese}
+    \endentry
     \entry{drduh}{online}{}
       \name{author}{1}{}{%
-        {{hash=4b456b4679e347ecc65cf395b9311659}{%
+        {{un=0,uniquepart=base,hash=4b456b4679e347ecc65cf395b9311659}{%
            family={Drduh},
            familyi={D\bibinitperiod}}}%
       }
@@ -62,6 +94,8 @@
       \strng{authorfullhash}{4b456b4679e347ecc65cf395b9311659}
       \field{sortinit}{D}
       \field{sortinithash}{6f385f66841fb5e82009dc833c761848}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
       \field{title}{Guide to using YubiKey as a SmartCard for GPG and SSH}
@@ -75,35 +109,9 @@
       \endverb
       \keyw{inglese}
     \endentry
-    \entry{gnupg:keylength}{online}{}
-      \name{author}{1}{}{%
-        {{hash=e49deda8d4eec72db2bf76c16ffc6918}{%
-           family={Gnupg.org},
-           familyi={G\bibinitperiod}}}%
-      }
-      \strng{namehash}{e49deda8d4eec72db2bf76c16ffc6918}
-      \strng{fullhash}{e49deda8d4eec72db2bf76c16ffc6918}
-      \strng{bibnamehash}{e49deda8d4eec72db2bf76c16ffc6918}
-      \strng{authorbibnamehash}{e49deda8d4eec72db2bf76c16ffc6918}
-      \strng{authornamehash}{e49deda8d4eec72db2bf76c16ffc6918}
-      \strng{authorfullhash}{e49deda8d4eec72db2bf76c16ffc6918}
-      \field{sortinit}{G}
-      \field{sortinithash}{32d67eca0634bf53703493fb1090a2e8}
-      \field{labelnamesource}{author}
-      \field{labeltitlesource}{title}
-      \field{title}{Why does GnuPG default to 2048 bit RSA-2048?}
-      \field{year}{2015}
-      \verb{urlraw}
-      \verb https://www.gnupg.org/faq/gnupg-faq.html#default_rsa2048
-      \endverb
-      \verb{url}
-      \verb https://www.gnupg.org/faq/gnupg-faq.html#default_rsa2048
-      \endverb
-      \keyw{inglese}
-    \endentry
     \entry{riseup}{online}{}
       \name{author}{1}{}{%
-        {{hash=0b8678d65f821e9a765cf080aa8845f4}{%
+        {{un=0,uniquepart=base,hash=0b8678d65f821e9a765cf080aa8845f4}{%
            family={Riseup},
            familyi={R\bibinitperiod}}}%
       }
@@ -115,6 +123,7 @@
       \strng{authorfullhash}{0b8678d65f821e9a765cf080aa8845f4}
       \field{sortinit}{R}
       \field{sortinithash}{5e1c39a9d46ffb6bebd8f801023a9486}
+      \field{labeldatesource}{nodate}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
       \field{title}{OpenPGP Best Practices}
@@ -129,11 +138,12 @@
     \endentry
     \entry{severance}{online}{}
       \name{author}{1}{}{%
-        {{hash=3b314ff4174574685049b9be80a85256}{%
+        {{un=0,uniquepart=base,hash=3b314ff4174574685049b9be80a85256}{%
            family={Severance},
            familyi={S\bibinitperiod},
            given={Eric},
-           giveni={E\bibinitperiod}}}%
+           giveni={E\bibinitperiod},
+           givenun=0}}%
       }
       \strng{namehash}{3b314ff4174574685049b9be80a85256}
       \strng{fullhash}{3b314ff4174574685049b9be80a85256}
@@ -143,6 +153,8 @@
       \strng{authorfullhash}{3b314ff4174574685049b9be80a85256}
       \field{sortinit}{S}
       \field{sortinithash}{b164b07b29984b41daf1e85279fbc5ab}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
       \field{title}{PGP and SSH keys on a Yubikey NEO}
@@ -158,11 +170,12 @@
     \endentry
     \entry{thapaliya}{online}{}
       \name{author}{1}{}{%
-        {{hash=d08b5ceea8c0de7e69980ba2600682d1}{%
+        {{un=0,uniquepart=base,hash=d08b5ceea8c0de7e69980ba2600682d1}{%
            family={Thapaliya},
            familyi={T\bibinitperiod},
            given={Suvash},
-           giveni={S\bibinitperiod}}}%
+           giveni={S\bibinitperiod},
+           givenun=0}}%
       }
       \strng{namehash}{d08b5ceea8c0de7e69980ba2600682d1}
       \strng{fullhash}{d08b5ceea8c0de7e69980ba2600682d1}
@@ -172,6 +185,8 @@
       \strng{authorfullhash}{d08b5ceea8c0de7e69980ba2600682d1}
       \field{sortinit}{T}
       \field{sortinithash}{9af77f0292593c26bde9a56e688eaee9}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
       \field{title}{Using GPG and SSH keys (GnuPG 2.1) with a Smartcard (Yubikey 4)}
@@ -185,9 +200,37 @@
       \endverb
       \keyw{inglese}
     \endentry
+    \entry{gnupg:keylength}{online}{}
+      \name{author}{1}{}{%
+        {{un=0,uniquepart=base,hash=d67ff842a019ea6246522c3c876ee98f}{%
+           family={{The GnuPG Project}},
+           familyi={T\bibinitperiod}}}%
+      }
+      \strng{namehash}{d67ff842a019ea6246522c3c876ee98f}
+      \strng{fullhash}{d67ff842a019ea6246522c3c876ee98f}
+      \strng{bibnamehash}{d67ff842a019ea6246522c3c876ee98f}
+      \strng{authorbibnamehash}{d67ff842a019ea6246522c3c876ee98f}
+      \strng{authornamehash}{d67ff842a019ea6246522c3c876ee98f}
+      \strng{authorfullhash}{d67ff842a019ea6246522c3c876ee98f}
+      \field{sortinit}{T}
+      \field{sortinithash}{9af77f0292593c26bde9a56e688eaee9}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{title}{Why does GnuPG default to 2048 bit RSA-2048?}
+      \field{year}{2015}
+      \verb{urlraw}
+      \verb https://www.gnupg.org/faq/gnupg-faq.html#default_rsa2048
+      \endverb
+      \verb{url}
+      \verb https://www.gnupg.org/faq/gnupg-faq.html#default_rsa2048
+      \endverb
+      \keyw{inglese}
+    \endentry
     \entry{tjl73}{online}{}
       \name{author}{1}{}{%
-        {{hash=9f5b56535c1a815b87c8d370f97f77ad}{%
+        {{un=0,uniquepart=base,hash=9f5b56535c1a815b87c8d370f97f77ad}{%
            family={\numerimaiuscoli{TJL73}},
            familyi={T\bibinitperiod}}}%
       }
@@ -199,6 +242,8 @@
       \strng{authorfullhash}{9f5b56535c1a815b87c8d370f97f77ad}
       \field{sortinit}{T}
       \field{sortinithash}{9af77f0292593c26bde9a56e688eaee9}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
       \field{title}{Creazione di chiavi sicure (ossìa, come generare con GnuPG una coppia di chiavi per poterla conservare in modo ``abbastanza'' sicuro)}
@@ -212,38 +257,9 @@
       \endverb
       \keyw{italiano}
     \endentry
-    \entry{debian}{online}{}
-      \name{author}{1}{}{%
-        {{hash=f86b99cfc51c39098d792fa0189cabfb}{%
-           family={Wiki},
-           familyi={W\bibinitperiod},
-           given={Debian},
-           giveni={D\bibinitperiod}}}%
-      }
-      \strng{namehash}{f86b99cfc51c39098d792fa0189cabfb}
-      \strng{fullhash}{f86b99cfc51c39098d792fa0189cabfb}
-      \strng{bibnamehash}{f86b99cfc51c39098d792fa0189cabfb}
-      \strng{authorbibnamehash}{f86b99cfc51c39098d792fa0189cabfb}
-      \strng{authornamehash}{f86b99cfc51c39098d792fa0189cabfb}
-      \strng{authorfullhash}{f86b99cfc51c39098d792fa0189cabfb}
-      \field{sortinit}{W}
-      \field{sortinithash}{4315d78024d0cea9b57a0c6f0e35ed0d}
-      \field{labelnamesource}{author}
-      \field{labeltitlesource}{title}
-      \field{title}{Subkeys}
-      \field{year}{2018}
-      \true{nocite}
-      \verb{urlraw}
-      \verb https://wiki.debian.org/Subkeys
-      \endverb
-      \verb{url}
-      \verb https://wiki.debian.org/Subkeys
-      \endverb
-      \keyw{inglese}
-    \endentry
     \entry{wiki:crittografia}{online}{}
       \name{author}{1}{}{%
-        {{hash=9c677286866aad38f8e9b660f5411814}{%
+        {{un=0,uniquepart=base,hash=9c677286866aad38f8e9b660f5411814}{%
            family={Wikipedia},
            familyi={W\bibinitperiod}}}%
       }
@@ -256,6 +272,9 @@
       \field{extraname}{1}
       \field{sortinit}{W}
       \field{sortinithash}{4315d78024d0cea9b57a0c6f0e35ed0d}
+      \field{extradate}{1}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
       \field{title}{Crittografia asimmetrica}
@@ -270,7 +289,7 @@
     \endentry
     \entry{wiki:ksp}{online}{}
       \name{author}{1}{}{%
-        {{hash=9c677286866aad38f8e9b660f5411814}{%
+        {{un=0,uniquepart=base,hash=9c677286866aad38f8e9b660f5411814}{%
            family={Wikipedia},
            familyi={W\bibinitperiod}}}%
       }
@@ -283,6 +302,9 @@
       \field{extraname}{2}
       \field{sortinit}{W}
       \field{sortinithash}{4315d78024d0cea9b57a0c6f0e35ed0d}
+      \field{extradate}{2}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
       \field{title}{Key signing party}
@@ -297,7 +319,7 @@
     \endentry
     \entry{wiki:webtrust}{online}{}
       \name{author}{1}{}{%
-        {{hash=9c677286866aad38f8e9b660f5411814}{%
+        {{un=0,uniquepart=base,hash=9c677286866aad38f8e9b660f5411814}{%
            family={Wikipedia},
            familyi={W\bibinitperiod}}}%
       }
@@ -310,6 +332,9 @@
       \field{extraname}{3}
       \field{sortinit}{W}
       \field{sortinithash}{4315d78024d0cea9b57a0c6f0e35ed0d}
+      \field{extradate}{3}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
       \field{title}{Web of Trust}
@@ -324,7 +349,7 @@
     \endentry
     \entry{yubico:keylength}{online}{}
       \name{author}{1}{}{%
-        {{hash=d64537cc32debef2d5eed7f739f6ea5c}{%
+        {{un=0,uniquepart=base,hash=d64537cc32debef2d5eed7f739f6ea5c}{%
            family={Yubico},
            familyi={Y\bibinitperiod}}}%
       }
@@ -336,6 +361,8 @@
       \strng{authorfullhash}{d64537cc32debef2d5eed7f739f6ea5c}
       \field{sortinit}{Y}
       \field{sortinithash}{fd67ad5a9ef0f7456bdd9aab10fe1495}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
       \field{title}{The Big Debate, 2048 vs. 4096, Yubico’s Position}

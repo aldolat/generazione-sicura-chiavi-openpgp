@@ -4,13 +4,13 @@
 
 \nota{La crittografia a chiave pubblica.}
 Come sappiamo, tutto il sistema della crittografia a chiave
-pubblica\footnote{Vedi \cite{wiki:crittografia}.} si basa sull'uso di una chiave
-che ha una parte pubblica, da divulgare il più possibile, e una parte privata,
-che va tenuta rigorosamente in un luogo sicuro. Qualora avessimo il dubbio che
-le chiavi private possano essere in mani altrui, saremmo obbligati a generare un
+pubblica\footcite[Vedi][]{wiki:crittografia} si basa sull'uso di una chiave che
+ha una parte pubblica, da divulgare il più possibile, e una parte privata, che
+va tenuta rigorosamente in un luogo sicuro. Qualora avessimo il dubbio che le
+chiavi private possano essere in mani altrui, saremmo obbligati a generare un
 nuovo mazzo di chiavi, con tutto quello che ne comporta (revoca delle chiavi,
-perdita del lavoro fatto per il \emph{Web of
-Trust},\footnote{\cite{wiki:webtrust}.} perdita delle firme apposte sulla nostra
+perdita del lavoro fatto per il \emph{Web of Trust},
+\footcite[Vedi][]{wiki:webtrust} perdita delle firme apposte sulla nostra
 chiave).
 
 Con questa guida vedremo come:
@@ -58,14 +58,14 @@ Avremo quindi \emph{una chiave distinta per ogni operazione}.\bigskip
 \end{wrapfloat}
 
 \nota{La chiave master.}
-La chiave più importante è la \emph{chiave master}. Questa chiave è
-talmente importante che, qualora fosse stata compromessa, ci costringerebbe a
-revocare l'intero mazzo di chiavi e a generarne di nuove. Per questo motivo la
-terremo in cassaforte, separata dal resto del mazzo di chiavi. Visto che la
-terremo separata dal resto, la abiliteremo solo per scopi che non sono
-quotidiani, ma periodici (come ad esempio il rinnovo della validità delle
-chiavi) o per occasioni speciali (come ad esempio un \emph{Key signing
-party}\footnote{\cite{wiki:ksp}.}). Lo scopo della chiave master sarà quello di
+La chiave più importante è la \emph{chiave master}. Questa chiave è talmente
+importante che, qualora fosse stata compromessa, ci costringerebbe a revocare
+l'intero mazzo di chiavi e a generarne di nuove. Per questo motivo la terremo in
+cassaforte, separata dal resto del mazzo di chiavi. Visto che la terremo
+separata dal resto, la abiliteremo solo per scopi che non sono quotidiani, ma
+periodici (come ad esempio il rinnovo della validità delle chiavi) o per
+occasioni speciali (come ad esempio un \emph{Key signing
+party}\footcite[Vedi][]{wiki:ksp}). Lo scopo della chiave master sarà quello di
 certificare chiavi altrui ed, essendo la chiave principale, di effettuare
 operazioni di manutenzione del nostro mazzo di chiavi (estensione validità,
 aggiunta di nomi utente, ecc.).
@@ -87,13 +87,13 @@ dell'evento.\bigskip
 
 \nota{Protezione delle sottochiavi.}
 Per proteggere le nostre sottochiavi, le sposteremo su \emph{un token
-\textsc{usb} come la YubiKey}.\footnote{\url{https://www.yubico.com/}.} Si
+\textsc{usb} come la YubiKey}.\footnote{Vedi \url{https://www.yubico.com/}.} Si
 tratta di token praticamente indistruttibili, che rendono l'uso della firma
 digitale, la cifratura e l'autenticazione su sistemi (come \textsc{ssh}) molto
 comodi, dato che basterà usare un \textsc{pin} numerico al posto della
-passphrase. Io uso la YubiKey
-4,\footnote{\url{https://www.yubico.com/product/yubikey-4-series/\#yubikey-4}}
-come da figura \vref{fig:yubikey4}. I token come YubiKey hanno il pregio che non
+passphrase. Io uso la YubiKey 4,\footnote{Vedi
+\url{https://www.yubico.com/product/yubikey-4-series/\#yubikey-4}.} come da
+figura \vref{fig:yubikey4}. I token come YubiKey hanno il pregio che non
 permettono l'esportazione delle chiavi lì conservate; questo significa che posso
 usare le mie chiavi anche in un ambiente poco sicuro come un Internet Point, un
 \textsc{pc} condiviso, ecc., senza il timore che le chiavi private possano
@@ -161,6 +161,8 @@ percorsi e quant'altro con quelli vostri. Ad esempio, in un comando come questo:
 gpg --with-keygrip --list-key 0x9F676B5A4B6E6777
 \end{lstlisting}
 
-dovrete sostituire \texttt{0x9F676B5A4B6E6777} con l'\textsc{id} corretto della
-vostra chiave. Inoltre, il percorso \texttt{/home/user} va modificato inserendo
-il nome utente corretto al posto di \texttt{user}.
+\noindent dovrete sostituire \texttt{0x9F676B5A4B6E6777} con l'\textsc{id}
+corretto della vostra chiave. Inoltre, il percorso alla \emph{home} dell'utente
+(\texttt{/home/user}) va modificato inserendo il nome utente corretto al posto
+di \texttt{user}. Spesso questo percorso viene abbreviato in \texttt{\~{}} per
+esigenze di impaginazione, ad esempio \texttt{\~{}/directory/file}.

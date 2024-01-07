@@ -19,8 +19,8 @@ GnuPG 2.1 o successiva, vediamo comunque i due procedimenti nel dettaglio.
 \subsection{GnuPG versione 2.1 o successiva}
 
 GnuPG, dalla versione 2.1 in su, deposita le chiavi private nella directory
-\texttt{/home/user/.gnupg/private-keys-v1.d/} e non più nel file
-\texttt{/home/user/.gnupg/secring.gpg}. Perciò, se avete una chiave master e 3
+\texttt{\~{}/.gnupg/private-keys-v1.d/} e non più nel file
+\texttt{\~{}/.gnupg/secring.gpg}. Perciò, se avete una chiave master e 3
 sottochiavi, dovreste avere 4 file con estensione \texttt{.key} in quella
 directory:
 
@@ -45,7 +45,7 @@ file, verificate che nel backup ci sia il file che state per cancellare. Il
 comando per eliminare il file è:
 
 \begin{lstlisting}
-cp rm /home/user/.gnupg/private-keys-v1.d/C6D1CD1D12CBBC8FA14D30004EAF381803A72597.key
+rm /home/user/.gnupg/private-keys-v1.d/C6D1CD1D12CBBC8FA14D30004EAF381803A72597.key
 \end{lstlisting}
 
 oppure usate un programma come \texttt{shred} per eliminarlo in modo

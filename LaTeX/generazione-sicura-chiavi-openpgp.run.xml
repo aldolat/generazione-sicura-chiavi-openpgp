@@ -56,9 +56,12 @@
       <file>biblatex.def</file>
       <file>standard.bbx</file>
       <file>authortitle.bbx</file>
-      <file>verbose.cbx</file>
+      <file>philosophy-standard.bbx</file>
+      <file>philosophy-verbose.bbx</file>
+      <file>authoryear.cbx</file>
       <file>biblatex.cfg</file>
       <file>italian.lbx</file>
+      <file>italian-philosophy.lbx</file>
     </requires>
   </internal>
   <external package="biblatex" priority="5" active="0">
